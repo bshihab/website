@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilal Shihab - Personal Site</title>
+    <style>
+        :root {
+            --background: #0d0d0f;
+            --text: #f5f5f7;
+            --accent: #ff9500;
+            --secondary: #2a2a2e;
+            --nav-height: 44px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Top Navigation Bar - Apple Style */
+        .nav-container {
+            background-color: rgba(22, 22, 24, 0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            /* Changed to relative positioning for floating effect */
+            top: 20px; /* Add some space from the top of the viewport */
+            left: 50%; /* Center the navigation bar */
+            transform: translateX(-50%); /* Adjust for centering */
+            width: calc(100% - 40px); /*Subtract the value to have space*/
+            max-width: 980px;  /*Maximumm width possible*/
+            height: var(--nav-height);
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; /* Rounded corners for modern look */
+
+        }
+        
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        
+        .logo:hover {
+            opacity: 0.7;
+        }
+        
+        .home-icon {
+            display: inline-flex;
+            background-color: var(--accent);
+            border-radius: 8px;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .icon-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            opacity: 0.8;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 16px;
+        }
+        
+        .icon-button:hover {
+            opacity: 1;
+        }
+
+        /* Remove the three lines button */
+        .nav-right .icon-button:last-child { /*Targets the last button*/
+            display: none;
+        }
+        
+        /* Main Content */
+        .main-container {
+            padding-top: calc(var(--nav-height) + 100px); /* Adjusted padding */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content {
+            max-width: 980px;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .name {
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .menu-item {
+            background-color: var(--secondary);
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.3s, background-color 0.3s;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            background-color: #353539;
+        }
+        
+        .menu-item h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+        
+        .code-bg {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.2;
+            opacity: 0.2;
+            color: var(--accent);
+            padding: 20px;
+            text-align: right;
+            max-width: 70%;
+            pointer-events: none;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 100px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        /* Skills */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(255, 149, 0, 0.15);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .project-card {
+            background-color: var(--secondary);
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .project-card p {
+            opacity: 0.8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        
+        .project-link:hover {
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            opacity: 0.6;
+            font-size: 14px;
+        }
+
+        /* Scroll to section smoothly */
+        html {
+          scroll-behavior: smooth;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .name {
+                font-size: 48px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <div class="nav-content">
+            <a href="#" class="logo-link">
+                <div class="logo">
+                    <div class="home-icon">B</div>
+                    <span>Bilal Shihab</span>
+                </div>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#resume-section">Resume</a>
+                <a href="#skills">Skills</a>
+            </div>
+            
+            <div class="nav-right">
+                <button class="icon-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">○</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="content">
+            <div class="hero">
+                <h1 class="name">Bilal Shihab</h1>
+                <p class="tagline">Biomedical Engineering Student at University of Texas at Austin</p>
+            </div>
+            
+            <div class="menu-grid">
+                <a href="#projects" class="menu-item">
+                    <h2>Projects</h2>
+                    <div class="code-bg">
+                        .projects { <br>
+                        &nbsp;&nbsp;display: grid;<br>
+                        &nbsp;&nbsp;innovations: true;<br>
+                        }
+                    </div>
+                </a>
+   
+                
+                <a href="#resume-section" class="menu-item">
+                <h2>Resume</h2>
+                <div class="code-bg">
+                  .experience { <br>
+                  &nbsp;&nbsp;value: expertise;<br>
+                  &nbsp;&nbsp;growth: continuous;<br>
+                   }
+                </div>
+              </a>
+                
+              <a href="#skills" class="menu-item">
+                <h2>Skills</h2>
+                <div class="code-bg">
+                   .skills { <br>
+                   &nbsp;&nbsp;level: advanced;<br>
+                   &nbsp;&nbsp;learning: always;<br>
+                  }
+                 </div>
+                </a>
+            </div>
+            
+            <div id="about" class="section">
+                <h2 class="section-title">About Me</h2>
+                <p>I'm a Biomedical Engineering student at the University of Texas at Austin, passionate about combining healthcare and technology to create innovative solutions. With a strong foundation in both engineering and programming, I work on projects that bridge the gap between medical needs and technological capabilities.</p>
+                <p>Currently focused on AI applications in healthcare, brain-computer interfaces, and medical imaging technologies. I'm always looking for opportunities to collaborate on projects that make a real difference in healthcare.</p>
+            </div>
+            
+            <div id="projects" class="section">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Neurotech Project</h3>
+                        <p>Developed and improved a capsule network for enhanced ML interpretability in neurotechnology.  I contributed to the development of this network, focusing on making complex machine learning models more understandable and trustworthy for healthcare applications. <a href="https://github.com/LonghornNeurotech/ML_Interpretability" target="_blank"> See Captum section</a></p>
+                        <a href="https://github.com/LonghornNeurotech/ML_Interpretability" target="_blank" class="project-link">View on GitHub →</a>
+                    </div>
+                  
+                    <div class="project-card">
+                        <h3>College AI</h3>
+                        <p>An AI chatbot with Langchain and Retrieval-Augmented Generation (RAG) to assist students in selecting majors and colleges, leveraging Vertex AI for improved model performance.</p>
+                        <a href="https://github.com/bshihab/college_ai" target="_blank" class="project-link">View on GitHub →</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Healthcare AI</h3>
+                        <p>An AI-powered solution for healthcare applications, focusing on medical data analysis and patient outcome prediction.</p>
+                        <a href="https://github.com/bshihab/healthcare_ai" target="_blank" class="project-link">View on GitHub →</a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Laser Speckle Project</h3>
+                        <p>Improved blood flow analysis during surgery by automating laser speckle contrast regulation using Arduino and Python.</p>
+                        <a href="https://github.com/bshihab/laser_speckle_project" target="_blank" class="project-link">View on GitHub →</a>
+                    </div>
+                </div>
+            </div>
+
+          <div id="resume-section" class = "section">
+             <h2 class = "section-title">Resume</h2>
+            <p>
+          <strong>Bilal Shihab</strong><br>
+          Austin, TX · (512)-920-9883 · shihabbilal@gmail.com<br>
+          <a href="https://www.linkedin.com/in/bilalshihab" target="_blank">LinkedIn</a> · <a href="https://github.com/bshihab" target="_blank">GitHub</a>
+
+          <br><br>
+
+          <strong>EDUCATION</strong><br>
+          <strong>The University of Texas at Austin</strong>, Austin, TX<br>
+          <em>Bachelor of Science in Biomedical Engineering</em><br>
+          <ul>
+            <li>GPA: 3.93/4.00</li>
+            <li>Relevant Courses: Thermodynamics, Biotransport, Signals and Systems, Data Analytics, Probability, Linear Algebra,
+            Circuits, Differential Equations, Organic Chemistry.</li>
+            <li>Honors: Cockrell School of Engineering Honors, Unrestricted Endowed Presidential Scholarship</li>
+            </ul>
+
+            <br>
+
+          <strong>PROJECTS</strong><br>
+          <strong>Healthcare AI</strong><br>
+          <em>Personal Project (Python), October 2023</em><br>
+          <ul>
+          <li>Developed a healthcare AI project, focusing on medical data analysis and outcome prediction.</li>
+          </ul>
+          
+          <strong>College AI</strong><br>
+          <em>Personal Project (Python), November 2023</em><br>
+           <ul>
+          <li>Developed a Vertex AI-powered chatbot using Langchain and Retrieval-Augmented Generation (RAG) to
+          assist students in selecting majors and colleges, enhancing model performance.</li>
+          </ul>
+
+          <strong>Laser Speckle Project</strong><br>
+          <em>Biophotonics Lab, January 2023 – May 2023</em><br>
+          <ul>
+          <li>Automated laser speckle contrast regulation for blood flow analysis during surgery.</li>
+          </ul>
+
+          <br>
+
+          <strong>SKILLS</strong> <br>
+            <ul>
+            <li>Programming Languages: Python, C++, MATLAB</li>
+            <li>Software & Tools: Vertex AI, Langchain, PyTorch, Google Cloud SDK, Jupyter Notebook, Git, SolidWorks,
+            Fusion 360, Arduino IDE</li>
+            <li>Laboratory Skills: Laser speckle contrast imaging, Data acquisition and analysis, Biomedical
+            instrumentation</li>
+            </ul>
+
+          <br>
+
+            <strong>EXPERIENCE</strong><br>
+
+            <strong>Undergraduate Researcher</strong><br>
