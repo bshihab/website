@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilal Shihab - Resume</title>
+    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><filter id='glow'><feGaussianBlur stdDeviation='2.5' result='coloredBlur'/><feMerge><feMergeNode in='coloredBlur'/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs><circle cx='50' cy='50' r='40' fill='%23bf5700' filter='url(%23glow)'/><text x='50' y='65' font-size='50' font-weight='bold' font-family='-apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro Display, Helvetica Neue, Arial, sans-serif' fill='white' text-anchor='middle'>B</text></svg>" type="image/svg+xml">
+    <style>
+        :root {
+            --background-light: #ffffff;
+            --text-light: #0d0d0f;
+            --accent-light: #bf5700;
+            --secondary-light: #f5f5f7;
+            --background-dark: #0d0d0f;
+            --text-dark: #f5f5f7;
+            --accent-dark: #bf5700;
+            --secondary-dark: #2a2a2e;
+            --nav-height: 44px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Additional CSS for RGB conversion of colors */
+        :root {
+            --background-light-rgb: 255, 255, 255;
+            --text-light-rgb: 13, 13, 15;
+            --accent-light-rgb: 191, 87, 0;
+            --secondary-light-rgb: 245, 245, 247;
+            --background-dark-rgb: 13, 13, 15;
+            --text-dark-rgb: 245, 245, 247;
+            --accent-dark-rgb: 191, 87, 0;
+            --secondary-dark-rgb: 42, 42, 46;
+        }
+        
+        /* Top Navigation Bar - Apple Style */
+        .nav-container {
+            background-color: rgba(var(--secondary-rgb), 0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: var(--nav-height);
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            border-radius: 18px;
+            width: 90%;
+            max-width: 980px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35), 0 0 20px rgba(var(--accent-rgb), 0.2);
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.5s ease, opacity 0.2s;
+        }
+        
+        .logo:hover {
+            opacity: 0.7;
+        }
+        
+        .home-icon {
+            display: inline-flex;
+            background-color: var(--accent);
+            border-radius: 10px;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.5s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 10px rgba(var(--accent-rgb), 0.5);
+        }
+        
+        .logo:hover .home-icon {
+            box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.7);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: color 0.5s ease, opacity 0.2s, box-shadow 0.3s ease;
+            padding: 6px 14px;
+            position: relative;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:not(:last-child)::after {
+            content: none;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.45), 0 0 15px rgba(var(--accent-rgb), 0.35);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(var(--accent-rgb), 0.1);
+            color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.45), 0 0 15px rgba(var(--accent-rgb), 0.35);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .icon-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            opacity: 0.8;
+            cursor: pointer;
+            transition: color 0.5s ease, opacity 0.2s;
+            font-size: 16px;
+        }
+        
+        .icon-button:hover {
+            opacity: 1;
+        }
+        
+        .theme-toggle {
+            margin-left: 8px;
+        }
+        
+        /* Main Content */
+        .main-container {
+            padding-top: calc(var(--nav-height) + 80px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content {
+            max-width: 980px;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            position: relative;
+            color: var(--accent);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+            box-shadow: 0 2px 6px rgba(var(--accent-rgb), 0.5);
+        }
+        
+        .resume-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
+            color: var(--accent);
+            text-shadow: 0 3px 15px rgba(var(--accent-rgb), 0.3);
+        }
+        
+        .contact-info {
+            font-size: 16px;
+            opacity: 0.8;
+            margin: 0 auto;
+        }
+        
+        .resume-item {
+            margin-bottom: 24px;
+            background-color: var(--secondary);
+            border-radius: 20px;
+            padding: 28px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: slideIn 0.5s ease-out forwards;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(var(--accent-rgb), 0.05);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .resume-item:nth-child(1) { animation-delay: 0.1s; }
+        .resume-item:nth-child(2) { animation-delay: 0.2s; }
+        .resume-item:nth-child(3) { animation-delay: 0.3s; }
+        .resume-item:nth-child(4) { animation-delay: 0.4s; }
+        
+        .resume-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(var(--accent-rgb), 0.15);
+        }
+        
+        .resume-item:hover h4 {
+            color: var(--accent);
+            text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.4);
+        }
+        
+        .resume-item h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .resume-item h4 {
+            font-size: 16px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        
+        .date {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+        
+        .resume-item p {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        
+        .resume-item ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .resume-item li {
+            margin-bottom: 6px;
+            font-size: 15px;
+            opacity: 0.9;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: background-color 0.5s ease, transform 0.3s, color 0.5s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 12px rgba(191, 87, 0, 0.4), 0 0 15px rgba(191, 87, 0, 0.2);
+        }
+        
+        .download-btn:hover {
+            background-color: #ffa726;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 167, 38, 0.5), 0 0 20px rgba(255, 167, 38, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            opacity: 0.6;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 36px;
+            }
+            
+            .nav-container {
+                width: 95%;
+                top: 10px;
+            }
+            
+            .nav-links {
+                gap: 5px;
+            }
+            
+            .nav-links a {
+                padding: 5px 10px;
+                font-size: 13px;
+            }
+            
+            .section {
+                margin-bottom: 60px;
+            }
+            
+            .main-container {
+                padding-top: calc(var(--nav-height) + 60px);
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .resume-item {
+                padding: 22px;
+            }
+            
+            .resume-item h3 {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .contact-info {
+                font-size: 14px;
+            }
+            
+            .nav-container {
+                height: auto;
+                padding: 8px 0;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .nav-right {
+                display: none;
+            }
+            
+            .resume-header {
+                margin-bottom: 40px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+            }
+            
+            .resume-item {
+                padding: 20px;
+            }
+            
+            .download-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Apple-style Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="home-icon">B</div>
+                    <span>Bilal Shihab</span>
+                </div>
+            </a>
+            
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#skills">Skills</a>
+                <a href="resume.html">Resume</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            
+            <div class="nav-right">
+                <button class="icon-button" id="top-button">○</button>
+                <button class="icon-button theme-toggle" id="theme-toggle">🌙</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="content">
+            <div class="resume-header">
+                <h1 class="page-title">Resume</h1>
+                <div class="contact-info">
+                    <p>Biomedical Engineering Student | University of Texas at Austin</p>
+                    <p>shihabbilal@gmail.com | 512-920-9883 | Austin, TX</p>
+                </div>
+                <a href="Bilal_Shihab_Resume.pdf" download="Bilal_Shihab_Resume.pdf" class="download-btn">Download PDF Version</a>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="resume-item">
+                    <h3>University of Texas at Austin</h3>
+                    <h4>Bachelor of Science in Biomedical Engineering</h4>
+                    <div class="date">Expected Graduation: May 2027</div>
+                    <p>Concentration in Computational Bioengineering</p>
+                    <p>Relevant Coursework: Circuits, Intro to Programming in C++ and Python, Machine Learning, Data Science, Biomedical Instrumentation</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Experience</h2>
+                
+                <div class="resume-item">
+                    <h3>Neurotech AI/ML Developer</h3>
+                    <h4>Longhorn Neurotech - Austin, TX</h4>
+                    <div class="date">September 2024 - Present</div>
+                    <ul>
+                        <li>Developed and improved capsule network architectures for interpretable brain-computer interfaces</li>
+                        <li>Exploring various interpretability techniques to better understand and explain machine learning model outcomes.</li>
+                        <li>Implemented machine learning models for neural signal processing and analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="resume-item">
+                    <h3>Coder and Researching Intern at FOIL</h3>
+                    <h4>Functional Optical Imaging Lab - Austin, TX</h4>
+                    <div class="date">September 2023 - Present</div>
+                    <ul>
+                        <li>Improved blood flow analysis during surgery by automating laser speckle contrast regulation</li>
+                        <li>Built custom hardware and software solutions using Arduino and Python</li>
+                        <li>Optimized the contrast adjustment script by rewriting it from MATLAB to Python, enhancing the system's efficiency.</li>
+                    </ul>
+                </div>
+                
+                <div class="resume-item">
+                    <h3>Android Development Intern</h3>
+                    <h4>Bithunch LLC - Mountain View, CA</h4>
+                    <div class="date">June 2022 - August 2022</div>
+                    <ul>
+                        <li>Updated Babylonian Twins, an Android application to the latest version, optimizing performance, resolving compatibility issues, and
+                            managing dependencies with Gradle.</li>
+                        <li>Integrated updated Crashlytics and Google Analytics libraries</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Projects</h2>
+                
+                <div class="resume-item">
+                    <h3>ML Interpretability with Neurotech</h3>
+                    <div class="date">2023 - Present</div>
+                    <p>Developed and improved capsule network architecture for better model interpretability in neural signal processing, enhancing the ability to understand and interpret brain-computer interface models.</p>
+                </div>
+                
+                <div class="resume-item">
+                    <h3>College AI</h3>
+                    <div class="date">2023</div>
+                    <p>Built an AI chatbot with Langchain and Retrieval-Augmented Generation (RAG) to assist students in selecting majors and colleges, leveraging Vertex AI for improved model performance.</p>
+                </div>
+                
+                <div class="resume-item">
+                    <h3>Healthcare AI</h3>
+                    <div class="date">2022</div>
+                    <p>Developed an AI-powered solution for healthcare applications, focusing on medical data analysis and patient outcome prediction.</p>
+                </div>
+                
+                <div class="resume-item">
+                    <h3>Laser Speckle Project</h3>
+                    <div class="date">2023</div>
+                    <p>Improved blood flow analysis during surgery by automating laser speckle contrast regulation using Arduino and Python.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Skills</h2>
+                <div class="resume-item">
+                    <h3>Technical Skills</h3>
+                    <ul>
+                        <li><strong>Programming Languages:</strong> Python, C++, MATLAB</li>
+                        <li><strong>Machine Learning:</strong> PyTorch, TensorFlow, Captum</li>
+                        <li><strong>Tools & Platforms:</strong> Google Cloud SDK, Git, Jupyter Notebook</li>
+                        <li><strong>Engineering Software:</strong> SolidWorks, Fusion 360, LabVIEW</li>
+                        <li><strong>Biomedical Expertise:</strong> Laser Speckle Systems, Brain-Computer Interfaces, Medical Imaging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Bilal Shihab. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll to top functionality
+        document.getElementById('top-button').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Theme detection and toggling
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let currentTheme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : 'light');
+
+        function applyTheme(theme) {
+            document.documentElement.style.setProperty('--background', `var(--background-${theme})`);
+            document.documentElement.style.setProperty('--text', `var(--text-${theme})`);
+            document.documentElement.style.setProperty('--accent', `var(--accent-${theme})`);
+            document.documentElement.style.setProperty('--secondary', `var(--secondary-${theme})`);
+            document.documentElement.style.setProperty('--background-rgb', `var(--background-${theme}-rgb)`);
+            document.documentElement.style.setProperty('--text-rgb', `var(--text-${theme}-rgb)`);
+            document.documentElement.style.setProperty('--accent-rgb', `var(--accent-${theme}-rgb)`);
+            document.documentElement.style.setProperty('--secondary-rgb', `var(--secondary-${theme}-rgb)`);
+            
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-toggle').textContent = theme === 'dark' ? '🌞' : '🌙';
+            currentTheme = theme;
+        }
+
+        applyTheme(currentTheme);
+
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+</body>
+</html> 
