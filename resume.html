@@ -4,39 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilal Shihab - Resume</title>
-    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><filter id='glow'><feGaussianBlur stdDeviation='2.5' result='coloredBlur'/><feMerge><feMergeNode in='coloredBlur'/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs><circle cx='50' cy='50' r='40' fill='%23bf5700' filter='url(%23glow)'/><text x='50' y='65' font-size='50' font-weight='bold' font-family='-apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro Display, Helvetica Neue, Arial, sans-serif' fill='white' text-anchor='middle'>B</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text x='50' y='65' font-size='50' font-weight='bold' font-family='monospace' fill='%2300ff00' text-anchor='middle'>B_</text></svg>" type="image/svg+xml">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+        
         :root {
-            --background-light: #ffffff;
-            --text-light: #0d0d0f;
-            --accent-light: #bf5700;
-            --secondary-light: #f5f5f7;
-            --background-dark: #0d0d0f;
-            --text-dark: #f5f5f7;
-            --accent-dark: #bf5700;
-            --secondary-dark: #2a2a2e;
+            --background-light: #0a0a0a;
+            --text-light: #4CAF50;
+            --accent-light: #4CAF50;
+            --secondary-light: #1a1a1a;
+            --terminal-green: #4CAF50;
+            --terminal-green-dim: #388E3C;
+            --terminal-amber: #FFA726;
+            --background-dark: #000000;
+            --text-dark: #4CAF50;
+            --accent-dark: #4CAF50;
+            --secondary-dark: #0f0f0f;
             --nav-height: 44px;
+            --matrix-glow: 0 0 8px rgba(76, 175, 80, 0.4);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            font-family: 'Fira Code', 'Courier New', monospace;
         }
         
         body {
-            background-color: var(--background);
-            color: var(--text);
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+            color: var(--terminal-green);
             line-height: 1.6;
             opacity: 0;
-            animation: fadeIn 0.5s ease-in-out forwards;
+            animation: terminalBoot 0.8s ease-in-out forwards;
             transition: background-color 0.5s ease, color 0.5s ease;
+            position: relative;
+            overflow-x: hidden;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        @keyframes terminalBoot {
+            0% { 
+                opacity: 0;
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 0.5;
+                filter: blur(5px);
+            }
+            100% { 
+                opacity: 1;
+                filter: blur(0);
+            }
         }
         
         /* Additional CSS for RGB conversion of colors */
@@ -51,35 +70,28 @@
             --secondary-dark-rgb: 42, 42, 46;
         }
         
-        /* Top Navigation Bar - Apple Style */
+        /* Top Navigation Bar - Hacker Style */
         .nav-container {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 0;
+            left: 0;
+            right: 0;
             height: var(--nav-height);
             display: flex;
             justify-content: center;
             z-index: 1000;
-            border-radius: 22px;
-            width: 90%;
-            max-width: 980px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 
-                        0 2px 8px rgba(0, 0, 0, 0.04),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.6);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-bottom: 1px solid var(--terminal-green);
+            box-shadow: var(--matrix-glow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, backdrop-filter, background-color;
         }
         
         body[data-theme="dark"] .nav-container {
-            background: rgba(30, 30, 30, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 
-                        0 2px 8px rgba(0, 0, 0, 0.24),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid var(--terminal-green-dim);
         }
         
         .nav-content {
@@ -100,29 +112,45 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.5s ease, opacity 0.2s;
+            color: var(--terminal-green);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .logo:hover {
-            opacity: 0.7;
+            text-shadow: var(--matrix-glow);
         }
+        
         
         .home-icon {
             display: inline-flex;
-            background-color: var(--accent);
-            border-radius: 10px;
+            background-color: transparent;
+            border: 1px solid var(--terminal-green);
+            border-radius: 0;
             width: 24px;
             height: 24px;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.5s ease, box-shadow 0.3s ease;
-            box-shadow: 0 3px 10px rgba(var(--accent-rgb), 0.5);
+            transition: all 0.3s ease;
+            color: var(--terminal-green);
+            font-weight: bold;
+            position: relative;
         }
         
+        .home-icon::before {
+            content: '>';
+            position: absolute;
+            left: -10px;
+            color: var(--terminal-green);
+        }
+        
+        
         .logo:hover .home-icon {
-            box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.7);
+            background-color: var(--terminal-green);
+            color: #000;
+            box-shadow: var(--matrix-glow);
         }
         
         .nav-links {
@@ -135,29 +163,37 @@
         }
         
         .nav-links a {
-            color: var(--text);
+            color: var(--terminal-green);
             text-decoration: none;
-            font-size: 14px;
-            opacity: 0.8;
-            transition: color 0.5s ease, opacity 0.2s, box-shadow 0.3s ease;
+            font-size: 12px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
             padding: 6px 14px;
             position: relative;
-            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .nav-links a:not(:last-child)::after {
-            content: none;
+        .nav-links a::before {
+            content: '[';
+            margin-right: 4px;
+            opacity: 0.5;
+        }
+        
+        .nav-links a::after {
+            content: ']';
+            margin-left: 4px;
+            opacity: 0.5;
         }
         
         .nav-links a:hover {
             opacity: 1;
-            box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.45), 0 0 15px rgba(var(--accent-rgb), 0.35);
+            text-shadow: var(--matrix-glow);
         }
         
         .nav-links a.active {
-            background-color: rgba(var(--accent-rgb), 0.1);
-            color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.45), 0 0 15px rgba(var(--accent-rgb), 0.35);
+            color: var(--terminal-amber);
+            opacity: 1;
         }
         
         .nav-right {
@@ -170,16 +206,21 @@
         
         .icon-button {
             background: none;
-            border: none;
-            color: var(--text);
-            opacity: 0.8;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
+            opacity: 0.7;
             cursor: pointer;
-            transition: color 0.5s ease, opacity 0.2s;
-            font-size: 16px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            padding: 4px 8px;
+            font-family: 'Fira Code', monospace;
         }
         
         .icon-button:hover {
             opacity: 1;
+            background-color: var(--terminal-green);
+            color: #000;
+            box-shadow: var(--matrix-glow);
         }
         
         .theme-toggle {
@@ -197,11 +238,13 @@
         
         /* Main Content */
         .main-container {
-            padding-top: calc(var(--nav-height) + 80px);
+            padding-top: calc(var(--nav-height) + 40px);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
         .content {
@@ -215,10 +258,18 @@
         }
         
         .section-title {
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 30px;
             position: relative;
-            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--terminal-amber);
+        }
+        
+        .section-title::before {
+            content: '## ';
+            color: var(--terminal-green-dim);
+            margin-right: 10px;
         }
         
         .section-title::after {
@@ -226,11 +277,10 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent);
-            border-radius: 2px;
-            box-shadow: 0 2px 6px rgba(var(--accent-rgb), 0.5);
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--terminal-green), transparent);
+            box-shadow: var(--matrix-glow);
         }
         
         .resume-header {
@@ -241,52 +291,69 @@
         .page-title {
             font-size: 48px;
             font-weight: 700;
-            letter-spacing: -1px;
+            letter-spacing: 3px;
             margin-bottom: 30px;
-            color: var(--accent);
-            text-shadow: 0 3px 15px rgba(var(--accent-rgb), 0.3);
+            color: var(--terminal-green);
+            text-shadow: var(--matrix-glow);
+            text-transform: uppercase;
+        }
+        
+        .page-title::after {
+            content: '_';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
         
         .contact-info {
-            font-size: 16px;
-            opacity: 0.8;
+            font-size: 14px;
+            opacity: 0.7;
             margin: 0 auto;
+            color: var(--terminal-green-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-info p::before {
+            content: '> ';
+            color: var(--terminal-green);
         }
         
         .resume-item {
             margin-bottom: 24px;
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 0;
             padding: 28px;
             transition: all 0.3s ease;
             opacity: 0;
-            animation: slideIn 0.5s ease-out forwards;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 
-                        0 2px 8px rgba(0, 0, 0, 0.04),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.6);
+            animation: terminalType 0.5s ease-out forwards;
+            border: 1px solid var(--terminal-green);
+            box-shadow: inset 0 0 20px rgba(76, 175, 80, 0.05);
             position: relative;
             overflow: hidden;
         }
+        
 
         body[data-theme="dark"] .resume-item {
-            background: rgba(30, 30, 30, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 
-                        0 2px 8px rgba(0, 0, 0, 0.24),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--terminal-green-dim);
         }
         
-        @keyframes slideIn {
+        @keyframes terminalType {
             from {
                 opacity: 0;
                 transform: translateY(20px);
+                filter: blur(5px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
+                filter: blur(0);
             }
         }
         
@@ -296,45 +363,60 @@
         .resume-item:nth-child(4) { animation-delay: 0.4s; }
         
         .resume-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 
-                        0 5px 15px rgba(0, 0, 0, 0.1),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            border-color: var(--terminal-amber);
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.2), inset 0 0 30px rgba(76, 175, 80, 0.1);
+            background: rgba(76, 175, 80, 0.02);
         }
 
         body[data-theme="dark"] .resume-item:hover {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 
-                        0 5px 15px rgba(0, 0, 0, 0.2),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.3);
         }
         
         .resume-item:hover h4 {
-            color: var(--accent);
-            text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.4);
+            text-shadow: var(--matrix-glow);
         }
         
         .resume-item h3 {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 8px;
+            color: var(--terminal-amber);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .resume-item h3::before {
+            content: '[+] ';
+            color: var(--terminal-green);
         }
         
         .resume-item h4 {
-            font-size: 16px;
-            color: var(--accent);
+            font-size: 14px;
+            color: var(--terminal-green);
             margin-bottom: 8px;
             transition: color 0.3s ease, text-shadow 0.3s ease;
+            opacity: 0.9;
         }
         
         .date {
-            font-size: 14px;
-            opacity: 0.7;
+            font-size: 12px;
+            opacity: 0.6;
             margin-bottom: 12px;
+            color: var(--terminal-green-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .date::before {
+            content: '// ';
         }
         
         .resume-item p {
-            font-size: 15px;
-            opacity: 0.9;
+            font-size: 13px;
+            opacity: 0.8;
             margin-bottom: 8px;
+            color: var(--terminal-green-dim);
+            line-height: 1.6;
         }
         
         .resume-item ul {
@@ -344,35 +426,59 @@
         
         .resume-item li {
             margin-bottom: 6px;
-            font-size: 15px;
-            opacity: 0.9;
+            font-size: 13px;
+            opacity: 0.8;
+            color: var(--terminal-green-dim);
+            line-height: 1.6;
+        }
+        
+        .resume-item li::marker {
+            content: '> ';
+            color: var(--terminal-green);
         }
         
         .download-btn {
             display: inline-block;
-            background-color: var(--accent);
-            color: #ffffff;
+            background-color: transparent;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
             padding: 14px 28px;
-            border-radius: 30px;
+            border-radius: 0;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             margin-top: 20px;
-            transition: background-color 0.5s ease, transform 0.3s, color 0.5s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 12px rgba(191, 87, 0, 0.4), 0 0 15px rgba(191, 87, 0, 0.2);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            position: relative;
+        }
+        
+        .download-btn::before {
+            content: '$ ';
+        }
+        
+        .download-btn::after {
+            content: ' .pdf';
+            opacity: 0.6;
         }
         
         .download-btn:hover {
-            background-color: #ffa726;
+            background-color: var(--terminal-green);
+            color: #000;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 167, 38, 0.5), 0 0 20px rgba(255, 167, 38, 0.3);
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.5);
         }
         
         /* Footer */
         footer {
             padding: 40px 0;
             text-align: center;
-            opacity: 0.6;
-            font-size: 14px;
+            opacity: 0.5;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--terminal-green-dim);
         }
 
         @media (max-width: 1024px) {
@@ -697,28 +803,6 @@
             visibility: visible;
         }
 
-        .resume-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                        rgba(255, 255, 255, 0.1) 0%, 
-                        transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .resume-item:hover::before {
-            opacity: 1;
-        }
-
-        body[data-theme="dark"] .resume-item:hover::before {
-            opacity: 0;
-        }
     </style>
 </head>
 <body>
@@ -748,7 +832,7 @@
             <a href="index.html" class="logo-link">
                 <div class="logo">
                     <div class="home-icon">B</div>
-                    <span>Bilal Shihab</span>
+                    <span>root@bilal</span>
                 </div>
             </a>
             
@@ -761,8 +845,7 @@
             </div>
             
             <div class="nav-right">
-                <button class="icon-button" id="top-button">○</button>
-                <button class="icon-button theme-toggle" id="theme-toggle">🌙</button>
+                <button class="icon-button" id="top-button">[TOP]</button>
             </div>
             
             <!-- Mobile Menu Button -->
@@ -781,21 +864,20 @@
             <div class="resume-header">
                 <h1 class="page-title">Resume</h1>
                 <div class="contact-info">
-                    <p>Biomedical Engineering Student | University of Texas at Austin</p>
-                    <p>bilalshihab@utexas.edu | Austin, TX</p>
+                    <p>bilalshihab@utexas.edu // linkedin.com/in/bilalshihab // github.com/bshihab</p>
                 </div>
-                <a href="Shihab_Bilal.pdf" download="Shihab_Bilal.pdf" class="download-btn">Download PDF Version</a>
+                <a href="Bilal_Shihab_Resume.pdf" download="Bilal_Shihab_Resume.pdf" class="download-btn">Download Resume</a>
             </div>
             
             <div class="section">
                 <h2 class="section-title">Education</h2>
                 <div class="resume-item">
                     <h3>University of Texas at Austin</h3>
-                    <h4>Bachelor of Science in Biomedical Engineering</h4>
-                    <div class="date">Expected Graduation: May 2027</div>
-                    <p>Concentration in Computational Biomedical Engineering</p>
+                    <h4>Bachelor of Science in Biomedical Engineering, Computational Track</h4>
+                    <div class="date">May 2027</div>
+                    <p>Organizations: Biomedical Engineering Society, Texas Guadaloop, Texas Engineering World Health</p>
                     <p>Relevant Coursework: Intro to Computational Engineering Design, Intro to Computing, Introduction to Python & C++, Statistics,
-                        Circuits, Biomechanics, Numerical Methods, Differential Equations & Linear Algebra</p>
+                        Intro to Embedded Systems, Circuits, Signals, Biomechanics, Numerical Methods, Differential Equations & Linear Algebra</p>
                 </div>
             </div>
             
@@ -803,19 +885,38 @@
                 <h2 class="section-title">Experience</h2>
                 
                 <div class="resume-item">
+                    <h3>Edge AI Team Lead</h3>
+                    <h4>Longhorn Neurotech - Austin, TX</h4>
+                    <div class="date">Sep 2025 - Present</div>
+                    <ul>
+                        <li>Promoted to lead the new Edge AI team, directing a group of student engineers on the initiative to optimize neural networks for deployment on embedded systems like Raspberry Pi.</li>
+                    </ul>
+                </div>
+                
+                <div class="resume-item">
                     <h3>AI/ML Developer</h3>
                     <h4>Longhorn Neurotech - Austin, TX</h4>
-                    <div class="date">September 2024 - Present</div>
+                    <div class="date">Sep 2024 - Aug 2025</div>
                     <ul>
-                        <li>Collaborated on developing machine learning models for Brain-Computer Interfaces (BCI) aimed at controlling a prosthetic arm, leveraging advanced techniques such as Convolutional Neural Networks, Capsule Networks, & Radial Basis Function Networks.</li>
-                        <li>Explored and implemented various interpretability techniques, including Optuna for hyperparameter optimization, to improve model transparency and provide insights into model decision-making processes, enhancing the reliability of BCI applications.</li>
+                        <li>Collaborated on developing machine learning models for Brain-Computer Interfaces (BCI) aimed at controlling a prosthetic arm, leveraging advanced techniques such as CNNs and Capsule Networks.</li>
+                        <li>Explored and implemented various interpretability techniques, including Optuna for hyperparameter optimization, to improve model transparency and enhance the reliability of BCI applications.</li>
+                    </ul>
+                </div>
+                
+                <div class="resume-item">
+                    <h3>Research Intern</h3>
+                    <h4>Recanzone Laboratory, UC Davis - Davis, CA</h4>
+                    <div class="date">Jun 2025 - Present</div>
+                    <ul>
+                        <li>Authored a pull request for a new 3D feature visualization UI to the open-source phy neuroscience software, designing an interactive 3D-to-2D projection pipeline with full camera controls for intuitive exploration of complex neural spike data.</li>
+                        <li>Engineered the mathematical model for the 3D viewer, enabling intuitive real-time data rotation through direct user mouse control.</li>
                     </ul>
                 </div>
                 
                 <div class="resume-item">
                     <h3>Researcher and Programmer</h3>
-                    <h4>Functional Optical Imaging Laboratory - Austin, TX</h4>
-                    <div class="date">September 2023 - Present</div>
+                    <h4>Functional Optical Imaging Lab, UT Austin - Austin, TX</h4>
+                    <div class="date">Sep 2023 - Present</div>
                     <ul>
                         <li>Developed a comprehensive Laser Speckle Analysis UI using Python and PySide6, integrating real-time image capture and analysis with Basler cameras and Arduino control for auto laser intensity adjustment.</li>
                         <li>Enhancing precision in speckle pattern evaluation and optimizing laser current recommendations through advanced histogram, pixel count, and contrast analysis methods.</li>
@@ -824,23 +925,13 @@
                 </div>
                 
                 <div class="resume-item">
-                    <h3>Competition Director</h3>
-                    <h4>Biomedical Engineering Society - Austin, TX</h4>
-                    <div class="date">August 2023 - Present</div>
+                    <h3>AI Intern</h3>
+                    <h4>Try Aladdin - San Jose, CA</h4>
+                    <div class="date">Jun 2025 - Aug 2025</div>
                     <ul>
-                        <li>Spearheaded the entire competition process, ensuring alignment with strategic objectives and seamless execution, while also developing the competition prompt.</li>
-                        <li>Managed logistics and facilitated effective communication with participants, ensuring all aspects of the event ran smoothly.</li>
-                        <li>Designated tasks to team members and optimized resource allocation, contributing to the successful outcome of the event.</li>
-                    </ul>
-                </div>
-                
-                <div class="resume-item">
-                    <h3>Math Instructor</h3>
-                    <h4>Mathnasium - Mountain View, CA</h4>
-                    <div class="date">April 2022 - June 2023</div>
-                    <ul>
-                        <li>Mentored grade school students in mathematics, developing personalized curriculum and innovative teaching techniques tailored to each student's learning style and pace, fostering a deeper understanding and appreciation of mathematical concepts.</li>
-                        <li>Facilitated conflict resolution among students and employees, employing effective communication strategies to promote a collaborative learning and working environment.</li>
+                        <li>Designed an automated social media content pipeline using n8n, designing a workflow for AI agents to scrape product data, generate Instagram content, and interface with the Facebook API.</li>
+                        <li>Containerized the automation workflow and its dependencies using Docker, creating a reproducible development environment.</li>
+                        <li>Integrated a Large Language Model via its REST API within n8n, responsible for transforming product data into social media posts.</li>
                     </ul>
                 </div>
             </div>
@@ -849,12 +940,12 @@
                 <h2 class="section-title">Projects</h2>
                 
                 <div class="resume-item">
-                    <h3>MotorMind Project</h3>
+                    <h3>ECG PCB Project</h3>
                     <h4>Austin, TX</h4>
                     <ul>
-                        <li>Developing a framework for converting brain signals into speech using EEG data and Google's Gemini AI.</li>
-                        <li>Implemented advanced tokenization methods to process and interpret EEG signals for accurate speech generation and integrated Supabase for efficient storage and management of EEG token embeddings.</li>
-                        <li>Planned the next phase of the project to design a specialized headset for real-time brain-to-speech conversion, enhancing accessibility and communication.</li>
+                        <li>Collaborated in a team to develop an Electrocardiogram PCB using Autodesk Fusion 360 for physiological signal monitoring.</li>
+                        <li>Selected components and designed the schematic layout for the signal amplification and filtering stages of the circuit.</li>
+                        <li>Led the project workflow by designating tasks to group members and optimizing the allocation of resources to ensure the timely completion of the project.</li>
                     </ul>
                 </div>
                 
@@ -865,39 +956,35 @@
                         <li>Creating a system for uploading and managing DICOM files using Google Cloud Healthcare API.</li>
                         <li>Implemented a Pub/Sub notification system to monitor DICOM uploads, enabling real-time data processing.</li>
                         <li>Configured Google Cloud resources, including DICOM stores and Pub/Sub topics, to support healthcare data workflows.</li>
-                        <li>Planned integration of AI-powered analysis for DICOM images to enhance diagnostic capabilities.</li>
+                        <li>Planned integration of AI-powered analysis using Google MedGemma for DICOM images to enhance diagnostic capabilities.</li>
                     </ul>
                 </div>
                 
                 <div class="resume-item">
-                    <h3>College AI Project</h3>
+                    <h3>Launch Kit (SaaS Project)</h3>
                     <h4>Austin, TX</h4>
                     <ul>
-                        <li>Developing an AI chatbot using Langchain and Google Cloud to assist students with college selection, enhancing user experience through personalized recommendations.</li>
-                        <li>Managed a comprehensive database of colleges and majors on Google Cloud for efficient data retrieval.</li>
-                        <li>Implemented AI features through Vertex AI, integrating natural language processing and retrieval-augmented generation (RAG) to enhance chatbot functionality.</li>
-                        <li>Strengthened expertise in cloud infrastructure, database management, and algorithm design through hands-on project development.</li>
+                        <li>Spearheading the development of Launch Kit, an AI-powered platform designed to streamline college and career navigation for students by providing college recommendations and automating personalized professional networking.</li>
+                        <li>Architecting and implementing a scalable microservices ecosystem where autonomous AI agents built with Python communicate and collaborate to handle complex tasks like data analysis, content generation, and quality assurance.</li>
+                        <li>Integrating Google's Gemini API to power the core analytical capabilities of each agent and leveraging third-party services like ScraperAPI for robust, real-world data extraction from public web sources.</li>
                     </ul>
                 </div>
             </div>
             
             <div class="section">
-                <h2 class="section-title">Skills</h2>
+                <h2 class="section-title">Skills and Interests</h2>
                 <div class="resume-item">
                     <h3>Technical Skills</h3>
                     <ul>
-                        <li><strong>Programming Languages:</strong> Python, C++, MATLAB</li>
-                        <li><strong>Machine Learning:</strong> PyTorch, TensorFlow, Captum</li>
-                        <li><strong>Tools & Platforms:</strong> Google Cloud SDK, Git, Jupyter Notebook</li>
-                        <li><strong>Engineering Software:</strong> SolidWorks, Fusion 360, LabVIEW</li>
-                        <li><strong>Biomedical Expertise:</strong> Laser Speckle Systems, Brain-Computer Interfaces, Medical Imaging</li>
+                        <li><strong>Technology/Skills:</strong> Python, C, C++, ARMv6-M Assembly, MatLab, R, Jupyter, Embedded Systems Programming, Google Cloud, Pandas, Matplotlib, Android Studio/IntelliJ, Pytorch, Keras, Machine Learning, SolidWorks, Fusion 360, Captum, Optuna</li>
+                        <li><strong>Languages:</strong> Arabic (Native), French (Beginner)</li>
                     </ul>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>&copy; 2025 Bilal Shihab. All Rights Reserved.</p>
+            <p>// &copy; 2025 Bilal Shihab | System Running | All Rights Reserved</p>
         </footer>
     </div>
 
@@ -910,39 +997,11 @@
             });
         });
 
-        // Theme detection and toggling
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        let currentTheme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : 'light');
-
-        function applyTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            document.documentElement.style.setProperty('--background', `var(--background-${theme})`);
-            document.documentElement.style.setProperty('--text', `var(--text-${theme})`);
-            document.documentElement.style.setProperty('--accent', `var(--accent-${theme})`);
-            document.documentElement.style.setProperty('--secondary', `var(--secondary-${theme})`);
-            document.documentElement.style.setProperty('--background-rgb', `var(--background-${theme}-rgb)`);
-            document.documentElement.style.setProperty('--text-rgb', `var(--text-${theme}-rgb)`);
-            document.documentElement.style.setProperty('--accent-rgb', `var(--accent-${theme}-rgb)`);
-            document.documentElement.style.setProperty('--secondary-rgb', `var(--secondary-${theme}-rgb)`);
-            
-            localStorage.setItem('theme', theme);
-            document.getElementById('theme-toggle').textContent = theme === 'dark' ? '🌞' : '🌙';
-            currentTheme = theme;
-        }
-
-        applyTheme(currentTheme);
-
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
-        });
-        
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                applyTheme(e.matches ? 'dark' : 'light');
-            }
-        });
+        // Set default theme values
+        document.documentElement.style.setProperty('--background', 'var(--background-dark)');
+        document.documentElement.style.setProperty('--text', 'var(--text-dark)');
+        document.documentElement.style.setProperty('--accent', 'var(--accent-dark)');
+        document.documentElement.style.setProperty('--secondary', 'var(--secondary-dark)');
 
         // Mobile Menu Functionality
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');

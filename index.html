@@ -4,95 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilal Shihab - Personal Site</title>
-    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><filter id='glow'><feGaussianBlur stdDeviation='2.5' result='coloredBlur'/><feMerge><feMergeNode in='coloredBlur'/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs><circle cx='50' cy='50' r='40' fill='%23bf5700' filter='url(%23glow)'/><text x='50' y='65' font-size='50' font-weight='bold' font-family='-apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro Display, Helvetica Neue, Arial, sans-serif' fill='white' text-anchor='middle'>B</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text x='50' y='65' font-size='50' font-weight='bold' font-family='monospace' fill='%2300ff00' text-anchor='middle'>B_</text></svg>" type="image/svg+xml">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+        
         :root {
-            --background-light: #ffffff;
-            --text-light: #0d0d0f;
-            --accent-light: #bf5700;
-            --secondary-light: #f5f5f7;
-            --background-dark: #0d0d0f;
-            --text-dark: #f5f5f7;
-            --accent-dark: #bf5700;
-            --secondary-dark: #2a2a2e;
+            --background-light: #0a0a0a;
+            --text-light: #4CAF50;
+            --accent-light: #4CAF50;
+            --secondary-light: #1a1a1a;
+            --terminal-green: #4CAF50;
+            --terminal-green-dim: #388E3C;
+            --terminal-amber: #FFA726;
+            --background-dark: #000000;
+            --text-dark: #4CAF50;
+            --accent-dark: #4CAF50;
+            --secondary-dark: #0f0f0f;
             --nav-height: 44px;
-            --background-light-rgb: 255, 255, 255;
-            --text-light-rgb: 13, 13, 15;
-            --accent-light-rgb: 191, 87, 0;
-            --secondary-light-rgb: 245, 245, 247;
-            --background-dark-rgb: 13, 13, 15;
-            --text-dark-rgb: 245, 245, 247;
-            --accent-dark-rgb: 191, 87, 0;
-            --secondary-dark-rgb: 42, 42, 46;
+            --background-light-rgb: 10, 10, 10;
+            --text-light-rgb: 76, 175, 80;
+            --accent-light-rgb: 76, 175, 80;
+            --secondary-light-rgb: 26, 26, 26;
+            --background-dark-rgb: 0, 0, 0;
+            --text-dark-rgb: 76, 175, 80;
+            --accent-dark-rgb: 76, 175, 80;
+            --secondary-dark-rgb: 15, 15, 15;
+            --matrix-glow: 0 0 8px rgba(76, 175, 80, 0.4);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            font-family: 'Fira Code', 'Courier New', monospace;
         }
         
         body {
-            background-color: var(--background);
-            color: var(--text);
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+            color: var(--terminal-green);
             line-height: 1.6;
             opacity: 0;
-            animation: fadeIn 0.5s ease-in-out forwards;
+            animation: terminalBoot 0.8s ease-in-out forwards;
             transition: background-color 0.5s ease, color 0.5s ease;
+            position: relative;
+            overflow-x: hidden;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        @keyframes terminalBoot {
+            0% { 
+                opacity: 0;
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 0.5;
+                filter: blur(5px);
+            }
+            100% { 
+                opacity: 1;
+                filter: blur(0);
+            }
         }
         
-        /* Top Navigation Bar - Apple Style */
+        
+        
+        /* Top Navigation Bar - Hacker Style */
         .nav-container {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 0;
+            left: 0;
+            right: 0;
             height: var(--nav-height);
             display: flex;
             justify-content: center;
             z-index: 1000;
-            border-radius: 22px;
-            width: 90%;
-            max-width: 980px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 
-                        0 2px 8px rgba(0, 0, 0, 0.04),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid var(--terminal-green);
+            box-shadow: var(--matrix-glow);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             will-change: transform, backdrop-filter, background-color;
         }
         
         /* Scrolled state for nav */
         .nav-container.scrolled {
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
-            background: rgba(255, 255, 255, 0.85);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 
-                        0 4px 12px rgba(0, 0, 0, 0.06),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
         }
         
         body[data-theme="dark"] .nav-container {
-            background: rgba(30, 30, 30, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 
-                        0 2px 8px rgba(0, 0, 0, 0.24),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid var(--terminal-green-dim);
         }
         
         body[data-theme="dark"] .nav-container.scrolled {
-            background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            background: rgba(0, 0, 0, 1);
         }
         
         .nav-content {
@@ -114,29 +121,43 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.5s ease, opacity 0.2s;
+            color: var(--terminal-green);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .logo:hover {
-            opacity: 0.7;
+            text-shadow: var(--matrix-glow);
         }
         
         .home-icon {
             display: inline-flex;
-            background-color: var(--accent);
-            border-radius: 10px;
+            background-color: transparent;
+            border: 1px solid var(--terminal-green);
+            border-radius: 0;
             width: 24px;
             height: 24px;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.5s ease, box-shadow 0.3s ease;
-            box-shadow: 0 3px 10px rgba(var(--accent-rgb), 0.5);
+            transition: all 0.3s ease;
+            color: var(--terminal-green);
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .home-icon::before {
+            content: '>';
+            position: absolute;
+            left: -10px;
+            color: var(--terminal-green);
         }
         
         .logo:hover .home-icon {
-            box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.7);
+            background-color: var(--terminal-green);
+            color: #000;
+            box-shadow: var(--matrix-glow);
         }
         
         .nav-links {
@@ -149,25 +170,37 @@
         }
         
         .nav-links a {
-            color: var(--text);
+            color: var(--terminal-green);
             text-decoration: none;
-            font-size: 14px;
-            opacity: 0.8;
-            transition: color 0.5s ease, opacity 0.2s, box-shadow 0.3s ease;
+            font-size: 12px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
             padding: 6px 14px;
             position: relative;
-            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links a::before {
+            content: '[';
+            margin-right: 4px;
+            opacity: 0.5;
+        }
+        
+        .nav-links a::after {
+            content: ']';
+            margin-left: 4px;
+            opacity: 0.5;
         }
         
         .nav-links a:hover {
             opacity: 1;
-            box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.45), 0 0 15px rgba(var(--accent-rgb), 0.35);
+            text-shadow: var(--matrix-glow);
         }
         
         .nav-links a.active {
-            background-color: rgba(var(--accent-rgb), 0.1);
-            color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.45), 0 0 15px rgba(var(--accent-rgb), 0.35);
+            color: var(--terminal-amber);
+            opacity: 1;
         }
         
         .nav-right {
@@ -180,16 +213,21 @@
         
         .icon-button {
             background: none;
-            border: none;
-            color: var(--text);
-            opacity: 0.8;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
+            opacity: 0.7;
             cursor: pointer;
-            transition: color 0.5s ease, opacity 0.2s;
-            font-size: 16px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            padding: 4px 8px;
+            font-family: 'Fira Code', monospace;
         }
         
         .icon-button:hover {
             opacity: 1;
+            background-color: var(--terminal-green);
+            color: #000;
+            box-shadow: var(--matrix-glow);
         }
         
         .theme-toggle {
@@ -202,11 +240,13 @@
         
         /* Main Content */
         .main-container {
-            padding-top: calc(var(--nav-height) + 80px);
+            padding-top: calc(var(--nav-height) + 40px);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
         .content {
@@ -219,34 +259,63 @@
             text-align: center;
             margin-bottom: 60px;
             opacity: 0;
-            animation: slideDown 0.8s ease-out forwards 0.2s;
+            animation: terminalType 1s ease-out forwards 0.2s;
+            position: relative;
         }
         
-        @keyframes slideDown {
+        .hero::before {
+            content: '$ whoami';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--terminal-green-dim);
+            font-size: 14px;
+            opacity: 0.5;
+        }
+        
+        @keyframes terminalType {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
+                filter: blur(5px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
+                filter: blur(0);
             }
         }
         
         .name {
-            font-size: 72px;
+            font-size: 64px;
             font-weight: 700;
-            letter-spacing: -1px;
+            letter-spacing: 3px;
             margin-bottom: 10px;
-            color: var(--accent);
-            text-shadow: 0 3px 15px rgba(var(--accent-rgb), 0.3);
+            color: var(--terminal-green);
+            text-shadow: var(--matrix-glow);
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .name::after {
+            content: '_';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
         
         .tagline {
-            font-size: 18px;
-            opacity: 0.8;
+            font-size: 14px;
+            opacity: 0.7;
             max-width: 600px;
             margin: 0 auto;
+            color: var(--terminal-green-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         /* Menu Grid */
@@ -257,73 +326,45 @@
             margin-top: 50px;
             margin-bottom: 80px;
             opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards 0.4s;
+            animation: terminalBoot 0.8s ease-out forwards 0.4s;
         }
         
         .menu-item {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 0;
             padding: 30px;
             display: flex;
             flex-direction: column;
             text-decoration: none;
-            color: var(--text);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            color: var(--terminal-green);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             min-height: 200px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 
-                        0 2px 8px rgba(0, 0, 0, 0.04),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--terminal-green);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.1);
             transform-style: preserve-3d;
-            will-change: transform, backdrop-filter;
+            will-change: transform;
         }
+        
         
         body[data-theme="dark"] .menu-item {
-            background: rgba(30, 30, 30, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 
-                        0 2px 8px rgba(0, 0, 0, 0.24),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--terminal-green-dim);
         }
         
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                        rgba(255, 255, 255, 0.1) 0%, 
-                        transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .menu-item:hover::before {
-            opacity: 1;
-        }
         
         .menu-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 
-                        0 10px 20px rgba(0, 0, 0, 0.1),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.8);
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
+            border-color: var(--terminal-amber);
+            background: rgba(76, 175, 80, 0.05);
         }
         
         body[data-theme="dark"] .menu-item:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
-                        0 10px 20px rgba(0, 0, 0, 0.2),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.2);
-        }
-        
-        body[data-theme="dark"] .menu-item:hover::before {
-            opacity: 0;
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.4);
         }
         
         .menu-item.in-view {
@@ -344,20 +385,28 @@
         }
         
         .menu-item h2 {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 10px;
             z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--terminal-amber);
+        }
+        
+        .menu-item h2::before {
+            content: '> ';
+            color: var(--terminal-green);
         }
         
         .code-bg {
             position: absolute;
             bottom: 0;
             right: 0;
-            font-family: monospace;
-            font-size: 12px;
-            line-height: 1.2;
-            opacity: 0.2;
-            color: var(--accent);
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            line-height: 1.4;
+            opacity: 0.3;
+            color: var(--terminal-green-dim);
             padding: 20px;
             text-align: right;
             max-width: 70%;
@@ -385,10 +434,18 @@
         #contact { animation-delay: 1.2s; }
         
         .section-title {
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 30px;
             position: relative;
-            text-shadow: 0 2px 5px rgba(var(--accent-rgb), 0.15);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--terminal-amber);
+        }
+        
+        .section-title::before {
+            content: '## ';
+            color: var(--terminal-green-dim);
+            margin-right: 10px;
         }
         
         .section-title::after {
@@ -396,11 +453,10 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent);
-            border-radius: 2px;
-            box-shadow: 0 2px 6px rgba(var(--accent-rgb), 0.5);
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--terminal-green), transparent);
+            box-shadow: var(--matrix-glow);
         }
         
         /* Skills */
@@ -411,18 +467,35 @@
         }
         
         .skill-tag {
-            background-color: rgba(var(--accent-rgb), 0.15);
-            color: var(--accent);
+            background-color: transparent;
+            color: var(--terminal-green);
             padding: 8px 14px;
-            border-radius: 30px;
-            font-size: 14px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 3px 8px rgba(var(--accent-rgb), 0.15);
+            border: 1px solid var(--terminal-green);
+            border-radius: 0;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .skill-tag::before {
+            content: '{';
+            margin-right: 4px;
+            color: var(--terminal-green-dim);
+        }
+        
+        .skill-tag::after {
+            content: '}';
+            margin-left: 4px;
+            color: var(--terminal-green-dim);
         }
         
         .skill-tag:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(var(--accent-rgb), 0.4);
+            background-color: var(--terminal-green);
+            color: #000;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
         }
         
         /* Projects */
@@ -434,99 +507,82 @@
         }
         
         .project-card {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 0;
             padding: 28px;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 
-                        0 2px 8px rgba(0, 0, 0, 0.04),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            border: 1px solid var(--terminal-green);
+            box-shadow: inset 0 0 20px rgba(76, 175, 80, 0.05);
             transform-style: preserve-3d;
-            will-change: transform, backdrop-filter;
+            will-change: transform;
             position: relative;
             overflow: hidden;
         }
         
+        
         body[data-theme="dark"] .project-card {
-            background: rgba(30, 30, 30, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 
-                        0 2px 8px rgba(0, 0, 0, 0.24),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--terminal-green-dim);
         }
         
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                        rgba(255, 255, 255, 0.1) 0%, 
-                        transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        body[data-theme="dark"] .project-card:hover::before {
-            opacity: 0;
-        }
         
         .project-card.in-view {
             animation: liquidReveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
         
         .project-card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 
-                        0 5px 15px rgba(0, 0, 0, 0.1),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            border-color: var(--terminal-amber);
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.2), inset 0 0 30px rgba(76, 175, 80, 0.1);
+            background: rgba(76, 175, 80, 0.02);
         }
         
         body[data-theme="dark"] .project-card:hover {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 
-                        0 5px 15px rgba(0, 0, 0, 0.2),
-                        inset 0 0 0 0.5px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.3);
         }
         
         .project-card h3 {
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 10px;
-            color: var(--accent);
+            margin-top: 20px;
+            color: var(--terminal-amber);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: text-shadow 0.3s ease;
         }
         
         .project-card:hover h3 {
-            text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.4);
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
         }
         
         .project-card p {
-            opacity: 0.8;
-            font-size: 14px;
+            opacity: 0.7;
+            font-size: 12px;
             margin-bottom: 15px;
+            line-height: 1.6;
+            color: var(--terminal-green-dim);
         }
         
         .project-link {
             display: inline-block;
-            color: var(--accent);
+            color: var(--terminal-green);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
-            transition: opacity 0.2s, text-shadow 0.2s ease;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .project-link::before {
+            content: '> ';
         }
         
         .project-link:hover {
-            opacity: 0.8;
-            text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
+            color: var(--terminal-amber);
+            text-shadow: var(--matrix-glow);
         }
         
         /* Page Transitions */
@@ -547,8 +603,11 @@
         footer {
             padding: 40px 0;
             text-align: center;
-            opacity: 0.6;
-            font-size: 14px;
+            opacity: 0.5;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--terminal-green-dim);
         }
         
         /* Smooth scrolling */
@@ -696,21 +755,22 @@
             justify-content: center;
             width: 44px;
             height: 44px;
-            border-radius: 22px;
-            background-color: var(--secondary);
-            color: var(--text);
+            border-radius: 0;
+            background-color: transparent;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
             text-decoration: none;
             font-size: 18px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12), 0 0 10px rgba(var(--accent-rgb), 0.1);
+            transition: all 0.3s ease;
             overflow: hidden;
+            position: relative;
         }
         
         .social-link:hover {
-            transform: translateY(-3px);
-            background-color: var(--accent);
-            color: white;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 0 18px rgba(var(--accent-rgb), 0.6);
+            transform: translateY(-2px);
+            background-color: var(--terminal-green);
+            color: #000;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
         }
         
         .social-link svg {
@@ -724,22 +784,28 @@
             display: inline-flex;
             align-items: center;
             padding: 10px 20px;
-            border-radius: 22px;
-            background-color: var(--secondary);
-            color: var(--text);
+            border-radius: 0;
+            background-color: transparent;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
             text-decoration: none;
-            font-size: 14px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12), 0 0 10px rgba(var(--accent-rgb), 0.1);
+            font-size: 12px;
+            transition: all 0.3s ease;
             margin-top: 15px;
             gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .email-btn::before {
+            content: '$ ';
         }
         
         .email-btn:hover {
-            transform: translateY(-3px);
-            background-color: var(--accent);
-            color: white;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 0 18px rgba(var(--accent-rgb), 0.6);
+            transform: translateY(-2px);
+            background-color: var(--terminal-green);
+            color: #000;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
         }
         
         .email-btn svg {
@@ -995,7 +1061,7 @@
             <a href="#" class="logo-link">
                 <div class="logo">
                     <div class="home-icon">B</div>
-                    <span>Bilal Shihab</span>
+                    <span>root@bilal</span>
                 </div>
             </a>
             
@@ -1008,8 +1074,7 @@
             </div>
             
             <div class="nav-right">
-                <button class="icon-button" id="top-button">○</button>
-                <button class="icon-button theme-toggle" id="theme-toggle">🌙</button>
+                <button class="icon-button" id="top-button">[TOP]</button>
             </div>
             
             <!-- Mobile Menu Button -->
@@ -1026,8 +1091,8 @@
     <div class="main-container">
         <div class="content">
             <div class="hero">
-                <h1 class="name">Bilal Shihab</h1>
-                <p class="tagline">Biomedical Engineering Student at University of Texas at Austin</p>
+                <h1 class="name">Bilal_Shihab</h1>
+                <p class="tagline">// Biomedical Engineering Student @ UT Austin</p>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/bilalshihab/" target="_blank" class="social-link" aria-label="LinkedIn">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -1052,9 +1117,9 @@
                 <a href="#projects" class="menu-item">
                     <h2>Projects</h2>
                     <div class="code-bg">
-                        .projects { <br>
-                        &nbsp;&nbsp;display: grid;<br>
-                        &nbsp;&nbsp;innovations: true;<br>
+                        projects.init() { <br>
+                        &nbsp;&nbsp;type: "innovative";<br>
+                        &nbsp;&nbsp;status: "active";<br>
                         }
                     </div>
                 </a>
@@ -1062,9 +1127,9 @@
                 <a href="resume.html" class="menu-item page-link">
                     <h2>Resume</h2>
                     <div class="code-bg">
-                        .experience { <br>
-                        &nbsp;&nbsp;value: expertise;<br>
-                        &nbsp;&nbsp;growth: continuous;<br>
+                        resume.load() { <br>
+                        &nbsp;&nbsp;experience: ++;<br>
+                        &nbsp;&nbsp;skills: "expanding";<br>
                         }
                     </div>
                 </a>
@@ -1072,9 +1137,9 @@
                 <a href="#skills" class="menu-item">
                     <h2>Skills</h2>
                     <div class="code-bg">
-                        .skills { <br>
-                        &nbsp;&nbsp;level: advanced;<br>
-                        &nbsp;&nbsp;learning: always;<br>
+                        skills.compile() { <br>
+                        &nbsp;&nbsp;stack: "full";<br>
+                        &nbsp;&nbsp;update: "daily";<br>
                         }
                     </div>
                 </a>
@@ -1082,8 +1147,10 @@
             
             <div id="about" class="section">
                 <h2 class="section-title">About Me</h2>
-                <p>I'm a Biomedical Engineering student at the University of Texas at Austin, passionate about combining healthcare and technology to create innovative solutions. With a strong foundation in both engineering and programming, I work on projects that bridge the gap between medical needs and technological capabilities.</p>
-                <p>Currently focused on AI applications in healthcare, brain-computer interfaces, and medical imaging technologies. I'm always looking for opportunities to collaborate on projects that make a real difference in healthcare.</p>
+                <p>// Biomedical Engineering student @ UT Austin<br>
+                // FOCUS: Healthcare + Technology convergence<br>
+                // SPECIALIZATION: AI/ML, Brain-Computer Interfaces, Medical Imaging</p>
+                <p>// Currently executing projects in neural signal processing, healthcare AI systems, and medical device development. Seeking collaborative opportunities in healthcare innovation.</p>
             </div>
             
             <div id="projects" class="section">
@@ -1124,36 +1191,36 @@
             <div id="skills" class="section">
                 <h2 class="section-title">Skills</h2>
                 <div class="skills">
-                    <div class="skill-tag">Machine Learning</div>
-                    <div class="skill-tag">AI</div>
-                    <div class="skill-tag">Jupyter Notebook</div>
                     <div class="skill-tag">Python</div>
-                    <div class="skill-tag">GIT</div>
-                    <div class="skill-tag">C++</div>
+                    <div class="skill-tag">C/C++</div>
+                    <div class="skill-tag">ARMv6-M Assembly</div>
+                    <div class="skill-tag">MatLab</div>
+                    <div class="skill-tag">R</div>
+                    <div class="skill-tag">Machine Learning</div>
                     <div class="skill-tag">PyTorch</div>
-                    <div class="skill-tag">Laser Speckle System</div>
-                    <div class="skill-tag">Google Cloud SDK</div>
+                    <div class="skill-tag">Keras</div>
+                    <div class="skill-tag">Embedded Systems</div>
+                    <div class="skill-tag">Google Cloud</div>
+                    <div class="skill-tag">Docker</div>
+                    <div class="skill-tag">Laser Speckle Systems</div>
                     <div class="skill-tag">SolidWorks</div>
                     <div class="skill-tag">Fusion 360</div>
                     <div class="skill-tag">Captum</div>
-                    <div class="skill-tag">Keras</div>
                     <div class="skill-tag">Optuna</div>
-                    <div class="skill-tag">Google Colaboratory</div>
-                    <div class="skill-tag">MatLab</div>
-                    <div class="skill-tag">R</div>
-                    <div class="skill-tag">Android Studio/IntelliJ</div>
+                    <div class="skill-tag">Git</div>
+                    <div class="skill-tag">Jupyter</div>
                 </div>
             </div>
             
             <div id="contact" class="section">
                 <h2 class="section-title">Contact Me</h2>
                 <p>Email: bilalshihab@utexas.edu</p>
-                <p>Locations: Austin, TX and San Francisco Bay Area</p>
+                <p>Location: Austin, TX</p>
             </div>
         </div>
         
         <footer>
-            <p>&copy; 2025 Bilal Shihab. All Rights Reserved.</p>
+            <p>// &copy; 2025 Bilal Shihab | System Running | All Rights Reserved</p>
         </footer>
     </div>
 
@@ -1207,39 +1274,15 @@
             });
         });
 
-        // Theme detection and toggling
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        let currentTheme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : 'light');
-
-        function applyTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            document.documentElement.style.setProperty('--background', `var(--background-${theme})`);
-            document.documentElement.style.setProperty('--text', `var(--text-${theme})`);
-            document.documentElement.style.setProperty('--accent', `var(--accent-${theme})`);
-            document.documentElement.style.setProperty('--secondary', `var(--secondary-${theme})`);
-            document.documentElement.style.setProperty('--background-rgb', `var(--background-${theme}-rgb)`);
-            document.documentElement.style.setProperty('--text-rgb', `var(--text-${theme}-rgb)`);
-            document.documentElement.style.setProperty('--accent-rgb', `var(--accent-${theme}-rgb)`);
-            document.documentElement.style.setProperty('--secondary-rgb', `var(--secondary-${theme}-rgb)`);
-            
-            localStorage.setItem('theme', theme);
-            document.getElementById('theme-toggle').textContent = theme === 'dark' ? '🌞' : '🌙';
-            currentTheme = theme;
-        }
-
-        applyTheme(currentTheme);
-
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
-        });
-        
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                applyTheme(e.matches ? 'dark' : 'light');
-            }
-        });
+        // Set default theme values
+        document.documentElement.style.setProperty('--background', 'var(--background-dark)');
+        document.documentElement.style.setProperty('--text', 'var(--text-dark)');
+        document.documentElement.style.setProperty('--accent', 'var(--accent-dark)');
+        document.documentElement.style.setProperty('--secondary', 'var(--secondary-dark)');
+        document.documentElement.style.setProperty('--background-rgb', 'var(--background-dark-rgb)');
+        document.documentElement.style.setProperty('--text-rgb', 'var(--text-dark-rgb)');
+        document.documentElement.style.setProperty('--accent-rgb', 'var(--accent-dark-rgb)');
+        document.documentElement.style.setProperty('--secondary-rgb', 'var(--secondary-dark-rgb)');
 
         // Mobile Menu Functionality
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -1341,18 +1384,6 @@
             observer.observe(el);
         });
 
-        // Mouse tracking for liquid glass effect
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.menu-item, .project-card');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                
-                card.style.setProperty('--mouse-x', `${x}%`);
-                card.style.setProperty('--mouse-y', `${y}%`);
-            });
-        });
 
         // Smooth reveal for sections
         const revealOnScroll = () => {
