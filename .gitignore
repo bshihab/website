@@ -1,1 +1,12 @@
-# No sensitive files to ignore currently
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+node_modules/
