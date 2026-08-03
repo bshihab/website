@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilal Shihab - Portfolio</title>
     <meta name="description"
-        content="Bilal Shihab — Biomedical Engineering student at UT Austin specializing in Embedded Systems, Edge AI, and hardware-software integration.">
+        content="Bilal Shihab — Biomedical Engineering student at UT Austin building on-device clinical AI, edge inference pipelines, and iOS health applications.">
     <link rel="icon"
         href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0f'/><text x='50' y='68' font-size='50' font-weight='700' font-family='system-ui' fill='%23a78bfa' text-anchor='middle'>B</text></svg>"
         type="image/svg+xml">
@@ -492,11 +492,91 @@
             stroke-linejoin: round;
         }
 
+        .project-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-tech {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.2px;
+            margin-bottom: 14px;
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: auto;
+        }
+
+        /* ===== MORE ON GITHUB ===== */
+        .subsection-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin: 44px 0 14px;
+            letter-spacing: -0.1px;
+        }
+
+        .more-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 10px;
+        }
+
+        .more-project {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .more-project:hover {
+            color: var(--primary);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+
+        .more-project span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
         /* ===== SKILLS ===== */
         .skills {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+        }
+
+        .skills-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .skill-group-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
         }
 
         .skill-tag {
@@ -1192,8 +1272,8 @@
         <div class="content">
             <div class="hero">
                 <h1 class="name">Bilal Shihab</h1>
-                <p class="tagline">Biomedical Engineering Student at UT Austin — specializing in Embedded Systems, Edge
-                    AI, and hardware-software integration.</p>
+                <p class="tagline">Biomedical Engineering at UT Austin — building on-device clinical AI, edge inference
+                    pipelines, and iOS health applications.</p>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/bilalshihab/" target="_blank" class="social-link"
                         aria-label="LinkedIn">
@@ -1277,14 +1357,19 @@
                 <span class="code-decoration" style="top: -28px; left: -4px;">&lt;section&gt;</span>
                 <h2 class="section-title">About Me</h2>
                 <div class="about-text">
-                    <p>I'm a <strong>Biomedical Engineering</strong> student at <span class="about-highlight">UT
-                            Austin</span>, specializing in <strong>Embedded Systems</strong>, <strong>Edge AI</strong>,
-                        and hardware-software integration.</p>
+                    <p>I'm a <strong>Biomedical Engineering</strong> student on the Computational Track at <span
+                            class="about-highlight">UT Austin</span>, working on <strong>on-device clinical AI</strong>
+                        and <strong>edge inference</strong> — taking models that normally need a datacenter and getting
+                        them to run on a phone or a microcontroller.</p>
                     <br>
-                    <p>I'm passionate about developing low-level firmware and high-performance data pipelines —
-                        currently leading the Edge AI team at <strong>Longhorn Neurotech</strong>, building projects in
-                        neural network deployment on embedded platforms, medical device development, and real-time
-                        signal processing.</p>
+                    <p>That's meant shipping two privacy-first iOS apps that run quantized LLMs entirely on-device via
+                        llama.cpp on Metal, building a C inference engine for a dual-core Cortex-M0+, and leading the
+                        Edge AI team at <strong>Longhorn Neurotech</strong>. I'm currently researching the gut-brain
+                        axis at <strong>Wang Laboratory</strong>, modeling EEG and EGG data to time targeted vagus nerve
+                        stimulation.</p>
+                    <br>
+                    <p>The through-line is <span class="about-highlight">privacy by architecture</span> — health data
+                        that never leaves the device it was measured on.</p>
                 </div>
                 <span class="code-decoration" style="bottom: -20px; left: -4px;">&lt;/section&gt;</span>
             </div>
@@ -1294,79 +1379,276 @@
                 <span class="code-decoration" style="top: -28px; left: -4px;">&lt;div class="projects"&gt;</span>
                 <h2 class="section-title">Projects</h2>
                 <div class="projects-grid">
+
+                    <div class="project-card">
+                        <h3>Localabs</h3>
+                        <div class="project-tech">Swift · SwiftUI · llama.cpp · Metal · Vision OCR · HealthKit</div>
+                        <p>iOS app that translates medical lab reports into plain language, fully on-device. Apple
+                            Vision OCR extracts text locally; MedGemma 4B (quantized to ~2.5&nbsp;GB) runs on the iPhone
+                            GPU via llama.cpp on Metal and returns a five-section summary. Lasso any text on the scan to
+                            ask follow-ups. Health Trends folds 30-day Apple Health vitals against peer-reviewed
+                            reference bands. No cloud, no account, no telemetry.</p>
+                        <div class="project-links">
+                            <a href="https://localabs.app" target="_blank" class="project-link">
+                                localabs.app
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                            <a href="https://github.com/bshihab/localabs" target="_blank" class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>MedAdvisor</h3>
+                        <div class="project-tech">Swift · Qwen 2.5-7B · llama.cpp · SpeechAnalyzer</div>
+                        <p>Built with a Stanford surgeon — records a medical consultation and scores it against a
+                            clinical rubric entirely on-device. Runs a 4-bit 7B LLM on iPhone, fitting a 4&nbsp;GB model
+                            into a 495&nbsp;MB footprint via memory-mapped weights, and cuts evaluation latency ~60%
+                            (18.6&nbsp;s → 7.3&nbsp;s per criterion) by caching transcript KV state across all 16
+                            evaluations. Model choice came from benchmarking, not labels: a general 7B beat
+                            medical-tuned MedGemma 4B decisively.</p>
+                        <div class="project-links">
+                            <a href="https://bshihab.github.io/medadvisor-site/" target="_blank" class="project-link">
+                                Project site
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                            <a href="https://bshihab.github.io/medadvisor-site/blog/shipping-the-less-accurate-speech-engine.html"
+                                target="_blank" class="project-link">
+                                Engineering writeup
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                            <a href="https://github.com/bshihab/medadvisor" target="_blank" class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>PulseCam — Contactless Heart Rate</h3>
+                        <div class="project-tech">Python · PyTorch · OpenCV · PhysNet</div>
+                        <p>Measures heart rate from an ordinary webcam using remote photoplethysmography. Two engines: a
+                            fully explainable DSP baseline (forehead ROI → green channel → Butterworth bandpass → FFT
+                            peak) and PhysNet, a 0.77M-parameter 3D-CNN trained on UBFC-rPPG for robustness to motion
+                            and lighting. Runs locally on Apple Silicon MPS, CUDA, or CPU — the camera feed never leaves
+                            the machine.</p>
+                        <div class="project-links">
+                            <a href="https://bshihab.github.io/rppg-poc/" target="_blank" class="project-link">
+                                Project page
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                            <a href="https://github.com/bshihab/rppg-poc" target="_blank" class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="project-card">
                         <h3>Cloud to Edge Heart Rate Monitor</h3>
-                        <p>End-to-end pipeline from Cloud Storage → Raspberry Pi 5 → Pi Pico, with a custom C-based
-                            inference engine running quantized neural networks on a dual-core Cortex-M0+ to classify
-                            heart conditions.</p>
-                        <a href="https://github.com/bshihab/pico_hrm_integrity" target="_blank" class="project-link">
-                            View on GitHub
-                            <svg viewBox="0 0 24 24">
-                                <line x1="7" y1="17" x2="17" y2="7" />
-                                <polyline points="7 7 17 7 17 17" />
-                            </svg>
-                        </a>
+                        <div class="project-tech">C · RP2040 · Cortex-M0+ · UART · Google Cloud</div>
+                        <p>Dual-core safety-critical arrhythmia detector. A Raspberry Pi 5 streams MIT-BIH clinical data
+                            from Cloud Storage over a custom UART protocol to a Pi Pico, where Core 0 runs a hand-written
+                            C inference engine on a hybrid-quantized network (Int8 weights, float math) and Core 1 runs
+                            a watchdog that fires a hardware panic strobe if inference hangs past one second.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/bshihab/pico_hrm_integrity" target="_blank" class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Evo 2 — BRCA1 Variant Effect Prediction</h3>
+                        <div class="project-tech">Python · Evo 2 · Modal · genomics</div>
+                        <p>Zero-shot pathogenicity scoring for BRCA1 single-nucleotide variants using the Evo 2 genomic
+                            foundation model — delta log-likelihood between reference and variant sequence windows.
+                            Validated against the Findlay 2018 saturation mutagenesis set (~3,893 SNVs) and ClinVar. The
+                            centerpiece is the honesty layer: per-category performance, false-positive rates,
+                            calibration, and severity-dependent failure modes rather than a headline AUROC alone.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/bshihab/evo2-brca1-variant-effect" target="_blank"
+                                class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="project-card">
                         <h3>Embedded Multiplayer Racer</h3>
-                        <p>Award-winning bare-metal racing game in C for TI MSPM0 — register-level UART/ADC/DAC drivers,
-                            custom networking protocol, and real-time physics on ARM Cortex-M0+.</p>
-                        <a href="https://github.com/bshihab/Embedded-Multiplayer-Racer" target="_blank"
-                            class="project-link">
-                            View on GitHub
-                            <svg viewBox="0 0 24 24">
-                                <line x1="7" y1="17" x2="17" y2="7" />
-                                <polyline points="7 7 17 7 17 17" />
-                            </svg>
-                        </a>
+                        <div class="project-tech">C · TI MSPM0G3507 · bare-metal</div>
+                        <p>Won 'Best Embedded Design' in a class-wide competition. Bare-metal racing game in C with
+                            register-level drivers written from scratch — UART (interrupt-driven networking), SPI
+                            (ST7735 LCD), ADC (joystick), and DAC/Timer (audio, 30&nbsp;Hz game loop). A custom UART
+                            protocol syncs player coordinates and item events between two boards in real time.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/bshihab/Embedded-Multiplayer-Racer" target="_blank"
+                                class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="project-card">
-                        <h3>ML Interpretability with Neurotech</h3>
-                        <p>Capsule network architecture for model interpretability in neural signal processing,
-                            improving understanding of brain-computer interface models.</p>
-                        <a href="https://github.com/LonghornNeurotech/ML_Interpretability" target="_blank"
-                            class="project-link">
-                            View on GitHub
-                            <svg viewBox="0 0 24 24">
-                                <line x1="7" y1="17" x2="17" y2="7" />
-                                <polyline points="7 7 17 7 17 17" />
-                            </svg>
-                        </a>
+                        <h3>Scribend</h3>
+                        <div class="project-tech">TypeScript · on-device STT · vector search</div>
+                        <p>Offline-first medical scribe for healthcare workers with no connectivity. Captures
+                            doctor-patient audio, converts it to text, retrieves historical patient context via local
+                            vector search, and structures the encounter into a JSON SOAP note — 100% on-device.</p>
+                        <div class="project-links">
+                            <a href="https://bshihab.github.io/Scribend/" target="_blank" class="project-link">
+                                Project page
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                            <a href="https://github.com/bshihab/Scribend" target="_blank" class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="project-card">
-                        <h3>ECG PCB Project</h3>
-                        <p>Custom Electrocardiogram PCB designed in Fusion 360 with instrumentation amplifiers and
-                            active bandpass/notch filtering to isolate cardiac signals.</p>
+                        <h3>Ballotwise</h3>
+                        <div class="project-tech">React Native · Expo · TypeScript · Claude</div>
+                        <p>Cross-platform voting guide that ranks the candidates on your real ballot by how well they
+                            match a 10-policy-area questionnaire. Google Civic Information API for elections and
+                            ballots, Claude for neutral candidate summaries and follow-up chat, styled like a paper
+                            optical-scan ballot.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/bshihab/ballotwise" target="_blank" class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="project-card">
-                        <h3>Laser Speckle Project</h3>
-                        <p>Real-time Laser Speckle Analysis UI in Python, interfacing with Basler cameras and Arduinos
-                            for automated laser intensity control during surgery.</p>
-                        <a href="https://github.com/bshihab/laser_speckle_project" target="_blank" class="project-link">
-                            View on GitHub
-                            <svg viewBox="0 0 24 24">
-                                <line x1="7" y1="17" x2="17" y2="7" />
-                                <polyline points="7 7 17 7 17 17" />
-                            </svg>
-                        </a>
+                        <h3>Laser Speckle Analysis</h3>
+                        <div class="project-tech">Python · PySide6 · Basler · Arduino</div>
+                        <p>Real-time laser speckle UI processing 16-bit optical streams from Basler cameras for tissue
+                            imaging during surgery. Localized contrast analysis over a 7×7 spatial sliding window, plus
+                            an Arduino feedback loop that evaluates microsecond exposures and adjusts laser current
+                            against a center-weighted 98% pixel saturation threshold.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/bshihab/laser_speckle_project" target="_blank"
+                                class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="project-card">
-                        <h3>MotorMind: EEG Signal Processing</h3>
-                        <p>Python framework for EEG signal processing using RAG with Google's Gemini AI — data
-                            acquisition, tokenization, vector storage, and inference.</p>
-                        <a href="https://github.com/bshihab/MotorMind" target="_blank" class="project-link">
-                            View on GitHub
-                            <svg viewBox="0 0 24 24">
-                                <line x1="7" y1="17" x2="17" y2="7" />
-                                <polyline points="7 7 17 7 17 17" />
-                            </svg>
-                        </a>
+                        <h3>ML Interpretability for Neurotech</h3>
+                        <div class="project-tech">PyTorch · Capsule Networks · Captum</div>
+                        <p>Capsule network architecture for interpretability in brain-computer interface models,
+                            improving understanding of what neural signal classifiers actually key on.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/LonghornNeurotech/ML_Interpretability" target="_blank"
+                                class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
+
+                    <div class="project-card">
+                        <h3>MotorMind</h3>
+                        <div class="project-tech">Python · RAG · vector store</div>
+                        <p>EEG signal processing framework built on retrieval-augmented generation — acquisition,
+                            tokenization, vector storage, and inference over neural signal data.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/bshihab/MotorMind" target="_blank" class="project-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>ECG PCB</h3>
+                        <div class="project-tech">Fusion 360 · analog design</div>
+                        <p>Custom electrocardiogram PCB designed in Autodesk Fusion 360. Analog signal chain with
+                            instrumentation amplifiers and active bandpass/notch filtering to reject 60&nbsp;Hz noise
+                            and isolate cardiac signals, including component selection and BOM optimization for
+                            fabrication.</p>
+                    </div>
+
+                </div>
+
+                <h3 class="subsection-title">More on GitHub</h3>
+                <div class="more-projects">
+                    <a href="https://github.com/bshihab/launch-kit" target="_blank" class="more-project">
+                        launch-kit <span>Python</span>
+                    </a>
+                    <a href="https://github.com/bshihab/healthcare_ai" target="_blank" class="more-project">
+                        healthcare_ai <span>DICOM · GCP</span>
+                    </a>
+                    <a href="https://github.com/bshihab/college_ai" target="_blank" class="more-project">
+                        college_ai <span>LangChain</span>
+                    </a>
+                    <a href="https://github.com/bshihab/tello_drone_project" target="_blank" class="more-project">
+                        tello_drone_project <span>OpenCV</span>
+                    </a>
+                    <a href="https://github.com/bshihab/covid19hackathon2020" target="_blank" class="more-project">
+                        covid19hackathon2020 <span>Python</span>
+                    </a>
+                    <a href="https://github.com/bshihab" target="_blank" class="more-project">
+                        All repositories <span>github.com/bshihab</span>
+                    </a>
                 </div>
             </div>
 
@@ -1374,31 +1656,74 @@
             <div id="skills" class="section">
                 <span class="code-decoration" style="top: -28px; left: -4px;">&lt;ul class="skills"&gt;</span>
                 <h2 class="section-title">Skills</h2>
-                <div class="skills">
-                    <div class="skill-tag">Python</div>
-                    <div class="skill-tag">C/C++</div>
-                    <div class="skill-tag">ARMv6-M Assembly</div>
-                    <div class="skill-tag">MATLAB</div>
-                    <div class="skill-tag">R</div>
-                    <div class="skill-tag">Machine Learning</div>
-                    <div class="skill-tag">Embedded Systems</div>
-                    <div class="skill-tag">TI MSPM0</div>
-                    <div class="skill-tag">Raspberry Pi</div>
-                    <div class="skill-tag">Arduino</div>
-                    <div class="skill-tag">UART</div>
-                    <div class="skill-tag">PyTorch</div>
-                    <div class="skill-tag">ExecuTorch</div>
-                    <div class="skill-tag">TensorFlow Lite</div>
-                    <div class="skill-tag">Keras</div>
-                    <div class="skill-tag">Captum</div>
-                    <div class="skill-tag">Optuna</div>
-                    <div class="skill-tag">Google Cloud</div>
-                    <div class="skill-tag">Docker</div>
-                    <div class="skill-tag">Git</div>
-                    <div class="skill-tag">SolidWorks</div>
-                    <div class="skill-tag">Fusion 360</div>
-                    <div class="skill-tag">Code Composer Studio</div>
-                    <div class="skill-tag">Jupyter</div>
+                <div class="skills-groups">
+                    <div class="skill-group">
+                        <div class="skill-group-label">Languages</div>
+                        <div class="skills">
+                            <div class="skill-tag">Python</div>
+                            <div class="skill-tag">Swift</div>
+                            <div class="skill-tag">C</div>
+                            <div class="skill-tag">ARMv6-M Assembly</div>
+                            <div class="skill-tag">MATLAB</div>
+                            <div class="skill-tag">R</div>
+                            <div class="skill-tag">TypeScript</div>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">On-device AI</div>
+                        <div class="skills">
+                            <div class="skill-tag">llama.cpp</div>
+                            <div class="skill-tag">Metal</div>
+                            <div class="skill-tag">Core ML</div>
+                            <div class="skill-tag">Apple Neural Engine</div>
+                            <div class="skill-tag">ExecuTorch</div>
+                            <div class="skill-tag">ONNX</div>
+                            <div class="skill-tag">TensorFlow Lite</div>
+                            <div class="skill-tag">Quantization</div>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">ML & Data</div>
+                        <div class="skills">
+                            <div class="skill-tag">PyTorch</div>
+                            <div class="skill-tag">Optuna</div>
+                            <div class="skill-tag">Captum</div>
+                            <div class="skill-tag">LlamaIndex</div>
+                            <div class="skill-tag">ChromaDB</div>
+                            <div class="skill-tag">Docker</div>
+                            <div class="skill-tag">Google Cloud</div>
+                            <div class="skill-tag">Modal</div>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">iOS</div>
+                        <div class="skills">
+                            <div class="skill-tag">SwiftUI</div>
+                            <div class="skill-tag">HealthKit</div>
+                            <div class="skill-tag">Apple Vision</div>
+                            <div class="skill-tag">Background Assets</div>
+                            <div class="skill-tag">React Native</div>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">Embedded</div>
+                        <div class="skills">
+                            <div class="skill-tag">TI MSPM0</div>
+                            <div class="skill-tag">Raspberry Pi</div>
+                            <div class="skill-tag">RP2040</div>
+                            <div class="skill-tag">Arduino</div>
+                            <div class="skill-tag">UART</div>
+                            <div class="skill-tag">Code Composer Studio</div>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">Hardware</div>
+                        <div class="skills">
+                            <div class="skill-tag">SolidWorks</div>
+                            <div class="skill-tag">Fusion 360</div>
+                            <div class="skill-tag">PCB Design</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1433,8 +1758,6 @@
             <a href="resume.html" class="page-link">Resume</a>
             <a href="#contact">Contact</a>
         </div>
-    </div>
-
     </div>
 
     <script>

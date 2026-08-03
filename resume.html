@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilal Shihab - Resume</title>
-    <meta name="description" content="Resume of Bilal Shihab — Biomedical Engineering student specializing in Embedded Systems, Edge AI, and hardware-software integration.">
+    <meta name="description" content="Resume of Bilal Shihab — Biomedical Engineering student specializing in AI, Cloud, and Embedded Software, building inference pipelines for edge devices.">
     <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0f'/><text x='50' y='68' font-size='50' font-weight='700' font-family='system-ui' fill='%23a78bfa' text-anchor='middle'>B</text></svg>" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -208,6 +208,40 @@
         }
 
         .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        .resume-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 14px;
+        }
+
+        .resume-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .resume-links a:hover {
+            color: var(--accent);
+        }
+
+        .resume-note {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 20px;
+        }
+
+        .resume-note a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .resume-note a:hover {
             color: var(--accent);
         }
 
@@ -648,7 +682,7 @@
                     <a href="https://github.com/bshihab" target="_blank">github.com/bshihab</a> · 
                     Austin, TX
                 </div>
-                <p class="professional-summary">Biomedical Engineering undergraduate specializing in Embedded Systems, Edge AI, and hardware-software integration. Passionate about developing low-level firmware and high-performance data pipelines to bridge the gap between hardware and software.</p>
+                <p class="professional-summary">Biomedical Engineering undergraduate specializing in AI, Cloud, and Embedded Software. Experienced in developing inference pipelines and optimizing machine learning models for edge devices. Passionate about leveraging Cloud and Edge AI to solve complex biological data challenges.</p>
                 <a href="Bilal_Shihab_Resume.pdf" download="Bilal_Shihab_Resume.pdf" class="download-btn">
                     <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Download PDF
@@ -678,12 +712,12 @@
                             <span class="skill-items">Python, C, ARMv6-M Assembly, MATLAB, R</span>
                         </div>
                         <div class="skill-row">
-                            <span class="skill-label">Embedded & Hardware</span>
-                            <span class="skill-items">TI MSPM0, Raspberry Pi, Arduino, Code Composer Studio, UART, SolidWorks</span>
+                            <span class="skill-label">AI &amp; Data</span>
+                            <span class="skill-items">PyTorch, TensorFlow Lite, Google Cloud Platform (GCP), Optuna, Captum, Docker</span>
                         </div>
                         <div class="skill-row">
-                            <span class="skill-label">AI & Data</span>
-                            <span class="skill-items">PyTorch, ExecuTorch, Captum, Optuna, Google Cloud, TensorFlow Lite, Jupyter Notebook</span>
+                            <span class="skill-label">Embedded &amp; Hardware</span>
+                            <span class="skill-items">TI MSPM0, Raspberry Pi, Arduino, Code Composer Studio, UART, SolidWorks</span>
                         </div>
                     </div>
                 </div>
@@ -701,7 +735,7 @@
                     <ul>
                         <li>Directed a team of student engineers to optimize neural networks for deployment on embedded systems (Raspberry Pi series).</li>
                         <li>Designing a reusable quantization pipeline using ExecuTorch and an inference backend to support keyword spotting and future neuroprosthetic control applications.</li>
-                        <li>Developing a low-latency Python audio acquisition module for USB audio devices, using circular buffering to stream live audio into an on-device inference engine.</li>
+                        <li>Developed an optimized ONNX inference pipeline to process EMG band signals for prosthetic arm control, reducing MLP model energy consumption by 45%.</li>
                     </ul>
                 </div>
 
@@ -716,12 +750,12 @@
                 </div>
 
                 <div class="resume-item">
-                    <h3>Research Intern</h3>
-                    <h4>Recanzone Laboratory, UC Davis · Davis, CA</h4>
-                    <div class="date">Jun 2025 – Aug 2025</div>
+                    <h3>Machine Learning Researcher</h3>
+                    <h4>Wang Laboratory, UT Austin · Austin, TX</h4>
+                    <div class="date">Feb 2026 – Present</div>
                     <ul>
-                        <li>Developed an interactive 3D feature visualization UI for open-source neuroscience software, allowing users to inspect neural features through real-time camera and projection controls.</li>
-                        <li>Implemented real-time rotation and transformation logic using linear algebra, enabling mouse-based inspection of neural spike data.</li>
+                        <li><strong>Gut-Brain Axis Research:</strong> Writing machine learning models to analyze EEG and EGG data, predicting the optimal timing for targeted ultrasound vagus nerve stimulation to help alleviate gastrointestinal issues.</li>
+                        <li><strong>Neurawear Startup Initiative:</strong> Collaborating with a student engineering team to develop the "Neustim" wearable device, processing epilepsy datasets to build predictive neuromodulation algorithms.</li>
                     </ul>
                 </div>
 
@@ -730,7 +764,7 @@
                     <h4>Functional Optical Imaging Lab, UT Austin · Austin, TX</h4>
                     <div class="date">Sep 2023 – May 2025</div>
                     <ul>
-                        <li>Developed a real-time Laser Speckle Analysis UI in Python, interfacing with Basler cameras and Arduinos for automated laser intensity control.</li>
+                        <li>Developed a real-time Laser Speckle UI in Python, using Basler cameras and Arduinos for automated laser intensity control.</li>
                         <li>Enhanced speckle pattern evaluation by implementing contrast analysis algorithms to maximize measurement precision.</li>
                         <li>Refactored contrast adjustment scripts from MATLAB to Python, enabling integration with the real-time Laser Speckle Analysis UI.</li>
                     </ul>
@@ -743,13 +777,30 @@
                 <h2 class="section-title">Technical Projects</h2>
 
                 <div class="resume-item">
+                    <h3>MedAdvisor — Clinical Feedback App</h3>
+                    <div class="date">Jun 2026 – Present</div>
+                    <ul>
+                        <li>Built an iOS app with a Stanford surgeon that records medical consultations and scores them against a clinical rubric on-device.</li>
+                        <li>Deployed a 4-bit 7B LLM on iPhone (llama.cpp, Metal GPU): full rubric analysis in under 4 minutes, running the 4 GB model in a 495 MB footprint via memory-mapped weights.</li>
+                        <li>Cut rubric evaluation latency ~60% (18.6 s → 7.3 s/criterion) by caching transcript KV state across all 16 evaluations; built an on-device benchmark that quantified 31% thermal throttling under sustained load.</li>
+                    </ul>
+                    <div class="resume-links">
+                        <a href="https://bshihab.github.io/medadvisor-site/" target="_blank">Project site</a>
+                        <a href="https://github.com/bshihab/medadvisor" target="_blank">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="resume-item">
                     <h3>Cloud to Edge Heart Rate Monitor</h3>
                     <div class="date">Dec 2025 – Present</div>
                     <ul>
-                        <li>Architected a pipeline that retrieves heart rate datasets from Cloud Storage to a Raspberry Pi 5, utilizing it as a patient simulator.</li>
+                        <li>Architected a cloud-to-Raspberry Pi 5 data pipeline streaming real-time heart rate data for patient simulation.</li>
                         <li>Developed a UART communication protocol to stream simulated patient data from the Pi 5 to a Pi Pico for low-latency processing.</li>
                         <li>Built a custom C-based inference engine on the Pico's dual-core Cortex-M0+ architecture to execute quantized neural networks on the incoming data stream in order to classify the patient's heart condition.</li>
                     </ul>
+                    <div class="resume-links">
+                        <a href="https://github.com/bshihab/pico_hrm_integrity" target="_blank">GitHub</a>
+                    </div>
                 </div>
 
                 <div class="resume-item">
@@ -761,17 +812,12 @@
                         <li>Programmed register-level drivers for UART, ADC, and DAC to interface with analog joysticks and audio peripherals, bypassing standard libraries for efficiency.</li>
                         <li>Designed a custom UART protocol to synchronize player coordinates and game events between two microcontrollers in real-time.</li>
                     </ul>
+                    <div class="resume-links">
+                        <a href="https://github.com/bshihab/Embedded-Multiplayer-Racer" target="_blank">GitHub</a>
+                    </div>
                 </div>
 
-                <div class="resume-item">
-                    <h3>ECG PCB Project</h3>
-                    <div class="date">Mar 2025 – Apr 2025</div>
-                    <ul>
-                        <li>Designed a custom Electrocardiogram PCB in Autodesk Fusion 360, creating the schematic for physiological monitoring.</li>
-                        <li>Engineered the analog signal chain, implementing instrumentation amplifiers and active filtering (bandpass/notch) to reject 60Hz noise and isolate cardiac signals.</li>
-                        <li>Coordinated component selection and fabrication logistics, optimizing the Bill of Materials for cost and assembly efficiency.</li>
-                    </ul>
-                </div>
+                <p class="resume-note">More projects — including Localabs, PulseCam, and the Evo&nbsp;2 variant-effect work — on the <a href="index.html#projects">projects page</a>.</p>
             </div>
         </div>
 

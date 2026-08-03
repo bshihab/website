@@ -18,3 +18,4 @@ config.js
 # Wrangler local cache
 worker/.wrangler/
 worker/node_modules/
+.gstack/
