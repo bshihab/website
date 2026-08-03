@@ -10,7 +10,7 @@ const ALLOWED_ORIGINS = new Set([
     'http://127.0.0.1:8000',
 ]);
 
-const MODEL = 'gemini-2.5-flash';
+const MODEL = 'gemini-3.5-flash-lite';
 const MAX_QUESTION_CHARS = 500;
 
 function corsHeaders(origin) {
