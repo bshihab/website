@@ -10,3 +10,11 @@ Thumbs.db
 
 # Dependencies
 node_modules/
+
+# Secrets — never commit. Key lives in Cloudflare (see worker/README.md)
+config.js
+.dev.vars
+
+# Wrangler local cache
+worker/.wrangler/
+worker/node_modules/

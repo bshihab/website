@@ -1437,7 +1437,6 @@
 
     </div>
 
-    <script src="config.js"></script>
     <script>
         // ===== SCROLL TO TOP =====
         document.getElementById('top-button').addEventListener('click', () => {
@@ -1561,41 +1560,9 @@
         }, 300);
 
         // ===== INLINE AI SEARCH (GEMINI API) =====
-        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-
-        const SYSTEM_CONTEXT = `You are an AI assistant embedded in Bilal Shihab's portfolio website. Answer questions about his projects, skills, and experience based on the documentation below. Be concise (under 120 words), friendly, and technically accurate. Format key terms with **bold**. If asked something outside this context, politely redirect to what you do know.
-
-ABOUT BILAL:
-Biomedical Engineering undergraduate at UT Austin (graduating May 2027), specializing in Embedded Systems, Edge AI, and hardware-software integration. Contact: shihabbilal@gmail.com, Austin TX. GitHub: github.com/bshihab, LinkedIn: linkedin.com/in/bilalshihab
-
-SKILLS:
-Languages: Python, C, ARMv6-M Assembly, MATLAB, R
-Embedded & Hardware: TI MSPM0, Raspberry Pi, Arduino, Code Composer Studio, UART, SolidWorks
-AI & Data: PyTorch, ExecuTorch, Captum, Optuna, Google Cloud, TensorFlow Lite, Jupyter
-
-EXPERIENCE:
-1. Edge AI Team Lead at Longhorn Neurotech (Sep 2025-Present): Directs team optimizing neural networks for Raspberry Pi. Designing quantization pipeline with ExecuTorch for keyword spotting and neuroprosthetic control. Building low-latency Python audio acquisition with circular buffering.
-2. AI/ML Developer at Longhorn Neurotech (Sep 2024-Aug 2025): ML models for Brain-Computer Interfaces (CNNs, Capsule Networks). Improved BCI accuracy 60% to 80% with Optuna and Captum.
-3. Research Intern at Recanzone Lab, UC Davis (Jun-Aug 2025): Interactive 3D visualization UI for neuroscience software. Real-time rotation with linear algebra for neural spike data.
-4. Researcher at FOIL, UT Austin (Sep 2023-May 2025): Real-time Laser Speckle Analysis UI with Basler cameras and Arduino.
-
-EDUCATION: BS Biomedical Engineering (Computational Track), UT Austin, May 2027. Coursework: Embedded Systems, Biomedical Instrumentation, Circuits, Systems & Signals, Diff Eq & Linear Algebra, Statistics, Numerical Methods.
-
-PROJECT DETAILS (FROM GITHUB READMES):
-
-1. CLOUD TO EDGE HEART RATE MONITOR (github.com/bshihab/pico_hrm_integrity):
-"Dual-Core Safety-Critical Arrhythmia Detector" using Raspberry Pi Pico (RP2040). "Doctor and Bodyguard" dual-core architecture: Core 0 = AI inference (arrhythmia detection), Core 1 = safety watchdog. Raspberry Pi 5 acts as Patient Simulator streaming clinical data from Google Cloud Storage over USB Serial. Zero-Overhead Inference: custom C inference engine for Hybrid-Quantized Neural Network (Int8 weights / Float math). If AI hangs >1s, Core 1 triggers hardware panic strobe. Reports NORMAL, S-TYPE, V-TYPE diagnoses via USB Serial. Uses MIT-BIH Arrhythmia Database from Google Cloud.
-
-2. EMBEDDED MULTIPLAYER RACER (github.com/bshihab/Embedded-Multiplayer-Racer):
-Multiplayer racing game in C for TI MSPM0G3507. Won 'Best Embedded Design'. UART-based multiplayer with position syncing and item events (Banana/Bomb). Custom AABB collision detection, velocity/breaking/bounce physics. Register-level drivers: UART (interrupt-driven networking), SPI (ST7735 LCD), ADC (joystick), DAC/Timer (sound, 30Hz game loop). Hardware: TI MSPM0G3507 LaunchPad, ST7735 128x160 TFT LCD, analog joystick, DAC audio. Two boards connected via UART.
-
-3. ECG PCB PROJECT: Custom ECG PCB in Fusion 360. Instrumentation amplifiers + active bandpass/notch filtering for 60Hz rejection and cardiac signal isolation.
-
-4. ML INTERPRETABILITY (github.com/LonghornNeurotech/ML_Interpretability): Capsule network architecture for neural signal processing interpretability in BCI.
-
-5. LASER SPECKLE (github.com/bshihab/laser_speckle_project): Real-time speckle pattern capture and analysis. Python UI, Arduino laser control, Basler camera integration, contrast/saturation measurements.
-
-6. MOTORMIND (github.com/bshihab/MotorMind): Python framework for EEG signal processing using RAG with Google Gemini AI. EEG acquisition, tokenization, vector storage, and inference.`;
+        // Key + knowledge base live in the Cloudflare Worker, not here.
+        // Source: worker/src/index.js
+        const AI_ENDPOINT = 'https://bilal-ai-proxy.shihabbilal.workers.dev';
 
         const aiInput = document.getElementById('ai-input');
         const aiSend = document.getElementById('ai-send');
@@ -1624,22 +1591,17 @@ Multiplayer racing game in C for TI MSPM0G3507. Won 'Best Embedded Design'. UART
             aiResponseText.innerHTML = '<div class="ai-typing-dots"><span></span><span></span><span></span></div>';
 
             try {
-                const res = await fetch(GEMINI_URL, {
+                const res = await fetch(AI_ENDPOINT, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        system_instruction: { parts: [{ text: SYSTEM_CONTEXT }] },
-                        contents: [{ role: 'user', parts: [{ text: question }] }]
-                    })
+                    body: JSON.stringify({ question })
                 });
+                const data = await res.json().catch(() => null);
                 if (!res.ok) {
-                    const errData = await res.json().catch(() => null);
-                    const msg = errData?.error?.message || "API error. Please try again.";
-                    aiResponseText.textContent = res.status === 429 ? "Rate limited — please wait a moment and try again." : msg;
+                    aiResponseText.textContent = data?.error || "Something went wrong. Please try again.";
                     return;
                 }
-                const data = await res.json();
-                let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Couldn't generate a response.";
+                let reply = data?.reply || "Couldn't generate a response.";
                 // Type out the response character by character
                 aiResponseText.innerHTML = '';
                 let i = 0;

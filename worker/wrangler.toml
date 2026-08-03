@@ -1,0 +1,14 @@
+name = "bilal-ai-proxy"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+# Per-IP rate limit: 8 requests per 60s. namespace_id is a local identifier,
+# any integer, unique within this Worker.
+[[unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 8, period = 60 }
+
+# GEMINI_API_KEY is NOT set here. It's an encrypted secret, set once with:
+#   npx wrangler secret put GEMINI_API_KEY
