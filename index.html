@@ -1908,6 +1908,7 @@
                 aiResponseText.textContent = "Too many requests — please wait a moment before asking again.";
                 return;
             }
+            aiInput.value = '';
             aiSend.disabled = true;
             aiSend.textContent = '...';
             aiResponse.classList.add('active');
@@ -1967,7 +1968,7 @@
         aiSend.addEventListener('click', () => { const t = aiInput.value.trim(); if (t) askGemini(t); });
         aiInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const t = aiInput.value.trim(); if (t) askGemini(t); } });
         document.querySelectorAll('.ai-suggestion').forEach(btn => {
-            btn.addEventListener('click', () => { const q = btn.dataset.q; aiInput.value = q; askGemini(q); });
+            btn.addEventListener('click', () => askGemini(btn.dataset.q));
         });
     </script>
 </body>
