@@ -38,6 +38,7 @@ Dark mode follows the OS (`prefers-color-scheme`); there is no toggle.
 - One column, max 720px, 20px side gutter.
 - **Home:** name + nav → ECG trace (real MIT-BIH record 100, lead MLII, 4 s at 360 Hz) → intro → project index grouped by domain. Each row: 4:3 thumbnail (136px; 96px on phones), title, year, one line with a real number.
 - **Project page** (`/<slug>/`): crumb → title → one-sentence result → mono meta line (role · dates · status) → **spec block** (two-column key/value datasheet between two ink rules) → hero image (16:10) → the write-up (Bilal's own words) → figures → links → next project.
+- **Favicon:** `favicon.svg`, Fraunces "B" (opsz 9, weight 700, outlined to a path) in `#B8322A` on `#F5F3EE`.
 - **Radius:** 0 everywhere. **Shadows:** none.
 
 ## Images
@@ -60,4 +61,5 @@ Dark mode follows the OS (`prefers-color-scheme`); there is no toggle.
 | 2026-09-22 | Fraunces + Radio Canada + IBM Plex Mono (option B) | Bilal liked Bernard Dohrn's Fraunces/Plex look and wanted a CBC feel; Radio Canada is CBC's own font and separates the site from Bernard's. |
 | 2026-09-22 | ECG red accent `#B8322A` | Biomedical, unused by peers; Bernard uses green. |
 | 2026-09-22 | Spec block on every project page | Signals "builds real hardware + ML" at a glance. |
+| 2026-09-22 | Favicon: Fraunces "B", not a pulse | A pulse icon is generic health-tech; the B identifies Bilal in a tab and the ECG trace already carries the motif. |
 | 2026-09-22 | Wang Lab never appears on the site | Unpublished research, private. |
