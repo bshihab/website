@@ -36,7 +36,7 @@ Dark mode follows the OS (`prefers-color-scheme`); there is no toggle.
 
 ## Layout
 - One column, max 720px, 20px side gutter.
-- **Home:** name + nav → ECG trace (real MIT-BIH record 100, lead MLII, 4 s at 360 Hz) → intro → project index grouped by domain. Each row: 4:3 thumbnail (136px; 96px on phones), title, year, one line with a real number.
+- **Home:** name + nav → ECG trace (real MIT-BIH record 100, lead MLII, 4 s at 360 Hz; no caption) → intro → project index grouped by domain. Each row: 4:3 thumbnail (136px; 96px on phones), title, year, one line with a real number.
 - **Project page** (`/<slug>/`): crumb → title → one-sentence result → mono meta line (role · dates · status) → **spec block** (two-column key/value datasheet between two ink rules) → hero image (16:10) → the write-up (Bilal's own words) → figures → links → next project.
 - **Favicon:** `favicon.svg`, Fraunces "B" (opsz 9, weight 700, outlined to a path) in `#B8322A` on `#F5F3EE`.
 - **Radius:** 0 everywhere. **Shadows:** none.
