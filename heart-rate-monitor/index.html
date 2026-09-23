@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud to Edge Heart Rate Monitor · Bilal Shihab</title>
+<meta name="description" content="A dual-core arrhythmia detector: clinical ECG data streams from the cloud to a microcontroller that classifies it with a C inference engine I wrote.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F5F3EE'/%3E%3Cpolyline points='3,19 11,19 13,16 15,19 17,5 19,26 21,19 29,19' fill='none' stroke='%23B8322A' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="wrap">
+  <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
+  <h1 class="ptitle">Cloud to Edge Heart Rate Monitor</h1>
+  <p class="result">A dual-core arrhythmia detector: clinical ECG data streams from the cloud to a microcontroller that classifies it with a C inference engine I wrote.</p>
+  <div class="pmeta mono"><span>Solo project</span><span>Dec 2025 – present</span></div>
+
+  <section class="spec" aria-label="Specifications">
+    <div class="spec-h"><span>Spec</span></div>
+    <dl><div class="kv"><dt>Patient simulator</dt><dd>Raspberry Pi 5</dd></div><div class="kv"><dt>Classifier</dt><dd>Raspberry Pi Pico (RP2040)</dd></div><div class="kv"><dt>CPU</dt><dd>Dual-core Arm Cortex-M0+</dd></div><div class="kv"><dt>Data</dt><dd>MIT-BIH, from Cloud Storage</dd></div><div class="kv"><dt>Link</dt><dd>Custom UART protocol</dd></div><div class="kv"><dt>Model</dt><dd>Int8 weights, float math</dd></div><div class="kv"><dt>Core 0</dt><dd>Inference engine in C</dd></div><div class="kv"><dt>Core 1</dt><dd>Watchdog, panic strobe after 1 s hang</dd></div></dl>
+  </section>
+
+  <figure>
+    <!-- HERO IMAGE: replace this div with <img class="hero" src="hero.jpg" alt="..."> and add a caption -->
+    <div class="hero blank" role="img" aria-label="Image coming soon"></div>
+  </figure>
+
+  <!-- YOUR WRITE-UP: replace this whole .write block with your own paragraphs -->
+  <div class="write">
+    <p class="mono">Write-up coming soon.</p>
+    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
+    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
+    <h3>What I'd do next</h3><p>Honest limits and the next measurement.</p>
+  </div>
+
+  <div class="links"><a href="https://github.com/bshihab/pico_hrm_integrity">Code on GitHub</a></div>
+
+  <a class="next" href="../longhorn-neurotech/"><span class="mono">Next project</span><span class="t">Longhorn Neurotech →</span></a>
+  <footer class="site mono"><span>shihabbilal@gmail.com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
+</main>
+</body>
+</html>

@@ -14,11 +14,10 @@ AI & Data: PyTorch, ExecuTorch, ONNX, TensorFlow Lite, Captum, Optuna, LlamaInde
 Embedded & Hardware: TI MSPM0, Raspberry Pi, Raspberry Pi Pico (RP2040), Arduino, Code Composer Studio, UART, SolidWorks, Fusion 360
 
 EXPERIENCE:
-1. Machine Learning Researcher, Wang Laboratory, UT Austin (Feb 2026-Present): Gut-brain axis research — ML models on EEG and EGG data predicting optimal timing for targeted ultrasound vagus nerve stimulation to alleviate gastrointestinal issues. Also the Neurawear startup initiative: developing the "Neustim" wearable with a student engineering team, processing epilepsy datasets for predictive neuromodulation algorithms.
-2. Edge AI Team Lead, Longhorn Neurotech (Sep 2025-Present): Directs student engineers optimizing neural networks for embedded deployment (Raspberry Pi series). Designing a reusable ExecuTorch quantization pipeline and inference backend for keyword spotting and neuroprosthetic control. Built an ONNX inference pipeline for EMG signals that cut model energy and compute overhead by 45%.
-3. AI/ML Developer, Longhorn Neurotech (Sep 2024-Aug 2025): Trained CNNs and Capsule Networks on EEG for BCI prosthetic arm control, improving classification accuracy from 60% to 80% via Optuna hyperparameter search and Captum interpretability analysis.
-4. Research Intern, Recanzone Laboratory, UC Davis (Jun-Aug 2025): Interactive 3D feature visualization UI for open-source neuroscience software, with real-time rotation and transformation logic for inspecting neural spike data.
-5. Researcher and Programmer, Functional Optical Imaging Lab, UT Austin (Sep 2023-May 2025): Python real-time Laser Speckle UI processing 16-bit optical streams from Basler cameras. Localized contrast analysis with a 7x7 spatial sliding window and dynamic brightness. Automated Arduino feedback loop evaluating microsecond exposures and adjusting laser current against a center-weighted 98% pixel saturation threshold.
+1. Edge AI Team Lead, Longhorn Neurotech (Sep 2025-Present): Directs student engineers optimizing neural networks for embedded deployment (Raspberry Pi series). Designing a reusable ExecuTorch quantization pipeline and inference backend for keyword spotting and neuroprosthetic control. Built an ONNX inference pipeline for EMG signals that cut model energy and compute overhead by 45%.
+2. AI/ML Developer, Longhorn Neurotech (Sep 2024-Aug 2025): Trained CNNs and Capsule Networks on EEG for BCI prosthetic arm control, improving classification accuracy from 60% to 80% via Optuna hyperparameter search and Captum interpretability analysis.
+3. Research Intern, Recanzone Laboratory, UC Davis (Jun-Aug 2025): Interactive 3D feature visualization UI for open-source neuroscience software, with real-time rotation and transformation logic for inspecting neural spike data.
+4. Researcher and Programmer, Functional Optical Imaging Lab, UT Austin (Sep 2023-May 2025): Python real-time Laser Speckle UI processing 16-bit optical streams from Basler cameras. Localized contrast analysis with a 7x7 spatial sliding window and dynamic brightness. Automated Arduino feedback loop evaluating microsecond exposures and adjusting laser current against a center-weighted 98% pixel saturation threshold.
 
 EDUCATION: BS Biomedical Engineering (Computational Track), UT Austin, May 2027. Coursework: Numerical Methods, Statistics, Differential Equations & Linear Algebra, Intro to Computational Engineering Design, Circuits, Systems & Signals, Biomedical Instrumentation, Embedded Systems.
 
@@ -46,23 +45,15 @@ Uses the Evo 2 genomic foundation model (Arc Institute) to score pathogenicity o
 
 6. EMBEDDED MULTIPLAYER RACER.
 Repo: github.com/bshihab/Embedded-Multiplayer-Racer
-Bare-metal multiplayer racing game in C for the TI MSPM0G3507. Won "Best Embedded Design" in a class-wide competition. UART-based multiplayer with position syncing and item events, custom AABB collision detection, velocity/braking/bounce physics. Register-level drivers written from scratch: UART (interrupt-driven networking), SPI (ST7735 128x160 TFT LCD), ADC (analog joystick), DAC/Timer (audio, 30Hz game loop). Two boards connected over UART.
+Bare-metal multiplayer racing game in C for the TI MSPM0G3507. Voted "Best Game" in the ECE 319K class-wide competition (Fall 2025). UART-based multiplayer with position syncing and item events, custom AABB collision detection, velocity/braking/bounce physics. Register-level drivers written from scratch: UART (interrupt-driven networking), SPI (ST7735 128x160 TFT LCD), ADC (analog joystick), DAC/Timer (audio, 30Hz game loop). Two boards connected over UART.
 
 7. SCRIBEND — offline-first medical scribe.
 Repo: github.com/bshihab/Scribend · Site: bshihab.github.io/Scribend
 For healthcare workers in remote areas with zero Wi-Fi. Captures doctor-patient audio, converts to text, retrieves historical patient context via local vector search, and structures the encounter into a JSON SOAP note — 100% on-device.
 
-8. BALLOTWISE — values-matched voting guide.
-Repo: github.com/bshihab/ballotwise
-Cross-platform iOS + Android app in React Native / Expo SDK 55, TypeScript, Expo Router, Zustand. Walks a voter from location to their real ballot, ranking candidates by alignment with a 10-policy-area questionnaire. Google Civic Information API for elections and ballots, Anthropic Claude for neutral candidate summaries and a follow-up chatbot (with prompt caching), YouTube Data API for recommended videos.
-
-9. LASER SPECKLE PROJECT.
+8. LASER SPECKLE PROJECT.
 Repo: github.com/bshihab/laser_speckle_project
 Real-time speckle pattern capture and analysis. Python/PySide6 UI, Arduino laser control, Basler camera integration, live contrast and saturation measurement for tissue imaging during surgery.
 
-10. MOTORMIND — EEG signal processing framework.
-Repo: github.com/bshihab/MotorMind
-Python framework for EEG signal processing using retrieval-augmented generation: acquisition, tokenization, vector storage, and inference.
-
-11. ECG PCB PROJECT.
+9. ECG PCB PROJECT.
 Custom electrocardiogram PCB designed in Autodesk Fusion 360. Analog signal chain with instrumentation amplifiers and active bandpass/notch filtering to reject 60Hz noise and isolate cardiac signals. Included component selection and fabrication logistics, optimizing the BOM for cost and assembly.`;
