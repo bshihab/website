@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Embedded Multiplayer Racer · Bilal Shihab</title>
-<meta name="description" content="A two-player racing game written in bare-metal C for a microcontroller, with every driver written from the registers up.">
+<meta name="description" content="A two-player racing game in bare-metal C for a TI microcontroller, with the two boards keeping one race in sync over UART.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,12 +15,12 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Embedded Multiplayer Racer</h1>
-  <p class="result">A two-player racing game written in bare-metal C for a microcontroller, with every driver written from the registers up.</p>
-  <div class="pmeta mono"><span>ECE 319K, UT Austin</span><span>Nov – Dec 2025</span><span>Voted Best Game, Fall 2025</span></div>
+  <p class="result">A two-player racing game in bare-metal C for a TI microcontroller, with the two boards keeping one race in sync over UART.</p>
+  <div class="pmeta mono"><span>With Prarthana Balaji</span><span>ECE 319K, UT Austin</span><span>Nov – Dec 2025</span><span>Voted Best Game, Fall 2025</span></div>
 
   <section class="spec" aria-label="Specifications">
     <div class="spec-h"><span>Spec</span></div>
-    <dl><div class="kv"><dt>MCU</dt><dd>TI MSPM0G3507, Cortex-M0+</dd></div><div class="kv"><dt>Libraries</dt><dd>None, register-level</dd></div><div class="kv"><dt>Display</dt><dd>ST7735 LCD over SPI</dd></div><div class="kv"><dt>Input</dt><dd>Joystick via ADC</dd></div><div class="kv"><dt>Audio</dt><dd>DAC + timer</dd></div><div class="kv"><dt>Game loop</dt><dd>30 Hz</dd></div><div class="kv"><dt>Multiplayer</dt><dd>2 boards, custom UART protocol</dd></div><div class="kv"><dt>Physics</dt><dd>Velocity, collision detection</dd></div></dl>
+    <dl><div class="kv"><dt>MCU</dt><dd>TI MSPM0G3507, Cortex-M0+</dd></div><div class="kv"><dt>Language</dt><dd>C, bare metal</dd></div><div class="kv"><dt>Display</dt><dd>ST7735 LCD over SPI</dd></div><div class="kv"><dt>Input</dt><dd>Joystick via ADC</dd></div><div class="kv"><dt>Audio</dt><dd>DAC + timer</dd></div><div class="kv"><dt>Game loop</dt><dd>30 Hz</dd></div><div class="kv"><dt>Multiplayer</dt><dd>2 boards, custom UART protocol</dd></div><div class="kv"><dt>Physics</dt><dd>Velocity, collision detection</dd></div></dl>
   </section>
 
   <figure>
