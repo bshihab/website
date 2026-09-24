@@ -37,20 +37,39 @@
   </section>
 
   <figure>
-    <svg class="chart" viewBox="0 0 720 132" role="img" aria-label="Agreement with 240 labeled decisions: Qwen 3.5-4B 85 percent, Qwen 2.5-7B 79 percent">
-      <line class="axis" x1="150" y1="8" x2="150" y2="104"/>
-      <line class="axis" x1="660" y1="8" x2="660" y2="104" stroke-dasharray="2 3"/>
-      <text class="lbl" x="0" y="38">Qwen 3.5-4B</text>
-      <rect class="bar hi" x="150" y="22" width="433.5" height="24"/>
-      <text class="val" x="591" y="38">85%</text>
-      <text class="lbl" x="0" y="82">Qwen 2.5-7B</text>
-      <rect class="bar" x="150" y="66" width="402.9" height="24"/>
-      <text class="val" x="561" y="82">79%</text>
-      <text x="150" y="124" text-anchor="middle">0</text>
-      <text x="405" y="124" text-anchor="middle">50</text>
-      <text x="660" y="124" text-anchor="middle">100%</text>
+    <svg class="chart" viewBox="0 0 720 284" role="img" aria-label="Agreement with 240 labeled decisions for eight model configurations; Qwen 3.5-4B highest at 85.4 percent">
+      <line class="axis" x1="230" y1="6" x2="230" y2="250"/>
+      <line class="axis" x1="440" y1="6" x2="440" y2="250" stroke-dasharray="2 3"/>
+      <line class="axis" x1="650" y1="6" x2="650" y2="250" stroke-dasharray="2 3"/>
+      <text class="lbl" x="0" y="27">Qwen 3.5-4B</text>
+      <rect class="bar hi" x="230" y="14" width="358.7" height="18"/>
+      <text class="val" x="596.7" y="27">85.4%</text>
+      <text class="lbl" x="0" y="57">Qwen 2.5-7B + few-shot</text>
+      <rect class="bar" x="230" y="44" width="352.0" height="18"/>
+      <text class="val" x="590.0" y="57">83.8%</text>
+      <text class="lbl" x="0" y="87">Qwen 3.5-4B + few-shot</text>
+      <rect class="bar" x="230" y="74" width="343.1" height="18"/>
+      <text class="val" x="581.1" y="87">81.7%</text>
+      <text class="lbl" x="0" y="117">Qwen 2.5-7B</text>
+      <rect class="bar" x="230" y="104" width="332.6" height="18"/>
+      <text class="val" x="570.6" y="117">79.2%</text>
+      <text class="lbl" x="0" y="147">Qwen 3-4B (2507) + few-shot</text>
+      <rect class="bar" x="230" y="134" width="332.6" height="18"/>
+      <text class="val" x="570.6" y="147">79.2%</text>
+      <text class="lbl" x="0" y="177">Qwen 3-4B (2507)</text>
+      <rect class="bar" x="230" y="164" width="306.2" height="18"/>
+      <text class="val" x="544.2" y="177">72.9%</text>
+      <text class="lbl" x="0" y="207">Qwen 2.5-3B</text>
+      <rect class="bar" x="230" y="194" width="297.4" height="18"/>
+      <text class="val" x="535.4" y="207">70.8%</text>
+      <text class="lbl" x="0" y="237">Qwen 2.5-3B + few-shot</text>
+      <rect class="bar" x="230" y="224" width="252.0" height="18"/>
+      <text class="val" x="490.0" y="237">60.0%</text>
+      <text x="230" y="272" text-anchor="middle">0</text>
+      <text x="440" y="272" text-anchor="middle">50</text>
+      <text x="650" y="272" text-anchor="middle">100%</text>
     </svg>
-    <figcaption><b>Fig. 2</b>Agreement with 240 labeled rubric decisions. The smaller model scored higher and is a 30% smaller download, so it shipped.</figcaption>
+    <figcaption><b>Fig. 2</b>Agreement with 240 labeled decisions, every configuration run through the same scoring code. I shipped Qwen 3.5-4B. It never wrongly denied credit (0 of 128); all of its errors were over-credits, which is what the second pass goes after.</figcaption>
   </figure>
 
 
