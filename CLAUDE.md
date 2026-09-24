@@ -10,8 +10,9 @@ Do not deviate without explicit user approval.
 In QA mode, flag any code that doesn't match DESIGN.md.
 
 ## Content rules
-- Project write-ups are Bilal's own words. Never write or rewrite them; the `.write` block on each page is his to replace.
+- Project write-ups (the `.write` block) are first-person drafts built from repo evidence at Bilal's request, following `~/Downloads/ai_slop_detector.rtf`. Never invent his motives or feelings: leave a [bracket] for him. He approves text before it goes live.
 - Never mention Wang Lab / the gut–brain study anywhere on the site (unpublished research).
 - Ballotwise and MotorMind are intentionally not on the site.
+- The clinical startup (formerly "MedAdvisor") is in stealth: never name it, link its repo or blog, or name the clinical partner. Its page is `/clinical-ai/` and shows engineering only.
 - Numbers come from `~/Downloads/Bilal Shihab Projects facts sheet.pdf` or the project repos, never from memory.
 - Slugs are linked from printed resumes: never rename one.

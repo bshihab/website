@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MedAdvisor · Bilal Shihab</title>
-<meta name="description" content="An iPhone app that scores a recorded medical consultation against a 16-criterion clinical rubric, without the audio or transcript ever leaving the phone.">
+<title>Stealth Clinical AI · Bilal Shihab</title>
+<meta name="description" content="The on-device AI for a clinical startup I&#x27;m building, still in stealth: a language model on the iPhone that evaluates recorded clinical conversations, with nothing leaving the phone.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +14,13 @@
 <body>
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
-  <h1 class="ptitle">MedAdvisor</h1>
-  <p class="result">An iPhone app that scores a recorded medical consultation against a 16-criterion clinical rubric, without the audio or transcript ever leaving the phone.</p>
-  <div class="pmeta mono"><span>Built with a Stanford surgeon</span><span>Jun 2026 – present</span><span>TestFlight pilot</span></div>
+  <h1 class="ptitle">Stealth Clinical AI</h1>
+  <p class="result">The on-device AI for a clinical startup I'm building, still in stealth: a language model on the iPhone that evaluates recorded clinical conversations, with nothing leaving the phone.</p>
+  <div class="pmeta mono"><span>Founder</span><span>Built with a clinical partner</span><span>Jun 2026 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
     <div class="spec-h"><span>Spec</span><span>measured on iPhone 17</span></div>
-    <dl><div class="kv"><dt>Model</dt><dd>Qwen 3.5-4B, Q4_K_M, 3.0 GB</dd></div><div class="kv"><dt>Runtime</dt><dd>llama.cpp on Metal GPU</dd></div><div class="kv"><dt>Active RAM</dt><dd>&lt; 500 MB (memory-mapped weights)</dd></div><div class="kv"><dt>Full analysis</dt><dd>~144 s mean</dd></div><div class="kv"><dt>Transcription</dt><dd>Apple SpeechAnalyzer, 3.1% WER</dd></div><div class="kv"><dt>Rubric</dt><dd>16 criteria, quoted evidence</dd></div><div class="kv"><dt>Model choice</dt><dd>8+ models, 240 labeled decisions</dd></div><div class="kv"><dt>Leaves the phone</dt><dd>Redacted scores, after review</dd></div></dl>
+    <dl><div class="kv"><dt>Model</dt><dd>Qwen 3.5-4B, Q4_K_M, 3.0 GB</dd></div><div class="kv"><dt>Runtime</dt><dd>llama.cpp on Metal GPU</dd></div><div class="kv"><dt>Active RAM</dt><dd>&lt; 500 MB (memory-mapped weights)</dd></div><div class="kv"><dt>Full analysis</dt><dd>~144 s mean</dd></div><div class="kv"><dt>Transcription</dt><dd>Apple SpeechAnalyzer, 3.1% WER</dd></div><div class="kv"><dt>Model selection</dt><dd>240 labeled decisions</dd></div><div class="kv"><dt>Second pass</dt><dd>Verifier, 65.1% → 84.1% agreement</dd></div><div class="kv"><dt>Leaves the phone</dt><dd>Nothing without review</dd></div></dl>
   </section>
 
   <figure>
@@ -52,7 +52,7 @@
     </svg>
     <figcaption><b>Fig. 2</b>Agreement with 240 labeled rubric decisions. The smaller model scored higher and is a 30% smaller download, so it shipped.</figcaption>
   </figure>
-<div class="links"><a href="https://github.com/bshihab/medadvisor">Code on GitHub</a><a href="https://bshihab.github.io/medadvisor-site/">Project site</a><a href="https://bshihab.github.io/medadvisor-site/blog/shipping-the-less-accurate-speech-engine.html">Write-up: shipping the less accurate speech engine</a></div>
+
 
   <a class="next" href="../localabs/"><span class="mono">Next project</span><span class="t">Localabs →</span></a>
   <footer class="site mono"><span>shihabbilal@gmail.com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
