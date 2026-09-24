@@ -144,3 +144,25 @@ ul.what li::marker { color: var(--accent); }
 .story h2 { font: 560 24px/1.25 var(--serif); font-variation-settings: "opsz" 48; margin: 32px 0 8px; }
 .story h2:first-child { margin-top: 0; }
 .story p { margin: 0; max-width: 65ch; }
+
+/* ---------- writing ---------- */
+.post { margin-top: 8px; }
+.post .crumb { margin-top: 48px; }
+.post-note { color: var(--faint); margin: 14px 0 0; font-size: 12.5px; line-height: 1.5; }
+.post-note a { color: var(--muted); }
+.post h2 { font: 560 24px/1.25 var(--serif); font-variation-settings: "opsz" 48; margin: 40px 0 8px; text-wrap: balance; }
+.post p, .post ul { max-width: 65ch; }
+.post p { margin: 14px 0 0; }
+.post ul { padding-left: 1.1em; margin: 14px 0 0; }
+.post li { margin-top: 6px; }
+.post li::marker { color: var(--faint); }
+.post code { font-family: var(--mono); font-size: .88em; background: var(--surface); padding: 1px 4px; }
+.post pre { font: 13px/1.55 var(--mono); background: var(--surface); padding: 14px 16px; overflow-x: auto; margin: 16px 0 0; }
+.post .table { overflow-x: auto; margin: 18px 0 0; }
+.post table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+.post th { font: 500 11.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--ink); }
+.post td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.post .method { color: var(--muted); font-size: 14px; margin-top: 32px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.row-text { grid-template-columns: 1fr auto; }
+.row-text .row-year { white-space: nowrap; padding-top: 4px; }
+@media (max-width: 560px) { .row-text { grid-template-columns: 1fr; gap: 4px; } }

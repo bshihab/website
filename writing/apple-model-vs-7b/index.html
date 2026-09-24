@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apple&#x27;s on-device model vs Qwen 2.5-7B, and the fine-tune I couldn&#x27;t ship · Bilal Shihab</title>
+<meta name="description" content="Battery, heat and grading accuracy on an iPhone 17, plus a $0.76 LoRA adapter that beat the 7B.">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="mast">
+    <div class="mast-top">
+      <p class="name name-sm"><a href="../../">Bilal Shihab</a></p>
+      <nav class="site" aria-label="Site"><a href="../../index.html">Projects</a><a href="../../resume.html">Resume</a><a href="../../writing/" aria-current="page">Writing</a><a href="https://github.com/bshihab">GitHub</a><a href="mailto:shihabbilal@gmail.com">Email</a></nav>
+    </div>
+  </header>
+  <article class="post">
+    <p class="crumb mono"><a href="../../writing/">Writing</a> / <time datetime="2026-07-27">27 July 2026</time></p>
+    <h1 class="ptitle">Apple's on-device model vs Qwen 2.5-7B, and the fine-tune I couldn't ship</h1>
+    <p class="post-note mono">Written 27 July 2026. Since then the pipeline moved to Qwen 3.5-4B, and Apple's model scored 48.4% on a stricter, human-scored test set.</p>
+
+<p>I compared three ways of running the evaluation step on an iPhone: my Qwen 2.5-7B on the GPU, Apple's built-in model, and Apple's model with a LoRA adapter I trained. The adapter matched the 7B on my test set for $0.76, and I still couldn't ship it. This follows my <a href="../core-ml-vs-core-ai/">Core ML vs Core AI</a> post, which has the GPU baseline.</p>
+
+<h2>Test 1: my own model on the Neural Engine</h2>
+<p>Apple's Core AI export recipes for iOS stop at Qwen 3-4B. The 8B is macOS only, so even total success meant a smaller model than the one I ship. And the 4B never loaded on an 8 GB iPhone:</p>
+<ul>
+<li>Raw <code>.aimodel</code> on the Neural Engine: killed by the memory watchdog at load.</li>
+<li>Precompiled on a Mac: the on-device specialization pass ran 10 to 30 minutes at high heat and was killed in all five attempts, each time leaving gigabytes of orphaned cache.</li>
+<li>Forced onto the GPU: the palettized weights inflated during graph materialization and blew the memory budget.</li>
+<li>A macOS-style dynamic export: the engine came up in 180 MB, then died building the graph at the first prefill.</li>
+</ul>
+<p>The cause is memory accounting. Core AI holds model weights as counted app memory, while llama.cpp memory-maps them, which is why my 4.3 GB GGUF shows a ~495 MB footprint. iOS 27 also moved Neural Engine memory onto the app's own jetsam ledger. So a 2.4 GB Core AI 4B dies where a 4.3 GB llama.cpp model runs fine. Only Qwen 3-0.6B loaded, at about 43 tok/s, and it's far too small to grade anything reliably.</p>
+
+<h2>Test 2: Apple's built-in model</h2>
+<p>Apple ships a roughly 3B model inside the OS, reachable through the Foundation Models framework. Its weights live on the OS side, so the memory problem above doesn't apply, and there's nothing to download. I built a probe app that replays the pipeline's exact 48 grading prompts on the phone and saves the raw output. All scoring happens on my Mac with the same parser the pipeline uses, so the numbers compare directly with every other model I've run.</p>
+<div class="table"><table>
+<thead><tr><th>iPhone 17, iOS 27.0, 48 criterion calls</th><th>Measured</th></tr></thead>
+<tbody>
+<tr><td>Wall-clock</td><td>126 s</td></tr>
+<tr><td>Throughput</td><td>13.1 tok/s</td></tr>
+<tr><td>Battery</td><td>70% → 70%</td></tr>
+<tr><td>Thermal state</td><td>nominal → nominal</td></tr>
+<tr><td>Context window</td><td>4096</td></tr>
+<tr><td>Guardrail refusals</td><td>0 / 48</td></tr>
+</tbody></table></div>
+<p>My GPU path used about 5% battery for one analysis, hit serious thermal pressure and ran at 3.5 tok/s. Here, three analyses' worth of work didn't move the battery or the thermal state. It isn't a clean Neural Engine vs GPU comparison, because this is a 3B against a 7B, and iOS reports battery in 5% steps.</p>
+<p>I got one thing wrong going in. Apple's WWDC26 session shows the context size as 8192, and I assumed iOS 27 had doubled it. The device reports 4096. A 3,500-token transcript plus my ~700-token instructions barely fits.</p>
+<div class="table"><table>
+<thead><tr><th>Model</th><th>Accuracy</th><th>Over-score ↓</th><th>Recall</th></tr></thead>
+<tbody>
+<tr><td>Qwen 2.5-7B Q4 (shipping)</td><td>87.5%</td><td>13.3%</td><td>88.9%</td></tr>
+<tr><td>Apple, macOS 26.3 (older model)</td><td>54.3%</td><td>75.0%</td><td>100%</td></tr>
+<tr><td>Apple, iOS 27 on device</td><td>70.8%</td><td>46.7%</td><td>100%</td></tr>
+</tbody></table></div>
+<p>Over-score is the share of behaviors that did not happen but got marked as done, and it's the error I care most about. The iOS 27 model is better than the older one, but it still credits nearly half of what never happened, and all 14 of its errors go that way. It quotes some line from the transcript and accepts it: one closing line got credited against three separate criteria, and one terse instruction against five.</p>
+
+<h2>Test 3: fine-tuning Apple's model</h2>
+<p>That failure looked like bias, not missing ability. The model followed the output format every time and always quoted real transcript text. It just said yes too easily, and an earlier bake-off had shown this task depends on judgment more than domain knowledge.</p>
+<p>So I wrote about 600 synthetic training examples, all fiction, loaded with hard negatives: lines that look like they satisfy a criterion without doing it, and lines from the other speaker that must never be credited. Apple's toolkit asks for 32 GB of memory and my Mac mini has 16, where training crawled at about 95 s per step, roughly 15 hours per epoch. On a rented GPU it took 20 minutes and $0.76, so I trained two learning rates in parallel.</p>
+<div class="table"><table>
+<thead><tr><th>Model</th><th>Accuracy</th><th>Over-score ↓</th><th>Recall</th></tr></thead>
+<tbody>
+<tr><td>Apple stock, macOS 26.3</td><td>54.3%</td><td>75.0%</td><td>100%</td></tr>
+<tr><td>+ adapter, learning rate 1e-3 (Apple's default)</td><td>79.2%</td><td>3.3%</td><td>50.0%</td></tr>
+<tr><td>+ adapter, learning rate 3e-4</td><td>93.8%</td><td>6.7%</td><td>94.4%</td></tr>
+<tr><td>Qwen 2.5-7B (shipping)</td><td>87.5%</td><td>13.3%</td><td>88.9%</td></tr>
+</tbody></table></div>
+<p>Over-scoring fell from 75% to 6.7% while recall rose to 94.4%. I re-ran the exported adapter through the real Foundation Models framework, not just the training harness, and got identical numbers. Apple's default learning rate overcorrected into a harsh grader that missed half of what people did; a third of that rate landed in the middle.</p>
+<p>I made two mistakes. First, my benchmark only scored the met or missed verdict, but the product also writes a short tip for each criterion. Stock Apple wrote 39 tips, all different. My adapter wrote 29 with 5 distinct strings, mostly repeating one phrase I'd lazily reused in the training data. The verdicts improved and the feedback got worse, and I would have shipped it if I hadn't checked. The fix is to leave the tip line out of the training loss.</p>
+<p>Second, the test set was mildly contaminated. I wrote the training data in the same session I'd read the benchmark transcripts, and some phrasing leaked: zero exact duplicates and a median line similarity of 0.24, but two or three near-paraphrases. Discounting those puts accuracy around 89.6%. So what I can defend is that it matches the 7B within this test's resolution; 45 of 48 against 42 of 48 was never a meaningful gap.</p>
+
+<h2>Why it didn't ship</h2>
+<p>From Apple's adapter toolkit page: "Version 26.0.0 is the last release of this toolkit and is not compatible with macOS, iOS, iPadOS, or visionOS 27 and later."</p>
+<p>An adapter is tied to one exact set of base weights, checked by hash (<code>baseModelSignature</code>), and a mismatch is rejected outright. Training for iOS 27 needs a toolkit containing iOS 27's base weights, which doesn't exist publicly. My phone runs iOS 27, so no amount of compute would get the adapter onto it.</p>
+
+<h2>A prompting result that did help the 7B</h2>
+<p>While testing whether prompting could stand in for fine-tuning, I added three worked examples to the shared instructions and ran 240 criterion decisions:</p>
+<div class="table"><table>
+<thead><tr><th>Qwen 2.5-7B, 240 decisions</th><th>Accuracy</th><th>Over-score ↓</th><th>Recall</th></tr></thead>
+<tbody>
+<tr><td>baseline</td><td>79.2%</td><td>36.6%</td><td>93.0%</td></tr>
+<tr><td>+ three worked examples</td><td>83.8%</td><td>24.1%</td><td>90.6%</td></tr>
+</tbody></table></div>
+<p>That fixed 14 over-scores for 3 recall losses. The examples cost about 170 tokens, and because they sit in the cached instructions, they're processed once per analysis, not once per criterion. The same examples made Apple's 3B much worse: 54.3% down to 40.4%, with over-scoring up to 93.3%.</p>
+
+<h2>Result</h2>
+<p>I kept the 7B on the GPU. Apple's model costs almost nothing in battery and heat, and a few hundred targeted examples fix its accuracy for under a dollar, but the tool to deploy that fix has been withdrawn. The inference layer sits behind a protocol with llama.cpp underneath, which is what made this safe to try. The training pipeline is automated, so if Apple ships a toolkit for the current OS, retraining takes 20 minutes and about a dollar.</p>
+
+<p class="method">Method: iPhone 17 (iPhone18,3), iOS 27.0, Apple's system model through Foundation Models, greedy sampling, 180 max output tokens, default guardrails. The probe replays byte-identical prompts exported from my Python harness and computes nothing on the device. Labels: 48 hand-authored decisions across three sessions, and 240 decisions from 15 assembled transcripts for the prompting test. Adapter: Apple's toolkit 26.0.0, LoRA rank 32, bf16, 569 training and 70 validation examples split by transcript, 2 epochs, on a rented A10G. Every number measures agreement with my labels, not clinical correctness.</p>
+<p class="method">Sources: <a href="https://developer.apple.com/apple-intelligence/foundation-models-adapter">Apple, Foundation Models adapter training</a> · <a href="https://developer.apple.com/documentation/foundationmodels/loading-and-using-a-custom-adapter-with-foundation-models">Loading and using a custom adapter</a> · <a href="https://developer.apple.com/videos/play/wwdc2026/241/">WWDC26: What's new in Foundation Models</a></p>
+
+  </article>
+  <p class="links"><a href="../../clinical-ai/">The project: Stealth Clinical AI</a><a href="../../writing/">All writing</a></p>
+  <footer class="site mono"><span>shihabbilal@gmail.com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
+</main>
+</body>
+</html>

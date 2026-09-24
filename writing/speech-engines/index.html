@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three speech engines, and why I shipped the least accurate one · Bilal Shihab</title>
+<meta name="description" content="Whisper, Parakeet and Apple SpeechAnalyzer, compared on word error rate, download size and heat.">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="mast">
+    <div class="mast-top">
+      <p class="name name-sm"><a href="../../">Bilal Shihab</a></p>
+      <nav class="site" aria-label="Site"><a href="../../index.html">Projects</a><a href="../../resume.html">Resume</a><a href="../../writing/" aria-current="page">Writing</a><a href="https://github.com/bshihab">GitHub</a><a href="mailto:shihabbilal@gmail.com">Email</a></nav>
+    </div>
+  </header>
+  <article class="post">
+    <p class="crumb mono"><a href="../../writing/">Writing</a> / <time datetime="2026-07-25">25 July 2026</time></p>
+    <h1 class="ptitle">Three speech engines, and why I shipped the least accurate one</h1>
+    <p class="post-note mono">Written 25 July 2026, when the pipeline ran a 7B model. It now runs Qwen 3.5-4B; the speech results below still hold.</p>
+
+<p>Whisper transcribed my test set at 1.1% word error rate. Apple's built-in engine got 3.1%. I took Whisper out of the app anyway, and the reasons came down to download size and heat.</p>
+
+<h2>The constraint</h2>
+<p>I'm building a pipeline that transcribes a clinical conversation and has a language model evaluate it, all on an iPhone. Nothing can go to a server. That rules out every hosted speech API and leaves a trade between accuracy, download size and heat. A 480 MB first-run download matters when the person installing the app has a few minutes between patients.</p>
+
+<h2>How I measured</h2>
+<p>I wrote synthetic doctor–patient conversations with known text, synthesized the audio with macOS <code>say</code>, ran each engine and computed word error rate (WER): the share of words inserted, deleted or wrong. Both sides are lowercased and stripped of punctuation before scoring, so formatting doesn't count for or against anyone.</p>
+<p>The candidates were Whisper small.en (OpenAI's model on MLX, about 480 MB), Parakeet TDT (NVIDIA's model, which came bundled with the diarization library I was using) and Apple SpeechAnalyzer, which is built into iOS and macOS 26 and needs no download.</p>
+
+<h2>Results</h2>
+<div class="table"><table>
+<thead><tr><th>Engine</th><th>WER</th><th>n</th><th>Download</th></tr></thead>
+<tbody>
+<tr><td>Whisper small.en</td><td>1.1%</td><td>10 × 3</td><td>~480 MB</td></tr>
+<tr><td>Apple SpeechAnalyzer</td><td>3.2%</td><td>10</td><td>none</td></tr>
+<tr><td>Apple SpeechAnalyzer, rerun</td><td>3.1%</td><td>30</td><td>none</td></tr>
+<tr><td>Parakeet TDT</td><td>not measured</td><td></td><td>~2.5 GB</td></tr>
+</tbody></table></div>
+<p>I never measured Parakeet. Its MLX weights alone were a 75-minute download on the test machine, and by the time that mattered I'd already decided.</p>
+<p>The Apple rerun used 30 conversations (5,555 reference words, 28.5 minutes of audio) and landed within 0.1 points of the first run. Split by length:</p>
+<pre>overall             3.1%  (n=30)
+short  (≤10 turns)  4.0%
+medium (11–24)      3.0%
+long   (25+)        3.1%</pre>
+<p>Accuracy doesn't fall off as conversations get longer, which was the failure I was most worried about. Median 3.0%, standard deviation 1.6%, worst case 7.8%.</p>
+<p>The number that mattered most wasn't accuracy. Apple transcribed the 28.5 minutes of audio in 43 seconds, about 40× realtime, at roughly 6% CPU, because it runs on the Neural Engine instead of the GPU.</p>
+
+<h2>Why the less accurate engine won</h2>
+<p>In a 300-word conversation, 1.1% WER is about 3 wrong words and 3.1% is about 9. The transcript only feeds a language model that reads for meaning, and its verdicts didn't change between engines.</p>
+<p>On Apple's side of the ledger: no 480 MB download, which also meant no download screen or resume logic to build. It ran at 40× realtime on the Neural Engine, leaving the GPU to the language model, which was already making the phone hot. Removing Whisper also deleted a dependency and shrank the app.</p>
+<p>WER also weights every word the same. "The" counts as much as "no chest pain", and in a clinical transcript a dropped negation matters far more than a dropped filler word. After seeing that, I stopped reading a 2-point WER gap as meaningful.</p>
+
+<h2>Diarization model vs a language model</h2>
+<p>The evaluation needs to know which lines belong to the clinician. The usual answer is a diarization model that segments audio by voice. I tested skipping it: give the language model a flat transcript and ask it to split the speakers itself. Over 15 cases it separated the two voices correctly 73.6% of the time and got the roles right 68.1% of the time.</p>
+<p>That was too low, but the failure was specific. The model was decent at judging who a line sounds like and bad at finding where one speaker stops. Apple's streaming transcriber already breaks its output at pauses, which is usually where speakers change, so I kept those boundaries and asked the model only to label each utterance. The diarization model came out of the app. With Qwen 3.5-4B that labeling now reaches 98.3% on real recordings, against 85.0% for the 7B.</p>
+
+<h2>Limits</h2>
+<p>Every number above is clean synthetic speech, so real audio with accents and room noise will do worse. Overlapping speech is untested, because each line was synthesized separately. Medical vocabulary is untested too, and an engine that handles ordinary English can still mangle "levothyroxine".</p>
+<p>I shipped on a weaker kind of evidence: weeks of real recordings on real phones where Apple's transcript was never the reason an evaluation came out wrong.</p>
+
+<h2>Where the error lives</h2>
+<p>All three engines land between 1% and 3% on clean speech. The errors that hurt my output came from the language model's judgment, so I went in expecting the benchmark to pick a speech engine and came out spending the next month on the model.</p>
+
+  </article>
+  <p class="links"><a href="../../clinical-ai/">The project: Stealth Clinical AI</a><a href="../../writing/">All writing</a></p>
+  <footer class="site mono"><span>shihabbilal@gmail.com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
+</main>
+</body>
+</html>

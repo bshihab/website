@@ -16,3 +16,4 @@ In QA mode, flag any code that doesn't match DESIGN.md.
 - The clinical startup is in stealth: never name it, link its repo or blog, or name the clinical partner. Its page is `/clinical-ai/` and shows engineering only.
 - Numbers come from `~/Downloads/Bilal Shihab Projects facts sheet.pdf` or the project repos, never from memory.
 - Slugs are linked from printed resumes: never rename one.
+- `/writing/` holds posts dated when they were written (not when published here), edited against ai_slop_detector and anonymised for stealth.

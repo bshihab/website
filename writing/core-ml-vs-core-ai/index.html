@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Core ML vs Core AI for running an LLM on an iPhone · Bilal Shihab</title>
+<meta name="description" content="A measured GPU baseline for a 7B on an iPhone 17, and what iOS 27&#x27;s Core AI claims to change.">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="mast">
+    <div class="mast-top">
+      <p class="name name-sm"><a href="../../">Bilal Shihab</a></p>
+      <nav class="site" aria-label="Site"><a href="../../index.html">Projects</a><a href="../../resume.html">Resume</a><a href="../../writing/" aria-current="page">Writing</a><a href="https://github.com/bshihab">GitHub</a><a href="mailto:shihabbilal@gmail.com">Email</a></nav>
+    </div>
+  </header>
+  <article class="post">
+    <p class="crumb mono"><a href="../../writing/">Writing</a> / <time datetime="2026-07-15">15 July 2026</time></p>
+    <h1 class="ptitle">Core ML vs Core AI for running an LLM on an iPhone</h1>
+    <p class="post-note mono">Written 15 July 2026, before I tested Core AI. The results are in the <a href="../apple-model-vs-7b/">follow-up</a>. The pipeline now runs Qwen 3.5-4B.</p>
+
+<p>iOS 27 adds Core AI, Apple's successor to Core ML, built to run large models on the Neural Engine. Before trying it, I measured what my 7B costs on the GPU today, so I'd have a baseline to compare against.</p>
+
+<h2>My setup</h2>
+<p>The pipeline transcribes long-form speech and has a language model evaluate it against structured criteria, all on the phone. The audio and transcript are sensitive, so nothing can go to a server.</p>
+<ul>
+<li>Transcription: Apple's on-device SpeechAnalyzer (iOS 26).</li>
+<li>Language model: Qwen 2.5-7B-Instruct, 4-bit, about 4.3 GB, in GGUF format.</li>
+<li>Runtime: llama.cpp compiled into the app, with every layer on the GPU through Metal.</li>
+</ul>
+<p>Running on the GPU causes two problems. A dozen-plus inference passes is a sustained GPU load, so the phone gets hot and drains battery. And every user downloads 4.3 GB on first run, which I host and resume myself.</p>
+
+<h2>One session, measured</h2>
+<p>One full analysis of a roughly 3-minute scripted recording on an iPhone 17 (iPhone18,3), iOS 27.0:</p>
+<div class="table"><table>
+<thead><tr><th>One cold session</th><th>Measured</th></tr></thead>
+<tbody>
+<tr><td>Wall-clock, end to end</td><td>211 s</td></tr>
+<tr><td>Generation throughput</td><td>3.5 tok/s (686 output tokens)</td></tr>
+<tr><td>Model load, cold</td><td>14.0 s</td></tr>
+<tr><td>Peak app memory footprint</td><td>~495 MB</td></tr>
+<tr><td>Peak thermal state</td><td>fair</td></tr>
+<tr><td>Battery</td><td>~5%</td></tr>
+</tbody></table></div>
+<p>Scoring the criteria took 69% of the time (145 s), speaker attribution 20% (42.5 s), the cold model load 7% (14 s) and the closing summary 4% (9 s). Transcription and redaction together took under 0.2 s.</p>
+<p>The 495 MB is the app's counted footprint, not the model's real RAM. The 4.3 GB of weights are memory-mapped, so they page in from flash and don't count against the limit iOS enforces. That's what lets a 7B run without the increased-memory entitlement. It doesn't mean a 7B fits in half a gigabyte.</p>
+
+<h2>Three sessions back to back</h2>
+<p>One run only reached "fair" in its last few seconds. Running the same script three times without quitting the app, so heat is the only variable:</p>
+<div class="table"><table>
+<thead><tr><th>Session</th><th>Throughput</th><th>Wall-clock</th><th>Peak thermal</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>3.6 tok/s</td><td>189 s</td><td>serious</td></tr>
+<tr><td>2</td><td>2.7 tok/s (−25%)</td><td>204 s (+8%)</td><td>serious</td></tr>
+<tr><td>3</td><td>2.5 tok/s (−31%)</td><td>289 s (+53%)</td><td>serious</td></tr>
+</tbody></table></div>
+<p>By the third session throughput is down 31% and the same work takes 53% longer, nearly five minutes instead of three. Wall-clock degrades more than throughput because prompt processing throttles too, and tokens per second only counts generated tokens.</p>
+<p>iOS has no public temperature API, only four coarse thermal states, so the throttling is the measurement I have: the same result arriving 100 seconds later. Three runs is a small sample, and iOS reports battery in roughly 5% steps.</p>
+
+<h2>Why not the Neural Engine already?</h2>
+<p>Every iPhone since the A11 in 2017 has a Neural Engine. Two things kept large language models off it. Third-party apps could only reach it through Core ML, which decided on its own where each operation ran and silently fell back to the GPU or CPU. And it was designed around convolutional vision models, a poor fit for the operations and 4-bit weights an LLM uses. That's why llama.cpp and Apple's own MLX both went to the GPU.</p>
+
+<h2>What Core AI is</h2>
+<p>Core AI packages models in a new <code>.aimodel</code> format and dispatches them across the Neural Engine, GPU and CPU. Apple's built-in Foundation Models framework now sits on top of it, and Apple ships a catalog of optimized open models that includes Qwen and Mistral (<a href="https://www.apple.com/newsroom/2026/06/apple-aids-app-development-with-new-intelligence-frameworks-and-advanced-tools/">Apple Newsroom</a>, <a href="https://developer.apple.com/videos/play/wwdc2026/324/">WWDC26: Meet Core AI</a>).</p>
+
+<h2>Side by side</h2>
+<p>This compares the two frameworks by design. I hadn't measured either on a 7B yet.</p>
+<div class="table"><table>
+<thead><tr><th></th><th>Core ML (through iOS 26)</th><th>Core AI (iOS 27)</th></tr></thead>
+<tbody>
+<tr><td>Built for</td><td>Vision and smaller models</td><td>Large generative models</td></tr>
+<tr><td>Hardware targeting</td><td>Runtime chooses, indirectly</td><td>Runtime dispatches, tuned for large models on the Neural Engine</td></tr>
+<tr><td>Model format</td><td><code>.mlmodel</code>, <code>.mlpackage</code></td><td><code>.aimodel</code></td></tr>
+<tr><td>Large LLMs</td><td>Poor; the ecosystem used the GPU</td><td>A stated goal</td></tr>
+<tr><td>Apple's built-in LLM</td><td>Not a first-class concept</td><td>Foundation Models, built on Core AI</td></tr>
+<tr><td>Open models</td><td>Convert your own</td><td>Curated catalog (Qwen, Mistral)</td></tr>
+<tr><td>Realistic chip for a 7B</td><td>GPU</td><td>Neural Engine, if it works</td></tr>
+</tbody></table></div>
+
+<h2>What I didn't know yet</h2>
+<ul>
+<li>Whether a 7B runs on the Neural Engine or falls back to the GPU.</li>
+<li>Whether Apple's Qwen matches mine in size, quantization and context. Every prompt I'd tuned would need re-checking against a new model.</li>
+<li>Whether I could drop iOS 26 users, since Core AI is iOS 27 only, or would have to maintain two inference stacks.</li>
+<li>How much the beta APIs would move before release.</li>
+</ul>
+<p>I did test it afterwards. The 4B never loaded on an 8 GB iPhone by any of four routes, because Core AI counts model weights as app memory where llama.cpp maps them from flash. The details are in the <a href="../apple-model-vs-7b/">follow-up</a>.</p>
+
+<p class="method">Method: iPhone 17 (iPhone18,3), iOS 27.0, Qwen 2.5-7B-Instruct Q4_K_M under llama.cpp with all layers on Metal. Wall-clock and per-stage timings, generated-token throughput, peak <code>phys_footprint</code>, <code>ProcessInfo.thermalState</code> sampled once a second, and battery delta. The back-to-back runs used an identical script. No Core AI benchmarks are in this post; everything about Core AI comes from Apple's announcements.</p>
+
+  </article>
+  <p class="links"><a href="../../clinical-ai/">The project: Stealth Clinical AI</a><a href="../../writing/">All writing</a></p>
+  <footer class="site mono"><span>shihabbilal@gmail.com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
+</main>
+</body>
+</html>
