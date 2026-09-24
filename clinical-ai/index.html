@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stealth Clinical AI · Bilal Shihab</title>
-<meta name="description" content="The on-device AI for a clinical startup I&#x27;m building, still in stealth: a language model on the iPhone that evaluates recorded clinical conversations, with nothing leaving the phone.">
+<meta name="description" content="The on-device AI for a clinical startup I&#x27;m building, still in stealth. It records a clinical conversation and analyzes it entirely on an iPhone:">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Stealth Clinical AI</h1>
-  <p class="result">The on-device AI for a clinical startup I'm building, still in stealth: a language model on the iPhone that evaluates recorded clinical conversations, with nothing leaving the phone.</p>
+  <p class="result">The on-device AI for a clinical startup I'm building, still in stealth. It records a clinical conversation and analyzes it entirely on an iPhone:</p>
+  <ul class="what"><li>on-device transcription, at a 3.1% word error rate</li><li>Qwen 3.5-4B for the analysis, with a second pass that re-checks its work</li><li>about two and a half minutes per analysis, in under 500 MB of memory</li><li>nothing leaves the phone</li></ul>
   <div class="pmeta mono"><span>Founder</span><span>Built with a clinical partner</span><span>Jun 2026 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -28,13 +29,12 @@
     <figcaption><b>Fig. 1</b>The recording screen. The audio and the analysis stay on the phone.</figcaption>
   </figure>
 
-  <!-- YOUR WRITE-UP: replace this whole .write block with your own paragraphs -->
-  <div class="write">
-    <p class="mono">Write-up coming soon.</p>
-    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
-    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
-    <h3>What I'd do next</h3><p>Honest limits and the next measurement.</p>
-  </div>
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>Doctors I've talked to told me how much of their time goes into reviewing clinical conversations. I wanted to see if a phone could take on part of that without sending anything to the cloud.</p>
+    <h2>The hard part</h2>
+    <p>Choosing the model. MedGemma 4B, Google's medical model, gave credit that hadn't been earned 53% of the time. Apple's built-in Foundation Models needed no download but agreed with my scores only 48.4% of the time. Qwen 3.5-4B reached 85% on 240 labeled decisions, beating a 7B at 79%, in a 3.0 GB download.</p>
+  </section>
 
   <figure>
     <svg class="chart" viewBox="0 0 720 132" role="img" aria-label="Agreement with 240 labeled decisions: Qwen 3.5-4B 85 percent, Qwen 2.5-7B 79 percent">

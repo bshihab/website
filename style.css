@@ -135,3 +135,12 @@ footer.site { margin-top: 64px; color: var(--faint); display: flex; flex-wrap: w
   .skills { grid-template-columns: 1fr; gap: 2px; }
   .skills dd { margin-bottom: 10px; }
 }
+
+/* ---------- project write-up ---------- */
+ul.what { margin: 14px 0 0; padding-left: 1.1em; max-width: 34em; font-size: 18px; line-height: 1.5; }
+ul.what li { margin-top: 6px; }
+ul.what li::marker { color: var(--accent); }
+.story { margin-top: 40px; }
+.story h2 { font: 560 24px/1.25 var(--serif); font-variation-settings: "opsz" 48; margin: 32px 0 8px; }
+.story h2:first-child { margin-top: 0; }
+.story p { margin: 0; max-width: 65ch; }
