@@ -15,7 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Embedded Multiplayer Racer</h1>
-  <p class="result">A two-player racing game in bare-metal C for a TI microcontroller, with the two boards keeping one race in sync over UART.</p>
+  <p class="result">A two-player racing game in the style of old Mario Kart, written in bare-metal C for a TI microcontroller. Prarthana Balaji and I built it for ECE 319K:</p>
+  <ul class="what"><li>Two boards, one per player, keep the same race in sync over UART</li><li>Power-ups like bananas and bombs, a joystick read through the ADC, sound through the DAC, all in a 30 Hz game loop</li><li>I wrote the physics and controls, including the movement and bouncing; Prarthana wrote the UART protocol, the interrupts for the power-ups and the illustrations</li><li>Voted Best Game in the class competition, Fall 2025</li></ul>
   <div class="pmeta mono"><span>With Prarthana Balaji</span><span>ECE 319K, UT Austin</span><span>Nov – Dec 2025</span><span>Voted Best Game, Fall 2025</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -28,12 +29,12 @@
     <div class="hero blank" role="img" aria-label="Image coming soon"></div>
   </figure>
 
-  <!-- WRITE-UP: "Why I built it" and "The hard part" -->
-  <div class="write">
-    <p class="mono">Write-up coming soon.</p>
-    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
-    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
-  </div>
+  <section class="story">
+    <h2>Why we built it</h2>
+    <p>We wanted to make a racing game like old-style Mario Kart, and we wanted it to be two-player.</p>
+    <h2>The hard part</h2>
+    <p>Making it two-player. We knew it would be difficult, but it made the game much more fun. The two boards have to agree on one race: each sends its car's position and angle, plus events like a dropped banana, over UART, and the other board applies them inside the same 30 Hz loop that reads the joystick and draws the screen.</p>
+  </section>
 
   <div class="links"><a href="https://github.com/bshihab/Embedded-Multiplayer-Racer">Code on GitHub</a></div>
 
