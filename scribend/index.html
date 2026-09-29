@@ -16,8 +16,8 @@
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Scribend</h1>
   <p class="result">An offline medical scribe my team built at the Qualcomm × Meta ExecuTorch Hackathon. It records a doctor–patient visit and writes a structured SOAP note on an Android phone, with no internet:</p>
-  <ul class="what"><li>Whisper tiny.en for speech to text and Llama 3.2 1B for the note, both through ExecuTorch</li><li>Ran on a Galaxy S25 Ultra at about 49 tokens a second, on the CPU</li><li>No network needed after the first model download</li><li>My part was the on-device models and the Android build; Mariam, Ishani and Bhasky built the model exports, the patient-history search and the app</li></ul>
-  <div class="pmeta mono"><span>Team project</span><span>Qualcomm × Meta ExecuTorch Hackathon</span><span>San Francisco, June 2026</span></div>
+  <ul class="what"><li>Whisper tiny.en for speech to text and Llama 3.2 1B for the note, both through ExecuTorch</li><li>Ran on a Galaxy S25 Ultra at about 49 tokens a second, on the CPU</li><li>No network needed after the first model download</li><li>My part was the on-device models and the Android build; my teammates built the model exports, the patient-history search and the app interface</li></ul>
+  <div class="pmeta mono"><span>Collaborated with Mariam Shihab, Ishani Paul and Bhasky Nandagiri</span><span>Qualcomm × Meta ExecuTorch Hackathon</span><span>San Francisco, June 2026</span></div>
 
   <section class="spec" aria-label="Specifications">
     <div class="spec-h"><span>Spec</span></div>
@@ -26,14 +26,14 @@
 
   <figure>
     <img class="hero" src="screen.jpg" alt="The Scribend SOAP note screen, recreated from the app's code" style="aspect-ratio:4 / 3">
-    <figcaption><b>Fig. 1</b>The SOAP note screen, recreated from the app's React Native code (its colours, type and labels) with the app's built-in sample visit. It isn't a screenshot from the phone. The patient context card is empty because that search never got wired into the app.</figcaption>
+    <figcaption><b>Fig. 1</b>The SOAP note screen, recreated from the app's React Native code (colours, type and labels) using its built-in sample visit, not a screenshot from the phone. The patient-context card is empty because that feature was never connected in the app.</figcaption>
   </figure>
 
   <section class="story">
     <h2>Why I built it</h2>
-    <p>Clinics in remote areas often don't have reliable internet, and a scribe that depends on the cloud doesn't work there. The hackathon was about running AI on Snapdragon phones with ExecuTorch, so an offline scribe fit.</p>
+    <p>Clinics in remote areas often lack reliable internet, so a cloud-based scribe doesn't work there. The hackathon focused on running AI on Snapdragon phones with ExecuTorch, which made an offline scribe a natural fit.</p>
     <h2>The hard part</h2>
-    <p>Fitting two models on one phone. Llama 3.2 3B wrote better notes than the 1B, which sometimes echoed the prompt back, but with Whisper loaded beside it the app ran out of memory and crashed, because ExecuTorch loads models through the JavaScript heap. I tested the combinations on the S25 and went with Whisper tiny and Llama 3.2 1B, which ran reliably in all three runs at about 49 tokens a second.</p>
+    <p>The biggest constraint was memory. Llama 3.2 3B wrote better notes than the 1B, which sometimes echoed the prompt, but running it alongside Whisper exhausted the phone's memory and crashed the app, because ExecuTorch loads models through the JavaScript heap. After testing the combinations on the S25, I went with Whisper tiny and Llama 3.2 1B, which ran reliably in all three runs at about 49 tokens per second.</p>
   </section>
 
   <div class="links"><a href="https://github.com/bshihab/Scribend">Code on GitHub</a></div>

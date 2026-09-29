@@ -15,8 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Embedded Multiplayer Racer</h1>
-  <p class="result">A two-player racing game in the style of old Mario Kart, written in bare-metal C for a TI microcontroller, built for ECE 319K:</p>
-  <ul class="what"><li>Two boards, one per player, keep the same race in sync over UART</li><li>Power-ups like bananas and bombs, a joystick read through the ADC, sound through the DAC, all in a 30 Hz game loop</li><li>I wrote the physics and controls, including the movement and bouncing; my partner wrote the UART protocol, the interrupts for the power-ups and the illustrations</li><li>Voted Best Game in the class competition, Fall 2025</li></ul>
+  <p class="result">A two-player racing game inspired by classic Mario Kart, written in bare-metal C on a TI microcontroller for ECE 319K:</p>
+  <ul class="what"><li>Two boards, one per player, keep the same race in sync over UART</li><li>Power-ups like bananas and bombs, joystick input through the ADC and sound through the DAC, all running in a 30 Hz game loop</li><li>I wrote the physics and controls, including the movement and bouncing; my partner wrote the UART protocol, the interrupts for the power-ups and the illustrations</li><li>Voted Best Game in the class competition, Fall 2025</li></ul>
   <div class="pmeta mono"><span>Collaborated with Prarthana Balaji</span><span>ECE 319K, UT Austin</span><span>Nov – Dec 2025</span><span>Voted Best Game, Fall 2025</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -31,9 +31,9 @@
 
   <section class="story">
     <h2>Why we built it</h2>
-    <p>We wanted to make a racing game like old-style Mario Kart, and we wanted it to be two-player.</p>
+    <p>We wanted to build a two-player racing game inspired by classic Mario Kart.</p>
     <h2>The hard part</h2>
-    <p>Making it two-player. We knew it would be difficult, but it made the game much more fun. The two boards have to agree on one race: each sends its car's position and angle, plus events like a dropped banana, over UART, and the other board applies them inside the same 30 Hz loop that reads the joystick and draws the screen.</p>
+    <p>Two-player mode was the hardest part. We knew it would be difficult, but it made the game far more fun. Both boards have to agree on a single race: each sends its car's position and angle over UART, along with events like a dropped banana, and the other board applies them within the same 30 Hz loop that reads the joystick and updates the screen.</p>
   </section>
 
   <div class="links"><a href="https://www.youtube.com/watch?v=CwQ1BzuiUfw">Demo video</a><a href="https://github.com/bshihab/Embedded-Multiplayer-Racer">Code on GitHub</a></div>

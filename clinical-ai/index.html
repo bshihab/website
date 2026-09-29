@@ -15,8 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Stealth Clinical AI</h1>
-  <p class="result">The on-device AI for a clinical startup I'm building, still in stealth. It records a clinical conversation and analyzes it entirely on an iPhone:</p>
-  <ul class="what"><li>On-device transcription, at a 3.1% word error rate on test audio</li><li>Qwen 3.5-4B for the analysis, with a second pass that re-checks its work</li><li>About two and a half minutes per analysis, in under 500 MB of memory</li><li>The audio and transcript never leave the phone</li></ul>
+  <p class="result">The on-device AI for a clinical startup I'm building, currently in stealth. It records a clinical conversation and analyzes it entirely on an iPhone:</p>
+  <ul class="what"><li>On-device transcription, at a 3.1% word error rate on test audio</li><li>Qwen 3.5-4B for the analysis, with a second pass that re-checks its work</li><li>About two and a half minutes per analysis, using under 500 MB of memory</li><li>The audio and transcript never leave the phone</li></ul>
   <div class="pmeta mono"><span>Founder</span><span>Built with a clinical partner</span><span>Jun 2026 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -33,7 +33,7 @@
     <h2>Why I built it</h2>
     <p>Doctors I've talked to told me how much of their time goes into reviewing clinical conversations. I wanted to see if a phone could take on part of that without sending anything to the cloud.</p>
     <h2>The hard part</h2>
-    <p>Choosing the model. In an early test, MedGemma 4B, Google's medical model, gave credit that hadn't been earned 53% of the time. Apple's built-in Foundation Models didn't need a download, but they matched the grades I gave by hand only 48.4% of the time, against 65.1% for Qwen 3.5-4B on the same conversations. On a larger set of 240 labeled decisions, Qwen 3.5-4B reached 85%, beating a 7B at 79%, in a 3.0 GB download.</p>
+    <p>Most of my time went into choosing the model. In an early test, MedGemma 4B, Google's medical model, gave unearned credit 53% of the time. Apple's built-in Foundation Models require no download, but they matched my hand grading only 48.4% of the time, compared with 65.1% for Qwen 3.5-4B on the same conversations. On a larger set of 240 labeled decisions, Qwen 3.5-4B reached 85% against 79% for a 7B model, with a 3.0 GB download.</p>
   </section>
 
   <figure>
@@ -57,7 +57,7 @@
       <text x="410" y="168" text-anchor="middle">50</text>
       <text x="650" y="168" text-anchor="middle">100%</text>
     </svg>
-    <figcaption><b>Fig. 2</b>Agreement with 240 labeled decisions, every model run through the same scoring code. I shipped Qwen 3.5-4B. It never incorrectly denied credit (0 of 128); all of its errors were over-credits, which is what the second pass goes after.</figcaption>
+    <figcaption><b>Fig. 2</b>Agreement with 240 labeled decisions, every model run through the same scoring code. I shipped Qwen 3.5-4B. It never incorrectly denied credit (0 of 128); all of its errors were over-credits, which the second pass is designed to catch.</figcaption>
   </figure>
 <div class="links"><a href="../writing/speech-engines/">Writing: three speech engines, and why I shipped the least accurate one</a><a href="../writing/core-ml-vs-core-ai/">Writing: Core ML vs Core AI for running an LLM on an iPhone</a><a href="../writing/apple-model-vs-7b/">Writing: Apple's on-device model vs Qwen 2.5-7B</a></div>
 

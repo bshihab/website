@@ -16,7 +16,7 @@
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">ECG PCB</h1>
   <p class="result">An electrocardiogram board my team designed, built and tested for a BME lab class. It picked up a clean ECG:</p>
-  <ul class="what"><li>An AD620 instrumentation amplifier with a gain of about 248</li><li>A 0.324 Hz high-pass filter to remove baseline drift, and a 39.4 Hz low-pass filter that also cuts 60 Hz mains noise</li><li>A voltage follower to buffer the output</li><li>My part was the schematic and the soldering</li></ul>
+  <ul class="what"><li>An AD620 instrumentation amplifier with a gain of about 248</li><li>A 0.324 Hz high-pass filter to remove baseline drift, and a 39.4 Hz low-pass filter that also removes 60 Hz mains noise</li><li>A voltage follower to buffer the output</li><li>My part was the schematic and the soldering</li></ul>
   <div class="pmeta mono"><span>Collaborated with Diya Arvindh and Emily Netemeyer</span><span>BME lab, UT Austin</span><span>Mar – Apr 2025</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -39,9 +39,9 @@
 
   <section class="story">
     <h2>Why I built it</h2>
-    <p>It was the design project for a BME lab class: take a raw heart signal from the skin and build the circuit that makes it readable.</p>
+    <p>It was the design project for a BME lab class: build a circuit that turns the raw heart signal from the skin into a readable ECG.</p>
     <h2>The hard part</h2>
-    <p>The hardware. Everything had to be soldered cleanly, and when the boards arrived, two of our three copies had manufacturing defects. Every time the signal looked wrong, we had to work out whether it was our soldering, a fault in the board itself, or a problem with signal acquisition, and we kept iterating until we had a board that gave the clean trace in Fig. 2.</p>
+    <p>The hardware was the hardest part. Every joint had to be soldered cleanly, and two of the three boards we received had manufacturing defects. Whenever the signal looked wrong, we had to determine whether the cause was our soldering, a defect in the board, or signal acquisition, and we kept iterating until one board produced the clean trace in Fig. 2.</p>
   </section>
 
   

@@ -15,8 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Longhorn Neurotech</h1>
-  <p class="result">A student team building EEG and EMG models small enough to run on a prosthetic's own hardware. I've been a member since my first year:</p>
-  <ul class="what"><li>First year, ML Interpretability team: as a team we got our best EEG classifier to 85.71% on its test set</li><li>Now Edge AI Team Lead, running 10 people split across data processing, the EMG model, the EEG model and quantization with ONNX Runtime</li><li>We tried several models on a Raspberry Pi Zero 2 W, including XGBoost and a CNN-LSTM, and a small MLP did best</li><li>That EMG gesture model runs in 0.43 ms per sample instead of 1.04 ms, in 311 KB, at 90.37% accuracy against 90.50% before quantizing</li></ul>
+  <p class="result">A student organization building EEG and EMG models small enough to run on a prosthetic's own hardware. I've been a member since my first year:</p>
+  <ul class="what"><li>First year, ML Interpretability team: our best EEG classifier reached 85.71% on its test set</li><li>Now Edge AI Team Lead for a team of 10, split across data processing, the EMG and EEG models, and quantization with ONNX Runtime</li><li>We tested several models on a Raspberry Pi Zero 2 W, including XGBoost and a CNN-LSTM; a small MLP performed best</li><li>After INT8 quantization, that EMG gesture model runs in 0.43 ms per sample instead of 1.04 ms and fits in 311 KB, with accuracy going from 90.50% to 90.37%</li></ul>
   <div class="pmeta mono"><span>Edge AI Team Lead, Sep 2025 – present</span><span>AI/ML Developer, Sep 2024 – Aug 2025</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -31,9 +31,9 @@
 
   <section class="story">
     <h2>Why I joined</h2>
-    <p>I got into brain-computer interfaces reading about advances like Neuralink's. In my first year I joined the ML Interpretability team, where I built capsule networks for EEG and reordered the channels to match where the electrodes sit on the scalp. That work got me promoted to lead the Edge AI team.</p>
+    <p>I became interested in brain-computer interfaces after reading about advances like Neuralink's. In my first year I joined the ML Interpretability team, where I built capsule networks for EEG and reordered the channels to match electrode positions on the scalp. That work led to my promotion to Edge AI Team Lead.</p>
     <h2>The hard part</h2>
-    <p>Leading ten people who all needed the same hardware. Everyone wanted to test their own model on the Raspberry Pi. I set up Raspberry Pi Connect so that anyone could run inference on it remotely from their own laptop. That let us try several models without passing the board around, and it kept everyone involved. The technical wall was ONNX Runtime: PyTorch's own quantization made the model bigger than the original, so I switched to ONNX Runtime's static quantization, which got it down to 311 KB.</p>
+    <p>The hardest part was leading ten people who all needed the same hardware. Everyone wanted to test their own models on the Raspberry Pi, so I set up Raspberry Pi Connect, which let anyone run inference on it remotely from their own laptop. That let us compare models without sharing a single physical board, and it kept everyone involved. On the technical side, ONNX Runtime was the hurdle: PyTorch's built-in quantization made the model larger than the original, so I switched to ONNX Runtime's static quantization, which brought it down to 311 KB.</p>
   </section>
 
   <div class="links"><a href="https://github.com/LonghornNeurotech/Edge_EMG_Classification">EMG edge inference on GitHub</a><a href="https://github.com/LonghornNeurotech/ML_Interpretability">EEG interpretability on GitHub</a></div>

@@ -16,7 +16,7 @@
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Cloud to Edge Heart Rate Monitor</h1>
   <p class="result">A heart-rhythm monitor split between the cloud and a microcontroller:</p>
-  <ul class="what"><li>A Raspberry Pi 5 plays the patient, streaming MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>The Pico sorts each heartbeat as normal, supraventricular ectopic or ventricular ectopic with a small neural network I wrote in C, about 115 int8 weights</li><li>A Python exporter writes the trained weights into a C header, so retraining doesn't mean retyping numbers</li><li>The Pico's second core is a watchdog that flashes a warning if the data stops for more than a second</li></ul>
+  <ul class="what"><li>A Raspberry Pi 5 plays the patient, streaming MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>The Pico classifies each heartbeat as normal, supraventricular ectopic or ventricular ectopic using a small neural network I wrote in C (about 115 int8 weights)</li><li>A Python exporter writes the trained weights into a C header, so retrained weights go straight into the firmware</li><li>The Pico's second core is a watchdog that flashes a warning if the data stops for more than a second</li></ul>
   <div class="pmeta mono"><span>Solo project</span><span>Dec 2025 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -31,9 +31,9 @@
 
   <section class="story">
     <h2>Why I built it</h2>
-    <p>I built it on my own to experiment with how edge devices and the cloud can work together. I pictured it as a small, independent backup that double-checks the readings from a clinic's heart monitor.</p>
+    <p>I built this on my own to explore how edge devices and the cloud can work together. I designed it as a small, independent backup that could double-check the readings from a clinic's heart monitor.</p>
     <h2>The hard part</h2>
-    <p>Getting the Pico's two cores to work together. Core 0 reads the stream and runs the network, and stamps a shared timestamp every time a sample arrives. Core 1 waits for that first sample, then watches the timestamp and panics if it goes more than a second without changing. Both cores drive the same LED, so the results had to stay readable next to the alarm: one to three blinks for the beat type, a fast 30 ms strobe for a panic.</p>
+    <p>The hardest part was coordinating the Pico's two cores. Core 0 reads the incoming stream, runs the network and updates a shared timestamp with every sample. Core 1 waits for the first sample, then monitors that timestamp and raises an alarm if it stops updating for more than a second. Both cores share one LED, so the output had to stay distinguishable from the alarm: one to three blinks for the beat type, and a fast 30 ms strobe for a fault.</p>
   </section>
 
   <div class="links"><a href="https://github.com/bshihab/pico_hrm_integrity">Code on GitHub</a></div>
