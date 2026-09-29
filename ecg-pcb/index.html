@@ -15,25 +15,32 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">ECG PCB</h1>
-  <p class="result">A team-built electrocardiogram board. I designed the schematic for the amplification and filtering stages that pull a millivolt heart signal out of 60 Hz mains noise.</p>
-  <div class="pmeta mono"><span>Team project</span><span>Mar – Apr 2025</span></div>
+  <p class="result">An electrocardiogram board that Diya Arvindh, Emily Netemeyer and I designed, built and tested for a BME lab class. It picked up a clean ECG:</p>
+  <ul class="what"><li>An AD620 instrumentation amplifier with a gain of about 248</li><li>A 0.324 Hz high-pass filter to remove baseline drift, and a 39.4 Hz low-pass filter that also cuts 60 Hz mains noise</li><li>A voltage follower to buffer the output</li><li>My part was the schematic for the amplifier and filter stages</li></ul>
+  <div class="pmeta mono"><span>Team of three</span><span>BME lab, UT Austin</span><span>Mar – Apr 2025</span></div>
 
   <section class="spec" aria-label="Specifications">
-    <div class="spec-h"><span>Spec</span></div>
-    <dl><div class="kv"><dt>Tool</dt><dd>Autodesk Fusion 360</dd></div><div class="kv"><dt>Front end</dt><dd>Instrumentation amplifier</dd></div><div class="kv"><dt>Filtering</dt><dd>Active bandpass</dd></div><div class="kv"><dt>Interference</dt><dd>60 Hz notch</dd></div><div class="kv"><dt>My part</dt><dd>Amplifier and filter schematic</dd></div><div class="kv"><dt>Signal</dt><dd>Surface ECG</dd></div></dl>
+    <div class="spec-h"><span>Spec</span><span>from our lab presentation</span></div>
+    <dl><div class="kv"><dt>Amplifier</dt><dd>AD620, R<sub>G</sub> = 199.74 Ω</dd></div><div class="kv"><dt>Gain</dt><dd>~248 (≈ 48 dB)</dd></div><div class="kv"><dt>High-pass</dt><dd>0.324 Hz (1.49 MΩ, 331 nF)</dd></div><div class="kv"><dt>Low-pass</dt><dd>39.4 Hz (9.93 kΩ, 407 nF)</dd></div><div class="kv"><dt>Output</dt><dd>Voltage follower</dd></div><div class="kv"><dt>Readout</dt><dd>LabVIEW</dd></div></dl>
   </section>
 
   <figure>
-    <!-- HERO IMAGE: replace this div with <img class="hero" src="hero.jpg" alt="..."> and add a caption -->
-    <div class="hero blank" role="img" aria-label="Image coming soon"></div>
+    <img class="hero" src="trace.jpg" alt="A clean ECG trace in LabVIEW with regular QRS spikes" style="aspect-ratio:905 / 542">
+    <figcaption><b>Fig. 1</b>The board's output in LabVIEW: a clean ECG with regular QRS spikes.</figcaption>
+  </figure>
+  <figure>
+    <img class="hero" src="screen.jpg" alt="The purple ECG circuit board, front and back" style="aspect-ratio:4 / 3">
+    <figcaption><b>Fig. 2</b>The finished board, front and back.</figcaption>
+  </figure>
+  <figure>
+    <img class="hero" src="schematic.png" alt="Schematics for the amplifier, high-pass filter, low-pass filter and voltage follower" style="aspect-ratio:1502 / 340;background:#fff;object-fit:contain">
+    <figcaption><b>Fig. 3</b>The four stages in signal order: instrumentation amplifier, high-pass filter, low-pass filter, voltage follower.</figcaption>
   </figure>
 
-  <!-- WRITE-UP: "Why I built it" and "The hard part" -->
-  <div class="write">
-    <p class="mono">Write-up coming soon.</p>
-    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
-    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
-  </div>
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>It was the design project for a BME lab class: take a raw heart signal from the skin and build the circuit that makes it readable.</p>
+  </section>
 
   
 
