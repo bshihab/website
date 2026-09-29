@@ -16,24 +16,24 @@
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Stealth Clinical AI</h1>
   <p class="result">The on-device AI for a clinical startup I'm building, still in stealth. It records a clinical conversation and analyzes it entirely on an iPhone:</p>
-  <ul class="what"><li>on-device transcription, at a 3.1% word error rate</li><li>Qwen 3.5-4B for the analysis, with a second pass that re-checks its work</li><li>about two and a half minutes per analysis, in under 500 MB of memory</li><li>nothing leaves the phone</li></ul>
+  <ul class="what"><li>on-device transcription, at a 3.1% word error rate on test audio</li><li>Qwen 3.5-4B for the analysis, with a second pass that re-checks its work</li><li>about two and a half minutes per analysis, in under 500 MB of memory</li><li>the audio and transcript never leave the phone</li></ul>
   <div class="pmeta mono"><span>Founder</span><span>Built with a clinical partner</span><span>Jun 2026 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
     <div class="spec-h"><span>Spec</span><span>measured on iPhone 17</span></div>
-    <dl><div class="kv"><dt>Model</dt><dd>Qwen 3.5-4B, Q4_K_M, 3.0 GB</dd></div><div class="kv"><dt>Runtime</dt><dd>llama.cpp on Metal GPU</dd></div><div class="kv"><dt>Active RAM</dt><dd>&lt; 500 MB (memory-mapped weights)</dd></div><div class="kv"><dt>Full analysis</dt><dd>~144 s mean</dd></div><div class="kv"><dt>Transcription</dt><dd>Apple SpeechAnalyzer, 3.1% WER</dd></div><div class="kv"><dt>Model selection</dt><dd>240 labeled decisions</dd></div><div class="kv"><dt>Second pass</dt><dd>Verifier, 65.1% → 84.1% agreement</dd></div><div class="kv"><dt>Leaves the phone</dt><dd>Nothing without review</dd></div></dl>
+    <dl><div class="kv"><dt>Model</dt><dd>Qwen 3.5-4B, Q4_K_M, 3.0 GB</dd></div><div class="kv"><dt>Runtime</dt><dd>llama.cpp on Metal GPU</dd></div><div class="kv"><dt>Active RAM</dt><dd>&lt; 500 MB (memory-mapped weights)</dd></div><div class="kv"><dt>Full analysis</dt><dd>~144 s mean</dd></div><div class="kv"><dt>Transcription</dt><dd>Apple SpeechAnalyzer, 3.1% WER</dd></div><div class="kv"><dt>Model selection</dt><dd>240 labeled decisions</dd></div><div class="kv"><dt>Second pass</dt><dd>65.1% → 84.1% agreement with my scores</dd></div><div class="kv"><dt>Leaves the phone</dt><dd>Only reviewed scores, if the user opts in</dd></div></dl>
   </section>
 
   <figure>
     <img class="hero" src="screen.jpg" alt="The app's recording screen" style="aspect-ratio:4 / 3">
-    <figcaption><b>Fig. 1</b>The recording screen. The audio and the analysis stay on the phone.</figcaption>
+    <figcaption><b>Fig. 1</b>The recording screen. Recording, transcription and analysis all happen on the phone.</figcaption>
   </figure>
 
   <section class="story">
     <h2>Why I built it</h2>
     <p>Doctors I've talked to told me how much of their time goes into reviewing clinical conversations. I wanted to see if a phone could take on part of that without sending anything to the cloud.</p>
     <h2>The hard part</h2>
-    <p>Choosing the model. MedGemma 4B, Google's medical model, gave credit that hadn't been earned 53% of the time. Apple's built-in Foundation Models needed no download but agreed with my scores only 48.4% of the time. Qwen 3.5-4B reached 85% on 240 labeled decisions, beating a 7B at 79%, in a 3.0 GB download.</p>
+    <p>Choosing the model. In an early test, MedGemma 4B, Google's medical model, gave credit that hadn't been earned 53% of the time. On the conversations I scored by hand, Apple's built-in Foundation Models needed no download but agreed with me only 48.4% of the time, against 65.1% for Qwen 3.5-4B. On a larger set of 240 labeled decisions, Qwen 3.5-4B reached 85%, beating a 7B at 79%, in a 3.0 GB download.</p>
   </section>
 
   <figure>
