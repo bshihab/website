@@ -15,7 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Scribend</h1>
-  <p class="result">An offline medical scribe for clinics with no internet: it records a doctor–patient conversation and turns it into a structured SOAP note, running entirely on an Android phone.</p>
+  <p class="result">An offline medical scribe my team built at the Qualcomm × Meta ExecuTorch Hackathon. It records a doctor–patient visit and writes a structured SOAP note on an Android phone, with no internet:</p>
+  <ul class="what"><li>Whisper tiny.en for speech to text and Llama 3.2 1B for the note, both through ExecuTorch</li><li>ran on a Galaxy S25 Ultra at about 49 tokens a second, on the CPU</li><li>no network needed after the first model download</li><li>my part was the on-device models and the Android build; Mariam, Ishani and Bhasky built the model exports, the patient-history search and the app</li></ul>
   <div class="pmeta mono"><span>Team project</span><span>Qualcomm × Meta ExecuTorch Hackathon</span><span>San Francisco, June 2026</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -28,14 +29,14 @@
     <div class="hero blank" role="img" aria-label="Image coming soon"></div>
   </figure>
 
-  <!-- WRITE-UP: "Why I built it" and "The hard part" -->
-  <div class="write">
-    <p class="mono">Write-up coming soon.</p>
-    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
-    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
-  </div>
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>Clinics in remote areas often don't have reliable internet, and a scribe that depends on the cloud doesn't work there. The hackathon was about running AI on Snapdragon phones with ExecuTorch, so an offline scribe fit.</p>
+    <h2>The hard part</h2>
+    <p>Getting it onto the phone's NPU, which was the point of the hackathon. Qualcomm's QNN toolchain only builds on Linux, so I spent most of the night building it in a Codespace that kept running out of memory. By 1:49 a.m. I had Whisper exported for the phone's chip but nothing running on it, so at 2:48 I switched to the CPU. Llama 3.2 1B wrote its first SOAP note on the S25 at 5:05 a.m.</p>
+  </section>
 
-  <div class="links"><a href="https://bshihab.github.io/Scribend/">Project page</a><a href="https://github.com/bshihab/Scribend">Code on GitHub</a></div>
+  <div class="links"><a href="https://github.com/bshihab/Scribend">Code on GitHub</a></div>
 
   <a class="next" href="../heart-rate-monitor/"><span class="mono">Next project</span><span class="t">Cloud to Edge Heart Rate Monitor →</span></a>
   <footer class="site mono"><span>shihabbilal [at] gmail [dot] com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
