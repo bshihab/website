@@ -33,7 +33,7 @@
     <h2>Why I joined</h2>
     <p>I got into brain-computer interfaces reading about advances like Neuralink's. In my first year I joined the ML Interpretability team, where I built capsule networks for EEG and reordered the channels to match where the electrodes sit on the scalp. That work got me promoted to lead the Edge AI team.</p>
     <h2>The hard part</h2>
-    <p>Leading ten people. I had to learn what each person was good at and keep everyone engaged, and that let us work efficiently and test several models on the board. The technical wall was ONNX Runtime. PyTorch's own quantization made the model bigger, 1,423 KB against 1,139 KB for the float version, so I switched to ONNX Runtime's static quantization with a calibration set, which got it down to 311 KB.</p>
+    <p>Leading ten people who all needed the same hardware. Everyone wanted to test their own model on the Raspberry Pi, so I set up Raspberry Pi Connect and anyone could run inference on it remotely from their own laptop. That let us try several models without passing the board around, and it kept everyone involved. The technical wall was ONNX Runtime: PyTorch's own quantization made the model bigger than the original, so I switched to ONNX Runtime's static quantization, which got it down to 311 KB.</p>
   </section>
 
   <div class="links"><a href="https://github.com/LonghornNeurotech/Edge_EMG_Classification">EMG edge inference on GitHub</a><a href="https://github.com/LonghornNeurotech/ML_Interpretability">EEG interpretability on GitHub</a></div>
