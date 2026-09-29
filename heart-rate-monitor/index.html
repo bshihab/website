@@ -16,7 +16,7 @@
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Cloud to Edge Heart Rate Monitor</h1>
   <p class="result">A heart-rhythm monitor split between the cloud and a microcontroller:</p>
-  <ul class="what"><li>a Raspberry Pi 5 plays the patient, streaming MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>the Pico sorts each heartbeat as normal, supraventricular ectopic or ventricular ectopic with a small neural network I wrote in C, about 115 int8 weights</li><li>a Python exporter writes the trained weights into a C header, so retraining doesn't mean retyping numbers</li><li>the Pico's second core is a watchdog that flashes a warning if the data stops for more than a second</li></ul>
+  <ul class="what"><li>A Raspberry Pi 5 plays the patient, streaming MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>The Pico sorts each heartbeat as normal, supraventricular ectopic or ventricular ectopic with a small neural network I wrote in C, about 115 int8 weights</li><li>A Python exporter writes the trained weights into a C header, so retraining doesn't mean retyping numbers</li><li>The Pico's second core is a watchdog that flashes a warning if the data stops for more than a second</li></ul>
   <div class="pmeta mono"><span>Solo project</span><span>Dec 2025 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
