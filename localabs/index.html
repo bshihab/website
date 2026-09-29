@@ -15,7 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Localabs</h1>
-  <p class="result">An iPhone app that turns a photographed lab report into a five-section plain-language readout, running a medical language model entirely on the phone.</p>
+  <p class="result">An iPhone app that turns a photo of a lab report into a plain-language explanation, with a medical language model running entirely on the phone:</p>
+  <ul class="what"><li>scans multi-page reports and reads them with Apple's on-device OCR</li><li>MedGemma 4B writes a summary, a glossary, diet notes, questions for your next visit and a list of the medications on the report</li><li>turns those medications into a daily reminder list</li><li>lets you circle any part of the scan and ask about it</li><li>no account and no cloud</li></ul>
   <div class="pmeta mono"><span>Solo project</span><span>Apr 2026 – present</span><span>Feature-complete, not on the App Store</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -24,16 +25,16 @@
   </section>
 
   <figure>
-    <!-- HERO IMAGE: replace this div with <img class="hero" src="hero.jpg" alt="..."> and add a caption -->
-    <div class="hero blank" role="img" aria-label="Image coming soon"></div>
+    <img class="hero" src="hero.jpg" alt="Three Localabs screens: a report summary, the medication list, and questions for the doctor">
+    <figcaption><b>Fig. 1</b>A report summary over the original scan, the medication list it builds, and the questions it suggests for the next visit. The report is a sample.</figcaption>
   </figure>
 
-  <!-- WRITE-UP: "Why I built it" and "The hard part" -->
-  <div class="write">
-    <p class="mono">Write-up coming soon.</p>
-    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
-    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
-  </div>
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>Reading lab results is hard, especially when there's no doctor or anyone medical in the house. Pasting them into a regular chatbot risks it making things up, so it isn't something you should rely on. A chatbot also won't remind you about the medications listed on your report, or give you questions to bring to your follow-up visit.</p>
+    <h2>The hard part</h2>
+    <p>Making everything run on the phone, including phones with less RAM. With the 2.5 GB model loaded, a full 12-megapixel photo pushed 6 GB iPhones past their memory limit, and iOS killed the app at "Scanning…". I got around it by shrinking each photo to 2048 px before OCR, and the app checks for at least 7 GB of RAM at launch, since the App Store can't block downloads by memory.</p>
+  </section>
 
   <div class="links"><a href="https://localabs.app">localabs.app</a><a href="https://github.com/bshihab/localabs">Code on GitHub</a><a href="https://github.com/bshihab/localabs-cloud-bench">Cloud benchmark</a></div>
 
