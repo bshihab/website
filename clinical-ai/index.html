@@ -33,7 +33,7 @@
     <h2>Why I built it</h2>
     <p>Doctors I've talked to told me how much of their time goes into reviewing clinical conversations. I wanted to see if a phone could take on part of that without sending anything to the cloud.</p>
     <h2>The hard part</h2>
-    <p>Choosing the model. In an early test, MedGemma 4B, Google's medical model, gave credit that hadn't been earned 53% of the time. On the conversations I scored by hand, Apple's built-in Foundation Models didn't need a download, but they agreed with me only 48.4% of the time, against 65.1% for Qwen 3.5-4B. On a larger set of 240 labeled decisions, Qwen 3.5-4B reached 85%, beating a 7B at 79%, in a 3.0 GB download.</p>
+    <p>Choosing the model. In an early test, MedGemma 4B, Google's medical model, gave credit that hadn't been earned 53% of the time. Apple's built-in Foundation Models didn't need a download, but they matched the grades I gave by hand only 48.4% of the time, against 65.1% for Qwen 3.5-4B on the same conversations. On a larger set of 240 labeled decisions, Qwen 3.5-4B reached 85%, beating a 7B at 79%, in a 3.0 GB download.</p>
   </section>
 
   <figure>
@@ -57,7 +57,7 @@
       <text x="410" y="168" text-anchor="middle">50</text>
       <text x="650" y="168" text-anchor="middle">100%</text>
     </svg>
-    <figcaption><b>Fig. 2</b>Agreement with 240 labeled decisions, every model run through the same scoring code. I shipped Qwen 3.5-4B. It never wrongly denied credit (0 of 128); all of its errors were over-credits, which is what the second pass goes after.</figcaption>
+    <figcaption><b>Fig. 2</b>Agreement with 240 labeled decisions, every model run through the same scoring code. I shipped Qwen 3.5-4B. It never incorrectly denied credit (0 of 128); all of its errors were over-credits, which is what the second pass goes after.</figcaption>
   </figure>
 <div class="links"><a href="../writing/speech-engines/">Writing: three speech engines, and why I shipped the least accurate one</a><a href="../writing/core-ml-vs-core-ai/">Writing: Core ML vs Core AI for running an LLM on an iPhone</a><a href="../writing/apple-model-vs-7b/">Writing: Apple's on-device model vs Qwen 2.5-7B</a></div>
 
