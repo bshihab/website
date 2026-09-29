@@ -38,12 +38,11 @@
 <thead><tr><th>Engine</th><th>WER</th><th>n</th><th>Download</th></tr></thead>
 <tbody>
 <tr><td>Whisper small.en</td><td>1.1%</td><td>10 × 3</td><td>~480 MB</td></tr>
-<tr><td>Apple SpeechAnalyzer</td><td>3.2%</td><td>10</td><td>none</td></tr>
-<tr><td>Apple SpeechAnalyzer, rerun</td><td>3.1%</td><td>30</td><td>none</td></tr>
+<tr><td>Apple SpeechAnalyzer</td><td>3.1%</td><td>30</td><td>none</td></tr>
 <tr><td>Parakeet TDT</td><td>not measured</td><td></td><td>~2.5 GB</td></tr>
 </tbody></table></div>
 <p>I never measured Parakeet. Its MLX weights alone were a 75-minute download on the test machine, and by the time that mattered I'd already decided.</p>
-<p>The Apple rerun used 30 conversations (5,555 reference words, 28.5 minutes of audio) and landed within 0.1 points of the first run. Split by length:</p>
+<p>The Apple figure comes from 30 conversations: 5,555 reference words, 28.5 minutes of audio. Split by length:</p>
 <pre>overall             3.1%  (n=30)
 short  (≤10 turns)  4.0%
 medium (11–24)      3.0%
