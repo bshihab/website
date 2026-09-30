@@ -11,7 +11,7 @@ In QA mode, flag any code that doesn't match DESIGN.md.
 
 ## Content rules
 - Project write-ups (the `.write` block) are first-person drafts built from repo evidence at Bilal's request, following `~/Downloads/ai_slop_detector.rtf`. Never invent his motives or feelings: leave a [bracket] for him. He approves text before it goes live.
-- Never mention Wang Lab / the gut–brain study anywhere on the site (unpublished research).
+- Wang Lab (Feb 2026–): high-level mention only (role, dates, "gut–brain interactions"). Never results, figures, data, subject counts, methods detail or code links (the lab's rule, updated by Bilal 2026-09-30).
 - Ballotwise, MotorMind, PulseCam and Evo 2 BRCA1 are intentionally not on the site (PulseCam and Evo 2 removed 2026-09-29: too little of Bilal's own work to defend in an interview).
 - The clinical startup is in stealth: never name it, link its repo or blog, or name the clinical partner. Its page is `/clinical-ai/` and shows engineering only.
 - Numbers come from `~/Downloads/Bilal Shihab Projects facts sheet.pdf` or the project repos, never from memory.
