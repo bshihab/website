@@ -15,7 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Laser Speckle Imaging</h1>
-  <p class="result">Real-time laser speckle contrast imaging for watching blood flow in tissue, with the camera and laser tuned automatically in a closed loop.</p>
+  <p class="result">A real-time laser speckle imaging system I built in the Functional Optical Imaging Lab at UT Austin. It keeps the camera and laser tuned automatically so the speckle contrast stays usable:</p>
+  <ul class="what"><li>A Python (PySide6) interface that streams 16-bit frames from a Basler camera and shows speckle contrast live</li><li>Contrast computed over a sliding 7×7 pixel window</li><li>An Arduino that sets the laser current through a 12-bit DAC, controlled by the software over a checksummed serial link</li><li>Automatic exposure and laser adjustment against a center-weighted saturation limit: no more than 400 pixels above 98% of full scale</li></ul>
   <div class="pmeta mono"><span>Functional Optical Imaging Lab, UT Austin</span><span>Sep 2023 – May 2025</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -24,16 +25,20 @@
   </section>
 
   <figure>
-    <!-- HERO IMAGE: replace this div with <img class="hero" src="hero.jpg" alt="..."> and add a caption -->
-    <div class="hero blank" role="img" aria-label="Image coming soon"></div>
+    <img class="hero" src="rig.jpg" alt="The laser speckle setup on an optical table, with an Arduino and a laptop running the control software">
+    <figcaption><b>Fig. 1</b>The setup on the optical table: the camera and laser mounts, the Arduino that drives the laser current, and the control software on the laptop.</figcaption>
+  </figure>
+  <figure>
+    <img class="hero" src="manual.jpg" alt="A power meter reading 105.7 mW under a red laser in a dark lab" style="aspect-ratio:16 / 9">
+    <figcaption><b>Fig. 2</b>Before automation: raising the laser current by hand while a power meter reads 105.7 mW. A frame from a December 2024 video.</figcaption>
   </figure>
 
-  <!-- WRITE-UP: "Why I built it" and "The hard part" -->
-  <div class="write">
-    <p class="mono">Write-up coming soon.</p>
-    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
-    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
-  </div>
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>I joined the lab in my first month as a freshman. I already had a lot of coding experience, so I ended up working on much of the software, and through the research I learned DAC control and serial communication well before any of my classes covered them. The contrast was adjusted by hand, which meant a lab technician had to be there the whole time the system ran. The lab asked me to automate it with an Arduino, and the software now makes those adjustments on its own.</p>
+    <h2>The hard part</h2>
+    <p>The automatic control loop kept oscillating. It would overshoot, correct, then overshoot again, bouncing the laser current between 19% and 21%. I added logic that detects the alternating corrections, holds the current at 20% and pauses adjustment for five seconds, plus a 0.3% dead band so small fluctuations are ignored.</p>
+  </section>
 
   <div class="links"><a href="https://github.com/bshihab/laser_speckle_project">Code on GitHub</a></div>
 
