@@ -15,7 +15,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">phy 3D Feature View</h1>
-  <p class="result">A 3D feature view for phy, the open-source tool electrophysiology labs use to sort neural spikes, so clusters can be inspected and split in three dimensions.</p>
+  <p class="result">A 3D feature view for phy, the open-source tool electrophysiology labs use to sort neural spikes, so clusters can be inspected and split in three dimensions:</p>
+  <ul class="what"><li>Plots each cluster's spikes on their first three principal components, for up to 8 clusters and nearby channels within 100 µm</li><li>Rotate with shift-drag, pan and zoom, and switch between orthographic and perspective views</li><li>Lasso-select spikes in 3D to split a cluster</li><li>Submitted upstream as a pull request to phy (cortex-lab/phy #1345), still under review</li></ul>
   <div class="pmeta mono"><span>Recanzone Lab, UC Davis</span><span>Research intern, Jun – Aug 2025</span><span>Pull request open upstream</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -33,12 +34,12 @@
     }
   </script>
 
-  <!-- WRITE-UP: "Why I built it" and "The hard part" -->
-  <div class="write">
-    <p class="mono">Write-up coming soon.</p>
-    <h3>Why I built it</h3><p>Who it was for and what problem they had.</p>
-    <h3>The hard part</h3><p>One decision I had to make and what I gave up.</p>
-  </div>
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>My work at Longhorn Neurotech made me want to learn more about how neural recordings are analyzed at the level of individual neurons. The lab wanted a 3D view because it lets them compare two clusters across three principal components at once, instead of piecing that together from several 2D plots.</p>
+    <h2>The hard part</h2>
+    <p>The first obstacle was getting phy to run on my Mac. Its older graphics code wouldn't start on Apple Silicon, so I forced an OpenGL 2.1 compatibility profile on macOS and fixed a crash caused by a newer version of joblib. The other difficult part was the lasso split: it only checked the spikes drawn on screen, which are a subsample, so splits were missing spikes. I changed it to reload every spike before splitting.</p>
+  </section>
 
   <div class="links"><a href="https://github.com/bshihab/phy/tree/feature-3d-view">Code on GitHub</a><a href="https://github.com/cortex-lab/phy/pull/1345">Pull request to phy (open)</a></div>
 
