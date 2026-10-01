@@ -33,7 +33,7 @@
     <h2>Why I built it</h2>
     <p>Clinics in remote areas often lack reliable internet, so a cloud-based scribe doesn't work there. The hackathon focused on running AI on Snapdragon phones with ExecuTorch, which made an offline scribe a natural fit.</p>
     <h2>The hard part</h2>
-    <p>The biggest constraint was memory. Llama 3.2 3B wrote better notes than the 1B, which sometimes echoed the prompt, but running it alongside Whisper exhausted the phone's memory and crashed the app, because ExecuTorch loads models through the JavaScript heap. After testing the combinations on the S25, I went with Whisper tiny and Llama 3.2 1B, which ran reliably in all three runs at about 49 tokens per second.</p>
+    <p>The biggest constraint was memory. Llama 3.2 3B wrote better notes than the 1B, which sometimes echoed the prompt, but running it alongside Whisper exhausted the phone's memory and crashed the app. After testing the combinations on the S25, I went with Whisper tiny and Llama 3.2 1B, which ran reliably in all three runs at about 49 tokens per second.</p>
   </section>
 
   <div class="links"><a href="https://github.com/bshihab/Scribend">Code on GitHub</a></div>
