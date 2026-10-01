@@ -25,8 +25,30 @@
   </section>
 
   <figure>
-    <!-- HERO IMAGE: replace this div with <img class="hero" src="hero.jpg" alt="..."> and add a caption -->
-    <div class="hero blank" role="img" aria-label="Image coming soon"></div>
+    <svg class="chart" viewBox="0 0 720 276" role="img" aria-label="EMG model before and after INT8 quantization: latency 1.04 to 0.43 ms, size about 1160 to 311 KB, accuracy 90.50 to 90.37 percent">
+      <text x="0" y="20" class="grp">Latency per sample</text>
+      <text class="lbl" x="0" y="45">FP32</text>
+      <rect class="bar" x="200" y="32" width="381.3" height="18"/>
+      <text class="val" x="589.3" y="45">1.04 ms</text>
+      <text class="lbl" x="0" y="71">INT8</text>
+      <rect class="bar hi" x="200" y="58" width="157.7" height="18"/>
+      <text class="val" x="365.7" y="71">0.43 ms</text>
+      <text x="0" y="112" class="grp">Model size</text>
+      <text class="lbl" x="0" y="137">FP32</text>
+      <rect class="bar" x="200" y="124" width="425.3" height="18"/>
+      <text class="val" x="633.3" y="137">~1,160 KB</text>
+      <text class="lbl" x="0" y="163">INT8</text>
+      <rect class="bar hi" x="200" y="150" width="114.0" height="18"/>
+      <text class="val" x="322.0" y="163">311 KB</text>
+      <text x="0" y="204" class="grp">Test accuracy</text>
+      <text class="lbl" x="0" y="229">FP32</text>
+      <rect class="bar" x="200" y="216" width="398.2" height="18"/>
+      <text class="val" x="606.2" y="229">90.50%</text>
+      <text class="lbl" x="0" y="255">INT8</text>
+      <rect class="bar hi" x="200" y="242" width="397.6" height="18"/>
+      <text class="val" x="605.6" y="255">90.37%</text>
+    </svg>
+    <figcaption><b>Fig. 1</b>Our EMG gesture MLP before and after static INT8 quantization with ONNX Runtime, measured on a Raspberry Pi Zero 2 W over 4,497 test windows. Latency drops 2.4× and the model shrinks to 311 KB, for a 0.13-point accuracy cost.</figcaption>
   </figure>
 
   <section class="story">
