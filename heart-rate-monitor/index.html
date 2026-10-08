@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cloud to Edge Heart Rate Monitor · Bilal Shihab</title>
-<meta name="description" content="A heart-rhythm monitor split between the cloud and a microcontroller.">
+<meta name="description" content="A validation device that cross-checks a clinic&#x27;s heart-monitor readings, split between the cloud and a microcontroller.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bilal Shihab">
 <meta property="og:title" content="Cloud to Edge Heart Rate Monitor · Bilal Shihab">
-<meta property="og:description" content="A heart-rhythm monitor split between the cloud and a microcontroller.">
+<meta property="og:description" content="A validation device that cross-checks a clinic&#x27;s heart-monitor readings, split between the cloud and a microcontroller.">
 <meta property="og:url" content="https://bilalshihab.com/heart-rate-monitor/">
 <meta property="og:image" content="https://bilalshihab.com/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -24,8 +24,8 @@
 <main class="wrap">
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Cloud to Edge Heart Rate Monitor</h1>
-  <p class="result">A heart-rhythm monitor split between the cloud and a microcontroller:</p>
-  <ul class="what"><li>A Raspberry Pi 5 plays the patient, streaming MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>The Pico classifies each heartbeat as normal, supraventricular ectopic or ventricular ectopic using a small neural network I wrote in C (about 115 int8 weights)</li><li>A Python exporter writes the trained weights into a C header, so retrained weights go straight into the firmware</li><li>The Pico's second core is a watchdog that flashes a warning if the data stops for more than a second</li></ul>
+  <p class="result">A validation device that cross-checks a clinic's heart-monitor readings, split between the cloud and a microcontroller:</p>
+  <ul class="what"><li>A Raspberry Pi 5 plays the patient, replaying MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>The Pico classifies each heartbeat as normal, supraventricular ectopic or ventricular ectopic using a small neural network I wrote in C (about 115 int8 weights)</li><li>A Python exporter writes the trained weights into a C header, so retrained weights go straight into the firmware</li><li>The Pico's second core is a watchdog that raises an alarm if the data stops for more than a second, so a stalled feed shows up as an alarm instead of silence</li></ul>
   <div class="pmeta mono"><span>Solo project</span><span>Dec 2025 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -40,7 +40,7 @@
 
   <section class="story">
     <h2>Why I built it</h2>
-    <p>I built this on my own to explore how edge devices and the cloud can work together. I designed it as a small, independent backup that could double-check the readings from a clinic's heart monitor.</p>
+    <p>I built this on my own to explore how edge devices and the cloud can work together. I designed it as a small, independent validation device that could cross-check the readings from a clinic's heart monitor.</p>
     <h2>The hard part</h2>
     <p>The hardest part was coordinating the Pico's two cores. Core 0 reads the incoming stream, runs the network and updates a shared timestamp with every sample. Core 1 waits for the first sample, then monitors that timestamp and raises an alarm if it stops updating for more than a second. Both cores share one LED, so the output had to stay distinguishable from the alarm: one to three blinks for the beat type, and a fast 30 ms strobe for a fault.</p>
   </section>
