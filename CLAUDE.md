@@ -11,7 +11,8 @@ In QA mode, flag any code that doesn't match DESIGN.md.
 
 ## Content rules
 - Project write-ups (the `.write` block) are first-person drafts built from repo evidence at Bilal's request, following `~/Downloads/ai_slop_detector.rtf`. Never invent his motives or feelings: leave a [bracket] for him. He approves text before it goes live.
-- Wang Lab (Feb 2026–): the lab's rule is no results, figures or data online, and no code links (private repo). Bilal decided (2026-10-01) that describing his role and methods at resume level is fine, as in his resume PDF; the web resume page keeps a one-line mention.
+- Wang Lab (Feb 2026–): the lab's rule is no results, figures or data online, and no code links (private repo). Bilal decided (2026-10-01) that describing his role and methods at resume level is fine, as in his resume PDF. Since 2026-10-08 the web resume page carries the same two Wang bullets as the PDF.
+- `resume.html` mirrors the website PDF (`Bilal_Shihab_Resume.pdf`, the "General (website)" tab of his resume Google Doc) word for word, plus project-page links and the UC Davis entry. When one changes, change the other.
 - Ballotwise, MotorMind, PulseCam and Evo 2 BRCA1 are intentionally not on the site (PulseCam and Evo 2 removed 2026-09-29: too little of Bilal's own work to defend in an interview).
 - The clinical startup is in stealth: never name it, link its repo or blog, or name the clinical partner. Its page is `/clinical-ai/` and shows engineering only.
 - Numbers come from `~/Downloads/Bilal Shihab Projects facts sheet.pdf` or the project repos, never from memory.
