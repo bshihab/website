@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ease-O-Meter · Bilal Shihab</title>
+<meta name="description" content="A glove my junior design team built to detect the physical signs of an anxiety episode and respond with a calming vibration.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bilal Shihab">
+<meta property="og:title" content="Ease-O-Meter · Bilal Shihab">
+<meta property="og:description" content="A glove my junior design team built to detect the physical signs of an anxiety episode and respond with a calming vibration.">
+<meta property="og:url" content="https://bilalshihab.com/anxiety-monitor/">
+<meta property="og:image" content="https://bilalshihab.com/anxiety-monitor/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="wrap">
+  <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
+  <h1 class="ptitle">Ease-O-Meter</h1>
+  <p class="result">A glove my junior design team built to detect the physical signs of an anxiety episode and respond with a calming vibration:</p>
+  <ul class="what"><li>A MAX30102 optical sensor for heart rate and skin-conductance (GSR) electrodes on two fingertips, read by an Arduino Nano 33 IoT 10 times a second</li><li>When heart rate and skin conductance both pass the wearer's thresholds, a DRV2605 driver pulses a vibration motor until either drops, with a five-minute cutoff</li><li>Readings stream over Bluetooth Low Energy to a web dashboard, which sends back thresholds for the wearer's age group and sex</li><li>My part was the hardware and the hardware-software integration, including all of the Arduino firmware</li></ul>
+  <div class="pmeta mono"><span>Junior design project</span><span>Collaborated with Ruchi Birur, Stanislav Shevkoplyas, Saniya Chaudhari and Kashvika Thurvas Ratheesh</span><span>BME 261L, UT Austin</span><span>Feb – Apr 2026</span></div>
+
+  <section class="spec" aria-label="Specifications">
+    <div class="spec-h"><span>Spec</span><span>from our design history file</span></div>
+    <dl><div class="kv"><dt>Controller</dt><dd>Arduino Nano 33 IoT (BLE)</dd></div><div class="kv"><dt>Heart rate</dt><dd>MAX30102 PPG, red + IR</dd></div><div class="kv"><dt>Skin conductance</dt><dd>Grove GSR, fingertip electrodes</dd></div><div class="kv"><dt>Haptics</dt><dd>ERM motor, DRV2605 driver</dd></div><div class="kv"><dt>Sampling</dt><dd>10 Hz</dd></div><div class="kv"><dt>Power</dt><dd>3.7 V LiPo</dd></div><div class="kv"><dt>Heart rate, tested</dt><dd>68–101 bpm</dd></div><div class="kv"><dt>GSR, tested</dt><dd>2.4–7.7 µS</dd></div><div class="kv"><dt>BLE pairing</dt><dd>~8 s</dd></div><div class="kv"><dt>Dashboard update</dt><dd>~1 s</dd></div></dl>
+  </section>
+
+  <figure>
+    <img class="hero" src="glove.jpg" alt="The back of the glove with an Arduino, a battery booster, a haptic driver and wiring on a small breadboard, and a coin vibration motor on a lead" style="aspect-ratio:3 / 4;max-width:480px">
+    <figcaption><b>Fig. 1</b>The electronics on the back of the glove during integration: the Arduino Nano 33 IoT, a PowerBoost 500C for the LiPo battery, the DRV2605 haptic driver, and the coin vibration motor on its lead.</figcaption>
+  </figure>
+  <figure>
+    <img class="hero" src="final.jpg" alt="The finished black glove with snap electrodes on two fingertips and wiring taped down" style="aspect-ratio:4 / 3">
+    <figcaption><b>Fig. 2</b>The finished glove, with the skin-conductance electrodes on two fingertips.</figcaption>
+  </figure>
+  <figure>
+    <img class="hero" src="pcb.png" alt="KiCad layout of the main board, with the Arduino footprint in the middle and connectors for the heart-rate sensor, skin-conductance sensor and haptic driver" style="aspect-ratio:1000 / 617;max-width:420px;object-fit:contain">
+    <figcaption><b>Fig. 3</b>The team also designed a PCB for the main board, but it didn't work properly, so the final glove kept the breadboard in Fig. 1. I wasn't involved in the PCB.</figcaption>
+  </figure>
+
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>It was our team's junior design project. We took the device from customer needs through requirements, design reviews and verification testing, and documented every step in a design history file.</p>
+    <p>We picked anxiety because so many people live with it, and we wanted the monitor to have a seamless form factor. We chose a glove over a watch or a wristband because it held the skin-conductance electrodes firmly against the fingertips and left room on the back of the hand for the electronics.</p>
+    <h2>The hard part</h2>
+    <p>The hardest part was getting continuous, reliable readings from the sensors. All of the filtering ended up in software. The sensor library removes the steady (DC) part of the optical signal and applies a 4-point moving average, which together act roughly like a band-pass filter. On top of that, my firmware throws away readings the library marks invalid, averages the last six heart-rate values, and then smooths the result, moving less the bigger the jump, so a single bad reading can't swing the heart rate.</p>
+  </section>
+
+  <a class="next" href="../heart-rate-monitor/"><span class="mono">Next project</span><span class="t">Cloud to Edge Heart Rate Monitor →</span></a>
+  <footer class="site mono"><span>shihabbilal [at] gmail [dot] com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
+</main>
+</body>
+</html>

@@ -145,6 +145,7 @@ ul.what li::marker { color: var(--accent); }
 .story h2 { font: 560 24px/1.25 var(--serif); font-variation-settings: "opsz" 48; margin: 32px 0 8px; }
 .story h2:first-child { margin-top: 0; }
 .story p { margin: 0; max-width: 65ch; }
+.story p + p { margin-top: 1em; }
 
 /* ---------- writing ---------- */
 .post { margin-top: 8px; }
