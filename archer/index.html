@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARcher · Bilal Shihab</title>
+<meta name="description" content="A bow glove I built for my team's augmented-reality tower-defense game at HackTX 2026: make a fist to draw, open your hand to fire. Best Hardware Hack.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bilal Shihab">
+<meta property="og:title" content="ARcher · Bilal Shihab">
+<meta property="og:description" content="A bow glove I built for my team's augmented-reality tower-defense game at HackTX 2026: make a fist to draw, open your hand to fire. Best Hardware Hack.">
+<meta property="og:url" content="https://bilalshihab.com/archer/">
+<meta property="og:image" content="https://bilalshihab.com/archer/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="wrap">
+  <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
+  <h1 class="ptitle">ARcher</h1>
+  <p class="result">Best Hardware Hack at HackTX 2026. A bow glove I built for my team's augmented-reality tower-defense game. You defend a castle placed on your real floor through an iPhone, and the glove replaces tapping the screen: make a fist to draw, open your hand to fire:</p>
+  <ul class="what"><li>A flex sensor across a finger and an LSM6DSO32 accelerometer and gyroscope, read by a Seeed XIAO ESP32-S3 every 20 ms</li><li>Draw power builds over 1.2 seconds of a held fist, and the motion sensor gives the bow's tilt at the moment the hand opens</li><li>Each glove joins its player's iPhone hotspot and sends draw, release and heartbeat messages to the game as JSON over UDP</li><li>My part was the glove, its firmware and connecting it to the Unity game; my teammates built the AR game and the phone's side of the link</li></ul>
+  <div class="pmeta mono"><span>Collaborated with Mohammad Rashid, Jay Damodaran and Krish Singh</span><span>HackTX 2026, Austin</span><span>October 2026</span><span>Best Hardware Hack</span></div>
+
+  <section class="spec" aria-label="Specifications">
+    <div class="spec-h"><span>Spec</span></div>
+    <dl><div class="kv"><dt>Board</dt><dd>Seeed XIAO ESP32-S3</dd></div><div class="kv"><dt>Draw sensor</dt><dd>Flex sensor, 10 kΩ divider</dd></div><div class="kv"><dt>Tilt sensor</dt><dd>LSM6DSO32 IMU over I²C</dd></div><div class="kv"><dt>Firmware</dt><dd>Arduino (C++)</dd></div><div class="kv"><dt>Sensor loop</dt><dd>20 ms</dd></div><div class="kv"><dt>Full draw</dt><dd>1.2 s fist hold</dd></div><div class="kv"><dt>Link</dt><dd>JSON over UDP, phone hotspot</dd></div><div class="kv"><dt>Power</dt><dd>USB power bank</dd></div><div class="kv"><dt>Game</dt><dd>Unity 6, AR Foundation, ARKit (LiDAR)</dd></div></dl>
+  </section>
+
+  <figure>
+    <video class="hero" src="glove.mp4" poster="glove.jpg" style="aspect-ratio:16 / 9" autoplay loop muted playsinline aria-label="A player aiming an iPhone at the AR castle while wearing the bow glove, then drawing back and releasing"></video>
+    <figcaption><b>Fig. 1</b>Playing with the glove: the XIAO, the motion sensor and the wiring sit on a small breadboard on the back of the hand. More in our <a href="https://www.youtube.com/watch?v=8VPnimS6i_Q">demo video</a>.</figcaption>
+  </figure>
+  <script>
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var v = document.querySelector('video.hero'); v.removeAttribute('autoplay'); v.pause();
+    }
+  </script>
+
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>I wanted to build something with hardware, and I wanted our project to stand apart in how it felt to play. A bow you draw with your own hand made it a very different game from one you play by tapping a screen.</p>
+    <p>I built the glove and its firmware, which calibrates each player's open hand and fist and saves them on the board, and I connected it to the game in C#. The glove takes over the bow when it connects, hands control back to touch if it drops, and fires arrows with the power it measured. Mohammad built the AR game in Unity: the castle on your floor, the trebuchets and the raid. Jay wrote the phone's side of the glove link, including the scheme that numbers every shot and sends each release three times, so a dropped packet can't lose an arrow or fire one twice.</p>
+    <h2>The hard part</h2>
+    <p>The hard part was getting the glove onto the phone's network. I first wrote the firmware in MicroPython, but no phone, iPhone or Android, could join a Wi-Fi network the glove hosted. The same network hosted by Arduino firmware worked right away, so I rewrote the firmware in Arduino overnight and had each glove join its player's iPhone hotspot instead. Even then, the ESP32-S3 only sees 2.4 GHz networks, so the hotspot needs Maximize Compatibility turned on, and the glove has to match the iPhone's name exactly, curly apostrophe included.</p>
+    <p>Power was the other problem. A LiPo cell on the board's 5 V pin never finished joining Wi-Fi, and a boost converter didn't fix it in the time we had. We ran each glove off a USB power bank instead.</p>
+  </section>
+
+  <div class="links"><a href="https://www.youtube.com/watch?v=8VPnimS6i_Q">Demo video</a><a href="https://github.com/Mohammad-R-Rashid/ARcher">Code on GitHub</a><a href="https://devpost.com/software/overworked-archers">Devpost</a></div>
+
+  <a class="next" href="../clinical-ai/"><span class="mono">Next project</span><span class="t">Stealth Clinical AI →</span></a>
+  <footer class="site mono"><span>shihabbilal [at] gmail [dot] com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
+</main>
+</body>
+</html>
