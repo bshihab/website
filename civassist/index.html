@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Civassist · Bilal Shihab</title>
+<meta name="description" content="A desktop app my team is building that tells people in Texas whether they may qualify for Medicaid, CHIP, WIC and SNAP, with the model and their answers kept on their own computer.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bilal Shihab">
+<meta property="og:title" content="Civassist · Bilal Shihab">
+<meta property="og:description" content="A desktop app my team is building that tells people in Texas whether they may qualify for Medicaid, CHIP, WIC and SNAP, with the model and their answers kept on their own computer.">
+<meta property="og:url" content="https://bilalshihab.com/civassist/">
+<meta property="og:image" content="https://bilalshihab.com/civassist/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="wrap">
+  <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
+  <h1 class="ptitle">Civassist</h1>
+  <p class="result">A desktop app my team is building that tells people in Texas whether they may qualify for Medicaid, CHIP, WIC and SNAP, with the model and their answers kept on their own computer:</p>
+  <ul class="what"><li>A local Gemma 3 4B model holds the conversation and fills in 14 screening answers as the person talks</li><li>Plain Python decides eligibility from a rulebook of 46 rules, each cited to the Texas Works Handbook or the program's own page; the model never sees the income limits</li><li>A retrieval pipeline (RAG) over 1,339 passages from the Texas Works Handbook and the state's CHIP and WIC pages, so answers about the programs come from real sources; it is built and tested, and connecting it to the chat is next</li><li>My part was the retrieval pipeline and the eligibility engine: the rulebook, the checker and its tests, and the evals that audit the rules against their sources</li></ul>
+  <div class="pmeta mono"><span>Collaborated with Jay Damodaran and Kaylan Tchamdjou</span><span>Jun 2026 – present</span><span>In development</span></div>
+
+  <section class="spec" aria-label="Specifications">
+    <div class="spec-h"><span>Spec</span></div>
+    <dl><div class="kv"><dt>Model</dt><dd>Gemma 3 4B, Q4_K_M, llama-server</dd></div><div class="kv"><dt>Backend</dt><dd>FastAPI, one local process</dd></div><div class="kv"><dt>Programs</dt><dd>Medicaid, CHIP, WIC, SNAP (Texas)</dd></div><div class="kv"><dt>Screening questions</dt><dd>14</dd></div><div class="kv"><dt>Eligibility rules</dt><dd>46, each cited to its source</dd></div><div class="kv"><dt>Checker tests</dt><dd>45, all passing</dd></div><div class="kv"><dt>Retrieval</dt><dd>LlamaIndex, ChromaDB, bge-small-en-v1.5</dd></div><div class="kv"><dt>Corpus</dt><dd>1,339 passages of 256 tokens</dd></div></dl>
+  </section>
+
+  <figure>
+    <img class="hero" src="screen.jpg" alt="The Civassist chat page: a mother says she has a 4-month-old and earns $1,800 a month, and Civassist asks follow-up questions" style="aspect-ratio:4 / 3">
+    <figcaption><b>Fig. 1</b>A test conversation I ran for this page with a made-up mother and her 4-month-old daughter. After each message, a second model call fills in the screening form and the rules engine runs again. The run also shows what is left to fix: the form never recorded the baby's age, so the model kept asking for it, and it logged her savings as over $5,000 when she had said under $1,000, so the engine correctly turned down SNAP on a wrong answer.</figcaption>
+  </figure>
+  <figure>
+    <img class="hero" src="disclaimer.jpg" alt="The disclaimer that opens the app: provided as is, data processed locally, and an I Accept and Agree button" style="aspect-ratio:4 / 3;max-width:480px">
+    <figcaption><b>Fig. 2</b>The disclaimer Kaylan built, shown before the first message.</figcaption>
+  </figure>
+  <figure>
+    <img class="hero" src="files.jpg" alt="The Documents page, with no uploaded files and three official documents: wic_eligibility.txt, texas_works_income_limits.txt and chip_eligibility.txt" style="aspect-ratio:2 / 1">
+    <figcaption><b>Fig. 3</b>The files page Jay built, with the retrieval pipeline's three source documents: the Texas Works Handbook (the 1.2 MB file) and the state's CHIP and WIC pages. Files a person uploads will go through the document parsers once those are connected.</figcaption>
+  </figure>
+
+  <section class="story">
+    <h2>Why I built it</h2>
+    <p>I wanted to work on something that helps people directly. To find out whether your family qualifies for Medicaid, CHIP, WIC or SNAP in Texas, you have to work through income charts and a state handbook that runs to hundreds of pages, and the answer depends on details like household size, age and pregnancy. Civassist asks those questions in a normal conversation and gives an answer. It runs entirely on the person's own computer, so their income, immigration status and family details never leave it.</p>
+    <p>The team split the work three ways. Jay built the chat interface, the files page, the document parsers and the model server, including the two-call flow where one model call talks with the person and a second pulls their answers into a fixed form. Kaylan built the disclaimer, the heartbeat that shuts the local server down when the page closes, and the test setup: a stand-in model, browser tests of the interface and automatic test runs on GitHub. I built the retrieval pipeline and the eligibility engine.</p>
+    <h2>The hard part</h2>
+    <p>The hard part was getting the rules right, and showing they were right. Income limits and other hard facts live in a rulebook that plain Python reads, never in the model, so the model can't invent a limit. That only helps if the rulebook matches the handbook. The rules were transcribed from the handbook with help from Claude, so every rule carries the section it came from, and most carry the exact quote.</p>
+    <p>To check them, I built an eval in which a judge model reads each rule next to the source text it cites and flags anything the source doesn't support. To test the judge itself, I planted five false rules, from blatant to a boundary flipped by one cent, and it caught all five. Three judges (the local Gemma, Gemini 3.6 Flash and Claude Sonnet) found no transcription errors. Each flag traced to how the harness fed them evidence or to a table whose columns were scrambled in the copy-pasted handbook chart, which I confirmed by arithmetic.</p>
+    <p>A second eval looks for the opposite problem, a rule the handbook states that the rulebook leaves out. I deleted a real rule and checked that the judge named it, then ran it on the full rulebook. It found three missing rules, including newborns of mothers on Medicaid, who qualify with no income test, and I added them. A last sweep extracted every requirement from the whole source corpus. It found no missing rules but two places where my checker didn't apply a rule the rulebook already stated, and both wrongly turned people down. Both are fixed, with tests.</p>
+  </section>
+
+  <p class="mono" style="margin:28px 0 0">The code is in a private team repository.</p>
+
+  <a class="next" href="../clinical-ai/"><span class="mono">Next project</span><span class="t">Stealth Clinical AI →</span></a>
+  <footer class="site mono"><span>shihabbilal [at] gmail [dot] com</span><a href="https://github.com/bshihab">github.com/bshihab</a><a href="https://www.linkedin.com/in/bilalshihab/">linkedin.com/in/bilalshihab</a></footer>
+</main>
+</body>
+</html>
