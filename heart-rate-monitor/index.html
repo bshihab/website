@@ -25,7 +25,7 @@
   <p class="crumb mono"><a href="../">Bilal Shihab</a> / <a href="../#projects">Projects</a></p>
   <h1 class="ptitle">Cloud to Edge Heart Rate Monitor</h1>
   <p class="result">A validation device that cross-checks a clinic's heart-monitor readings, split between the cloud and a microcontroller:</p>
-  <ul class="what"><li>A Raspberry Pi 5 plays the patient, replaying MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>The Pico classifies each heartbeat as normal, supraventricular ectopic or ventricular ectopic using a small neural network I wrote in C (about 115 int8 weights)</li><li>A Python exporter writes the trained weights into a C header, so retrained weights go straight into the firmware</li><li>The Pico's second core is a watchdog that raises an alarm if the data stops for more than a second, so a stalled feed shows up as an alarm instead of silence</li></ul>
+  <ul class="what"><li>A Raspberry Pi 5 plays the patient, replaying MIT-BIH ECG recordings from Google Cloud Storage to a Pico over USB serial</li><li>The Pico classifies each heartbeat as normal, supraventricular ectopic or ventricular ectopic using a small neural network I wrote in C (1,120 int8 weights, which agree with the full-precision model on 99.9% of held-out beats)</li><li>A Python exporter writes the trained weights into a C header, so retrained weights go straight into the firmware</li><li>The Pico's second core is a watchdog that raises an alarm if the data stops for more than a second, so a stalled feed shows up as an alarm instead of silence</li></ul>
   <div class="pmeta mono"><span>Solo project</span><span>Dec 2025 – present</span></div>
 
   <section class="spec" aria-label="Specifications">
@@ -42,7 +42,7 @@
     <h2>Why I built it</h2>
     <p>I built this on my own to explore how edge devices and the cloud can work together. I designed it as a small, independent validation device that could cross-check the readings from a clinic's heart monitor.</p>
     <h2>The hard part</h2>
-    <p>The hardest part was coordinating the Pico's two cores. Core 0 reads the incoming stream, runs the network and updates a shared timestamp with every sample. Core 1 waits for the first sample, then monitors that timestamp and raises an alarm if it stops updating for more than a second. Both cores share one LED, so the output had to stay distinguishable from the alarm: one to three blinks for the beat type, and a fast 30 ms strobe for a fault.</p>
+    <p>The hardest part was coordinating the Pico's two cores. Core 0 reads the incoming stream, runs the network and updates a shared timestamp with every sample. Core 1 waits for the first sample, then monitors that timestamp and raises an alarm if it stops updating for more than a second. Each beat type has its own LED (green, yellow, red) and the alarm has a blue one that goes solid, then strobes every 30 ms, so a fault never looks like a heartbeat. Every LED also lights once at boot, so a dead one shows up before a run starts.</p>
   </section>
 
   <div class="links"><a href="https://github.com/bshihab/pico_hrm_integrity">Code on GitHub</a></div>
